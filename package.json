@@ -1,0 +1,45 @@
+{
+  "name": "wise-goodall",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build:cljs": "JAVA_HOME=/usr/lib/jvm/java-26-openjdk PATH=\"/usr/lib/jvm/java-26-openjdk/bin:$PATH\" bunx shadow-cljs compile app",
+    "watch:cljs": "JAVA_HOME=/usr/lib/jvm/java-26-openjdk PATH=\"/usr/lib/jvm/java-26-openjdk/bin:$PATH\" bunx shadow-cljs watch app",
+    "build": "bun run build:cljs && vite build",
+    "preview": "vite preview",
+    "test": "bun test tests/unit",
+    "test:coverage": "bun test tests/unit --coverage",
+    "test:coverage:e2e": "bun tests/e2e/collect-coverage.ts",
+    "test:coverage:merge": "bun tests/e2e/merge-coverage.ts",
+    "test:coverage:all": "bun run test:e2e && bun tests/e2e/merge-coverage.ts",
+    "videos": "bun tests/usecases/run-all.ts",
+    "assets": "bun tests/usecases/generate-assets.ts"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.62.1",
+    "@types/bun": "latest",
+    "@types/jszip": "^3.4.1",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.5",
+    "@vitejs/plugin-react": "^6.1.0",
+    "eslint": "^10.9.1",
+    "eslint-plugin-react": "^7.37.5",
+    "knip": "^6.34.0",
+    "marked": "^18.0.11",
+    "shadow-cljs": "^3.5.0",
+    "ts-prune": "^0.10.3",
+    "typescript": "5.8.2",
+    "typescript-eslint": "^8.69.0",
+    "v8-to-istanbul": "^9.3.0",
+    "vite": "^8.2.2"
+  },
+  "dependencies": {
+    "jszip": "^3.10.1",
+    "lucide-react": "^1.34.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  }
+}

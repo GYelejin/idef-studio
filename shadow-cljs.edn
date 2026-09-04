@@ -1,0 +1,10 @@
+{:source-paths ["src/cljs"]
+ :dependencies
+ [[com.pitch/uix.core "1.4.9"]]
+ :builds
+ {:app
+  {:target :esm
+   :output-dir ".cljs-out"
+   :js-options {:js-provider :import}
+   :modules {:main {:exports {:default app.core/app
+                               :App app.core/app}}}}}}

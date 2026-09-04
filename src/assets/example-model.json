@@ -1,0 +1,2046 @@
+{
+  "id": "proj-canonical-rd-idef0",
+  "name": "Закупочная деятельность предприятия",
+  "description": "Эталонная функциональная модель IDEF0 по спецификации ai_studio_co.svg (РД IDEF0 - 2000)",
+  "diagrams": [
+    {
+      "id": "diag-a0",
+      "code": "A0",
+      "title": "Контекстная диаграмма: Закупочная деятельность предприятия",
+      "parentBlockId": null,
+      "blocks": [
+        {
+          "id": "block-a0",
+          "nodeNumber": 0,
+          "name": "Закупочная деятельность\nпредприятия",
+          "x": 590,
+          "y": 330,
+          "width": 420,
+          "height": 240,
+          "decompDiagramId": "diag-a1"
+        }
+      ],
+      "arrows": [
+        {
+          "id": "flow-a0-suppliers",
+          "label": "Поставщики",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 370
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-a0",
+            "side": "left",
+            "point": {
+              "x": 590,
+              "y": 370
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 370
+            },
+            {
+              "x": 590,
+              "y": 370
+            }
+          ],
+          "labelPos": {
+            "x": 30,
+            "y": 358
+          },
+          "pinned": true
+        },
+        {
+          "id": "flow-a0-sales-stats",
+          "label": "Статистика продаж",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 412
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-a0",
+            "side": "left",
+            "point": {
+              "x": 590,
+              "y": 412
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 412
+            },
+            {
+              "x": 590,
+              "y": 412
+            }
+          ],
+          "labelPos": {
+            "x": 30,
+            "y": 400
+          },
+          "pinned": true
+        },
+        {
+          "id": "flow-a0-purchase-decision",
+          "label": "Решение о закупке руководством",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 461
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-a0",
+            "side": "left",
+            "point": {
+              "x": 590,
+              "y": 461
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 461
+            },
+            {
+              "x": 590,
+              "y": 461
+            }
+          ],
+          "labelPos": {
+            "x": 30,
+            "y": 449
+          },
+          "pinned": true
+        },
+        {
+          "id": "flow-a0-incoming-goods",
+          "label": "Товар от поставщика",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 510
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-a0",
+            "side": "left",
+            "point": {
+              "x": 590,
+              "y": 510
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 510
+            },
+            {
+              "x": 590,
+              "y": 510
+            }
+          ],
+          "labelPos": {
+            "x": 30,
+            "y": 498
+          },
+          "pinned": true
+        },
+        {
+          "id": "flow-a0-regulations",
+          "label": "Законодательные\nакты",
+          "source": {
+            "type": "border",
+            "side": "top",
+            "point": {
+              "x": 933,
+              "y": 40
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-a0",
+            "side": "top",
+            "point": {
+              "x": 933,
+              "y": 330
+            }
+          },
+          "role": "control",
+          "points": [
+            {
+              "x": 933,
+              "y": 40
+            },
+            {
+              "x": 933,
+              "y": 330
+            }
+          ],
+          "labelPos": {
+            "x": 941,
+            "y": 50
+          },
+          "pinned": true
+        },
+        {
+          "id": "flow-a0-market",
+          "label": "Конъюнктура\nрынка",
+          "source": {
+            "type": "border",
+            "side": "top",
+            "point": {
+              "x": 797,
+              "y": 40
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-a0",
+            "side": "top",
+            "point": {
+              "x": 797,
+              "y": 330
+            }
+          },
+          "role": "control",
+          "points": [
+            {
+              "x": 797,
+              "y": 40
+            },
+            {
+              "x": 797,
+              "y": 330
+            }
+          ],
+          "labelPos": {
+            "x": 805,
+            "y": 52
+          },
+          "pinned": true
+        },
+        {
+          "id": "flow-a0-procurement-method",
+          "label": "Метод\nзакупки\nтоваров",
+          "source": {
+            "type": "border",
+            "side": "top",
+            "point": {
+              "x": 660,
+              "y": 40
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-a0",
+            "side": "top",
+            "point": {
+              "x": 660,
+              "y": 330
+            }
+          },
+          "role": "control",
+          "points": [
+            {
+              "x": 660,
+              "y": 40
+            },
+            {
+              "x": 660,
+              "y": 330
+            }
+          ],
+          "labelPos": {
+            "x": 668,
+            "y": 54
+          },
+          "pinned": true
+        },
+        {
+          "id": "flow-a0-purchased-docs",
+          "label": "Документы на закупленный товар",
+          "source": {
+            "type": "block",
+            "id": "block-a0",
+            "side": "right",
+            "point": {
+              "x": 1010,
+              "y": 420
+            }
+          },
+          "target": {
+            "type": "border",
+            "side": "right",
+            "point": {
+              "x": 1580,
+              "y": 420
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 1010,
+              "y": 420
+            },
+            {
+              "x": 1580,
+              "y": 420
+            }
+          ],
+          "labelPos": {
+            "x": 1325,
+            "y": 410
+          },
+          "pinned": true
+        },
+        {
+          "id": "flow-a0-shipped-goods",
+          "label": "Поставленный товар",
+          "source": {
+            "type": "block",
+            "id": "block-a0",
+            "side": "right",
+            "point": {
+              "x": 1010,
+              "y": 490
+            }
+          },
+          "target": {
+            "type": "border",
+            "side": "right",
+            "point": {
+              "x": 1580,
+              "y": 490
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 1010,
+              "y": 490
+            },
+            {
+              "x": 1580,
+              "y": 490
+            }
+          ],
+          "labelPos": {
+            "x": 1415,
+            "y": 480
+          },
+          "pinned": true
+        },
+        {
+          "id": "flow-a0-employees",
+          "label": "Сотрудники",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 660,
+              "y": 865
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-a0",
+            "side": "bottom",
+            "point": {
+              "x": 660,
+              "y": 570
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 660,
+              "y": 865
+            },
+            {
+              "x": 660,
+              "y": 570
+            }
+          ],
+          "labelPos": {
+            "x": 668,
+            "y": 842
+          },
+          "pinned": true
+        },
+        {
+          "id": "flow-a0-comm",
+          "label": "ПК, средства связи",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 870,
+              "y": 865
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-a0",
+            "side": "bottom",
+            "point": {
+              "x": 870,
+              "y": 570
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 870,
+              "y": 865
+            },
+            {
+              "x": 870,
+              "y": 570
+            }
+          ],
+          "labelPos": {
+            "x": 878,
+            "y": 844
+          },
+          "pinned": true
+        }
+      ],
+      "junctions": []
+    },
+    {
+      "id": "diag-a1",
+      "code": "A0",
+      "title": "Декомпозиция: Закупочная деятельность предприятия",
+      "parentBlockId": "block-a0",
+      "blocks": [
+        {
+          "id": "block-choice",
+          "nodeNumber": 1,
+          "name": "Выбор поставщиков",
+          "x": 310,
+          "y": 170,
+          "width": 210,
+          "height": 130,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-order",
+          "nodeNumber": 2,
+          "name": "Формирование\nзаказа",
+          "x": 590,
+          "y": 330,
+          "width": 210,
+          "height": 130,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-control",
+          "nodeNumber": 3,
+          "name": "Контроль\nисполнения заказов",
+          "x": 870,
+          "y": 490,
+          "width": 210,
+          "height": 130,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-return",
+          "nodeNumber": 4,
+          "name": "Возврат товаров\nпоставщику",
+          "x": 1150,
+          "y": 650,
+          "width": 210,
+          "height": 130,
+          "decompDiagramId": null
+        }
+      ],
+      "arrows": [
+        {
+          "id": "flow-suppliers",
+          "label": "Поставщики",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 235
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-choice",
+            "side": "left",
+            "point": {
+              "x": 310,
+              "y": 235
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 235
+            },
+            {
+              "x": 310,
+              "y": 235
+            }
+          ],
+          "labelPos": {
+            "x": 30,
+            "y": 223
+          },
+          "pinned": true
+        },
+        {
+          "id": "flow-sales-stats",
+          "label": "Статистика продаж",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 370
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-order",
+            "side": "left",
+            "point": {
+              "x": 590,
+              "y": 370
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 370
+            },
+            {
+              "x": 590,
+              "y": 370
+            }
+          ],
+          "labelPos": {
+            "x": 46,
+            "y": 303
+          },
+          "pinned": true,
+          "showLeader": true,
+          "leaderPoints": [
+            {
+              "x": 56,
+              "y": 313
+            },
+            {
+              "x": 41,
+              "y": 341
+            },
+            {
+              "x": 58,
+              "y": 344
+            },
+            {
+              "x": 46,
+              "y": 370
+            }
+          ]
+        },
+        {
+          "id": "flow-purchase-decision",
+          "label": "Решение о закупке руководством",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 390
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-order",
+            "side": "left",
+            "point": {
+              "x": 590,
+              "y": 390
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 390
+            },
+            {
+              "x": 590,
+              "y": 390
+            }
+          ],
+          "labelPos": {
+            "x": 86,
+            "y": 337
+          },
+          "pinned": true,
+          "showLeader": true,
+          "leaderPoints": [
+            {
+              "x": 96,
+              "y": 347
+            },
+            {
+              "x": 81,
+              "y": 370
+            },
+            {
+              "x": 98,
+              "y": 369
+            },
+            {
+              "x": 86,
+              "y": 390
+            }
+          ]
+        },
+        {
+          "id": "flow-warehouse-req",
+          "label": "Заявка со склада",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 409
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-order",
+            "side": "left",
+            "point": {
+              "x": 590,
+              "y": 409
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 409
+            },
+            {
+              "x": 590,
+              "y": 409
+            }
+          ],
+          "labelPos": {
+            "x": 144,
+            "y": 358
+          },
+          "pinned": true,
+          "showLeader": true,
+          "leaderPoints": [
+            {
+              "x": 154,
+              "y": 368
+            },
+            {
+              "x": 139,
+              "y": 390
+            },
+            {
+              "x": 156,
+              "y": 389
+            },
+            {
+              "x": 144,
+              "y": 409
+            }
+          ]
+        },
+        {
+          "id": "flow-incoming-goods",
+          "label": "Товар от поставщика",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 585
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-control",
+            "side": "left",
+            "point": {
+              "x": 870,
+              "y": 585
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 585
+            },
+            {
+              "x": 870,
+              "y": 585
+            }
+          ],
+          "labelPos": {
+            "x": 30,
+            "y": 573
+          },
+          "pinned": true
+        },
+        {
+          "id": "flow-purchased-docs",
+          "label": "Документы на закупленный товар",
+          "source": {
+            "type": "block",
+            "id": "block-control",
+            "side": "right",
+            "point": {
+              "x": 1080,
+              "y": 520
+            }
+          },
+          "target": {
+            "type": "border",
+            "side": "right",
+            "point": {
+              "x": 1580,
+              "y": 520
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 1080,
+              "y": 520
+            },
+            {
+              "x": 1580,
+              "y": 520
+            }
+          ],
+          "labelPos": {
+            "x": 1325,
+            "y": 510
+          },
+          "pinned": true
+        },
+        {
+          "id": "flow-shipped-main",
+          "label": "Поставленный товар",
+          "source": {
+            "type": "block",
+            "id": "block-control",
+            "side": "right",
+            "point": {
+              "x": 1080,
+              "y": 550
+            }
+          },
+          "target": {
+            "type": "border",
+            "side": "right",
+            "point": {
+              "x": 1580,
+              "y": 550
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 1080,
+              "y": 550
+            },
+            {
+              "x": 1580,
+              "y": 550
+            }
+          ],
+          "labelPos": {
+            "x": 1415,
+            "y": 540
+          },
+          "pinned": true
+        },
+        {
+          "id": "flow-shipped-return-merge",
+          "label": "",
+          "source": {
+            "type": "block",
+            "id": "block-return",
+            "side": "right",
+            "point": {
+              "x": 1360,
+              "y": 715
+            }
+          },
+          "target": {
+            "type": "junction",
+            "id": "junc-shipped-merge",
+            "point": {
+              "x": 1500,
+              "y": 550
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 1360,
+              "y": 715
+            },
+            {
+              "x": 1500,
+              "y": 715
+            },
+            {
+              "x": 1500,
+              "y": 550
+            }
+          ],
+          "pinned": true
+        },
+        {
+          "id": "flow-regulations-order",
+          "label": "Законодательные\nакты",
+          "source": {
+            "type": "border",
+            "side": "top",
+            "point": {
+              "x": 750,
+              "y": 40
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-order",
+            "side": "top",
+            "point": {
+              "x": 750,
+              "y": 330
+            }
+          },
+          "role": "control",
+          "points": [
+            {
+              "x": 750,
+              "y": 40
+            },
+            {
+              "x": 750,
+              "y": 330
+            }
+          ],
+          "labelPos": {
+            "x": 758,
+            "y": 40
+          },
+          "pinned": true
+        },
+        {
+          "id": "flow-regulations-return",
+          "label": "",
+          "source": {
+            "type": "junction",
+            "id": "junc-reg-stem",
+            "point": {
+              "x": 750,
+              "y": 75
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-return",
+            "side": "top",
+            "point": {
+              "x": 1310,
+              "y": 650
+            }
+          },
+          "role": "control",
+          "points": [
+            {
+              "x": 750,
+              "y": 75
+            },
+            {
+              "x": 1310,
+              "y": 75
+            },
+            {
+              "x": 1310,
+              "y": 650
+            }
+          ],
+          "pinned": true
+        },
+        {
+          "id": "flow-regulations-control",
+          "label": "",
+          "source": {
+            "type": "junction",
+            "id": "junc-reg-control",
+            "point": {
+              "x": 970,
+              "y": 75
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-control",
+            "side": "top",
+            "point": {
+              "x": 970,
+              "y": 490
+            }
+          },
+          "role": "control",
+          "points": [
+            {
+              "x": 970,
+              "y": 75
+            },
+            {
+              "x": 970,
+              "y": 490
+            }
+          ],
+          "pinned": true
+        },
+        {
+          "id": "flow-market-order",
+          "label": "Конъюнктура\nрынка",
+          "source": {
+            "type": "border",
+            "side": "top",
+            "point": {
+              "x": 710,
+              "y": 40
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-order",
+            "side": "top",
+            "point": {
+              "x": 710,
+              "y": 330
+            }
+          },
+          "role": "control",
+          "points": [
+            {
+              "x": 710,
+              "y": 40
+            },
+            {
+              "x": 710,
+              "y": 330
+            }
+          ],
+          "labelPos": {
+            "x": 673,
+            "y": 35
+          },
+          "pinned": true
+        },
+        {
+          "id": "flow-market-choice",
+          "label": "",
+          "source": {
+            "type": "junction",
+            "id": "junc-market-stem",
+            "point": {
+              "x": 710,
+              "y": 79
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-choice",
+            "side": "top",
+            "point": {
+              "x": 380,
+              "y": 170
+            }
+          },
+          "role": "control",
+          "points": [
+            {
+              "x": 710,
+              "y": 79
+            },
+            {
+              "x": 380,
+              "y": 79
+            },
+            {
+              "x": 380,
+              "y": 170
+            }
+          ],
+          "pinned": true
+        },
+        {
+          "id": "flow-method-order",
+          "label": "Метод\nзакупки\nтоваров",
+          "source": {
+            "type": "border",
+            "side": "top",
+            "point": {
+              "x": 660,
+              "y": 40
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-order",
+            "side": "top",
+            "point": {
+              "x": 660,
+              "y": 330
+            }
+          },
+          "role": "control",
+          "points": [
+            {
+              "x": 660,
+              "y": 40
+            },
+            {
+              "x": 660,
+              "y": 330
+            }
+          ],
+          "labelPos": {
+            "x": 607,
+            "y": 36
+          },
+          "pinned": true
+        },
+        {
+          "id": "flow-method-choice",
+          "label": "",
+          "source": {
+            "type": "junction",
+            "id": "junc-method-stem",
+            "point": {
+              "x": 660,
+              "y": 110
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-choice",
+            "side": "top",
+            "point": {
+              "x": 450,
+              "y": 170
+            }
+          },
+          "role": "control",
+          "points": [
+            {
+              "x": 660,
+              "y": 110
+            },
+            {
+              "x": 450,
+              "y": 110
+            },
+            {
+              "x": 450,
+              "y": 170
+            }
+          ],
+          "pinned": true
+        },
+        {
+          "id": "flow-employees-stem",
+          "label": "Сотрудники",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 660,
+              "y": 865
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-order",
+            "side": "bottom",
+            "point": {
+              "x": 660,
+              "y": 460
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 660,
+              "y": 865
+            },
+            {
+              "x": 660,
+              "y": 460
+            }
+          ],
+          "labelPos": {
+            "x": 580,
+            "y": 804
+          },
+          "pinned": true
+        },
+        {
+          "id": "flow-employees-choice",
+          "label": "",
+          "source": {
+            "type": "junction",
+            "id": "junc-emp-choice",
+            "point": {
+              "x": 660,
+              "y": 813
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-choice",
+            "side": "bottom",
+            "point": {
+              "x": 380,
+              "y": 300
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 660,
+              "y": 813
+            },
+            {
+              "x": 380,
+              "y": 813
+            },
+            {
+              "x": 380,
+              "y": 300
+            }
+          ],
+          "pinned": true
+        },
+        {
+          "id": "flow-employees-control",
+          "label": "",
+          "source": {
+            "type": "junction",
+            "id": "junc-emp-control",
+            "point": {
+              "x": 660,
+              "y": 814
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-control",
+            "side": "bottom",
+            "point": {
+              "x": 940,
+              "y": 620
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 660,
+              "y": 814
+            },
+            {
+              "x": 940,
+              "y": 814
+            },
+            {
+              "x": 940,
+              "y": 620
+            }
+          ],
+          "pinned": true
+        },
+        {
+          "id": "flow-employees-return",
+          "label": "",
+          "source": {
+            "type": "junction",
+            "id": "junc-emp-return",
+            "point": {
+              "x": 940,
+              "y": 814
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-return",
+            "side": "bottom",
+            "point": {
+              "x": 1220,
+              "y": 780
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 940,
+              "y": 814
+            },
+            {
+              "x": 1220,
+              "y": 814
+            },
+            {
+              "x": 1220,
+              "y": 780
+            }
+          ],
+          "pinned": true
+        },
+        {
+          "id": "flow-comm-stem",
+          "label": "ПК, средства связи",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 1010,
+              "y": 865
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-control",
+            "side": "bottom",
+            "point": {
+              "x": 1010,
+              "y": 620
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 1010,
+              "y": 865
+            },
+            {
+              "x": 1010,
+              "y": 620
+            }
+          ],
+          "labelPos": {
+            "x": 889,
+            "y": 838
+          }
+        },
+        {
+          "id": "flow-comm-order",
+          "label": "",
+          "source": {
+            "type": "junction",
+            "id": "junc-comm-order",
+            "point": {
+              "x": 1010,
+              "y": 849
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-order",
+            "side": "bottom",
+            "point": {
+              "x": 730,
+              "y": 460
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 1010,
+              "y": 849
+            },
+            {
+              "x": 730,
+              "y": 849
+            },
+            {
+              "x": 730,
+              "y": 460
+            }
+          ],
+          "pinned": true
+        },
+        {
+          "id": "flow-comm-choice",
+          "label": "",
+          "source": {
+            "type": "junction",
+            "id": "junc-comm-choice",
+            "point": {
+              "x": 730,
+              "y": 849
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-choice",
+            "side": "bottom",
+            "point": {
+              "x": 450,
+              "y": 300
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 730,
+              "y": 849
+            },
+            {
+              "x": 450,
+              "y": 849
+            },
+            {
+              "x": 450,
+              "y": 300
+            }
+          ],
+          "pinned": true
+        },
+        {
+          "id": "flow-comm-return",
+          "label": "",
+          "source": {
+            "type": "junction",
+            "id": "junc-branch-1788311739314",
+            "point": {
+              "x": 1010,
+              "y": 849
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-return",
+            "side": "bottom",
+            "point": {
+              "x": 1290,
+              "y": 780
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 1010,
+              "y": 849
+            },
+            {
+              "x": 1290,
+              "y": 849
+            },
+            {
+              "x": 1290,
+              "y": 780
+            }
+          ],
+          "labelPos": {
+            "x": 1025,
+            "y": 829
+          },
+          "pinned": true
+        },
+        {
+          "id": "flow-supplier-list",
+          "label": "Список\nпоставщиков",
+          "source": {
+            "type": "block",
+            "id": "block-choice",
+            "side": "right",
+            "point": {
+              "x": 520,
+              "y": 235
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-order",
+            "side": "left",
+            "point": {
+              "x": 590,
+              "y": 350
+            }
+          },
+          "role": "input",
+          "labelPos": {
+            "x": 569,
+            "y": 187
+          },
+          "points": [
+            {
+              "x": 520,
+              "y": 235
+            },
+            {
+              "x": 550,
+              "y": 235
+            },
+            {
+              "x": 550,
+              "y": 350
+            },
+            {
+              "x": 590,
+              "y": 350
+            }
+          ],
+          "pinned": true,
+          "showLeader": true,
+          "leaderPoints": [
+            {
+              "x": 590,
+              "y": 205
+            },
+            {
+              "x": 575,
+              "y": 217
+            },
+            {
+              "x": 583,
+              "y": 223
+            },
+            {
+              "x": 550,
+              "y": 250
+            }
+          ]
+        },
+        {
+          "id": "flow-delivery-schedule",
+          "label": "График\nвыполнения\nпоставок",
+          "source": {
+            "type": "block",
+            "id": "block-order",
+            "side": "right",
+            "point": {
+              "x": 800,
+              "y": 350
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-order",
+            "side": "top",
+            "point": {
+              "x": 780,
+              "y": 330
+            }
+          },
+          "role": "control",
+          "labelPos": {
+            "x": 848,
+            "y": 311
+          },
+          "points": [
+            {
+              "x": 800,
+              "y": 350
+            },
+            {
+              "x": 840,
+              "y": 350
+            },
+            {
+              "x": 840,
+              "y": 280
+            },
+            {
+              "x": 780,
+              "y": 280
+            },
+            {
+              "x": 780,
+              "y": 330
+            }
+          ],
+          "pinned": true
+        },
+        {
+          "id": "flow-contract",
+          "label": "Договор",
+          "source": {
+            "type": "block",
+            "id": "block-order",
+            "side": "right",
+            "point": {
+              "x": 800,
+              "y": 370
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-return",
+            "side": "top",
+            "point": {
+              "x": 1220,
+              "y": 650
+            }
+          },
+          "role": "control",
+          "labelPos": {
+            "x": 1096,
+            "y": 333
+          },
+          "points": [
+            {
+              "x": 800,
+              "y": 370
+            },
+            {
+              "x": 1220,
+              "y": 370
+            },
+            {
+              "x": 1220,
+              "y": 650
+            }
+          ],
+          "pinned": true,
+          "showLeader": true,
+          "leaderPoints": [
+            {
+              "x": 1090,
+              "y": 340
+            },
+            {
+              "x": 1075,
+              "y": 350
+            },
+            {
+              "x": 1082,
+              "y": 354
+            },
+            {
+              "x": 1060,
+              "y": 370
+            }
+          ]
+        },
+        {
+          "id": "flow-contract-branch-control",
+          "label": "",
+          "source": {
+            "type": "junction",
+            "id": "junc-contract-control",
+            "point": {
+              "x": 1030,
+              "y": 370
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-control",
+            "side": "top",
+            "point": {
+              "x": 1030,
+              "y": 490
+            }
+          },
+          "role": "control",
+          "points": [
+            {
+              "x": 1030,
+              "y": 370
+            },
+            {
+              "x": 1030,
+              "y": 490
+            }
+          ],
+          "pinned": true
+        },
+        {
+          "id": "flow-schedule-branch-control",
+          "label": "",
+          "source": {
+            "type": "junction",
+            "id": "junc-schedule-control",
+            "point": {
+              "x": 840,
+              "y": 350
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-control",
+            "side": "top",
+            "point": {
+              "x": 900,
+              "y": 490
+            }
+          },
+          "role": "control",
+          "points": [
+            {
+              "x": 840,
+              "y": 350
+            },
+            {
+              "x": 900,
+              "y": 350
+            },
+            {
+              "x": 900,
+              "y": 490
+            }
+          ],
+          "pinned": true
+        },
+        {
+          "id": "flow-order-side",
+          "label": "Заказ",
+          "source": {
+            "type": "block",
+            "id": "block-order",
+            "side": "right",
+            "point": {
+              "x": 800,
+              "y": 430
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-control",
+            "side": "left",
+            "point": {
+              "x": 870,
+              "y": 556
+            }
+          },
+          "role": "control",
+          "labelPos": {
+            "x": 747,
+            "y": 518
+          },
+          "points": [
+            {
+              "x": 800,
+              "y": 430
+            },
+            {
+              "x": 820,
+              "y": 430
+            },
+            {
+              "x": 820,
+              "y": 556
+            },
+            {
+              "x": 870,
+              "y": 556
+            }
+          ],
+          "pinned": true,
+          "showLeader": true,
+          "leaderPoints": [
+            {
+              "x": 757,
+              "y": 528
+            },
+            {
+              "x": 767,
+              "y": 533
+            },
+            {
+              "x": 806,
+              "y": 516
+            },
+            {
+              "x": 820,
+              "y": 518
+            }
+          ]
+        },
+        {
+          "id": "flow-confirmation",
+          "label": "Требование\nподтверждения",
+          "source": {
+            "type": "block",
+            "id": "block-order",
+            "side": "right",
+            "point": {
+              "x": 800,
+              "y": 410
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-control",
+            "side": "left",
+            "point": {
+              "x": 870,
+              "y": 525
+            }
+          },
+          "role": "control",
+          "labelPos": {
+            "x": 865,
+            "y": 495
+          },
+          "points": [
+            {
+              "x": 800,
+              "y": 410
+            },
+            {
+              "x": 845,
+              "y": 410
+            },
+            {
+              "x": 845,
+              "y": 525
+            },
+            {
+              "x": 870,
+              "y": 525
+            }
+          ],
+          "pinned": true,
+          "showLeader": true,
+          "leaderPoints": [
+            {
+              "x": 865,
+              "y": 455
+            },
+            {
+              "x": 852,
+              "y": 467
+            },
+            {
+              "x": 859,
+              "y": 473
+            },
+            {
+              "x": 845,
+              "y": 485
+            }
+          ]
+        },
+        {
+          "id": "flow-defective-goods",
+          "label": "Неудовлетворяющий\nтребованиям товар",
+          "source": {
+            "type": "block",
+            "id": "block-control",
+            "side": "right",
+            "point": {
+              "x": 1080,
+              "y": 580
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-return",
+            "side": "left",
+            "point": {
+              "x": 1150,
+              "y": 715
+            }
+          },
+          "role": "input",
+          "labelPos": {
+            "x": 1120,
+            "y": 695
+          },
+          "points": [
+            {
+              "x": 1080,
+              "y": 580
+            },
+            {
+              "x": 1110,
+              "y": 580
+            },
+            {
+              "x": 1110,
+              "y": 715
+            },
+            {
+              "x": 1150,
+              "y": 715
+            }
+          ],
+          "pinned": true
+        },
+        {
+          "id": "flow-rejection",
+          "label": "Отказ\nпринятия\nзаказа",
+          "source": {
+            "type": "block",
+            "id": "block-control",
+            "side": "right",
+            "point": {
+              "x": 1080,
+              "y": 610
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-order",
+            "side": "left",
+            "point": {
+              "x": 590,
+              "y": 430
+            }
+          },
+          "role": "control",
+          "labelPos": {
+            "x": 1046,
+            "y": 679
+          },
+          "points": [
+            {
+              "x": 1080,
+              "y": 610
+            },
+            {
+              "x": 1096,
+              "y": 610
+            },
+            {
+              "x": 1096,
+              "y": 645
+            },
+            {
+              "x": 555,
+              "y": 645
+            },
+            {
+              "x": 555,
+              "y": 430
+            },
+            {
+              "x": 590,
+              "y": 430
+            }
+          ],
+          "pinned": true,
+          "showLeader": true,
+          "leaderPoints": [
+            {
+              "x": 1056,
+              "y": 689
+            },
+            {
+              "x": 1041,
+              "y": 682
+            },
+            {
+              "x": 1058,
+              "y": 654
+            },
+            {
+              "x": 1046,
+              "y": 645
+            }
+          ]
+        }
+      ],
+      "junctions": [
+        {
+          "id": "junc-reg-stem",
+          "type": "branch",
+          "point": {
+            "x": 750,
+            "y": 75
+          },
+          "parentArrowId": "flow-regulations-order",
+          "childArrowIds": [
+            "flow-regulations-return"
+          ]
+        },
+        {
+          "id": "junc-reg-control",
+          "type": "branch",
+          "point": {
+            "x": 970,
+            "y": 75
+          },
+          "parentArrowId": "flow-regulations-return",
+          "childArrowIds": [
+            "flow-regulations-control"
+          ]
+        },
+        {
+          "id": "junc-market-stem",
+          "type": "branch",
+          "point": {
+            "x": 710,
+            "y": 79
+          },
+          "parentArrowId": "flow-market-order",
+          "childArrowIds": [
+            "flow-market-choice"
+          ]
+        },
+        {
+          "id": "junc-method-stem",
+          "type": "branch",
+          "point": {
+            "x": 660,
+            "y": 110
+          },
+          "parentArrowId": "flow-method-order",
+          "childArrowIds": [
+            "flow-method-choice"
+          ]
+        },
+        {
+          "id": "junc-emp-choice",
+          "type": "branch",
+          "point": {
+            "x": 660,
+            "y": 813
+          },
+          "parentArrowId": "flow-employees-stem",
+          "childArrowIds": [
+            "flow-employees-choice"
+          ]
+        },
+        {
+          "id": "junc-emp-control",
+          "type": "branch",
+          "point": {
+            "x": 660,
+            "y": 814
+          },
+          "parentArrowId": "flow-employees-stem",
+          "childArrowIds": [
+            "flow-employees-control"
+          ]
+        },
+        {
+          "id": "junc-emp-return",
+          "type": "branch",
+          "point": {
+            "x": 940,
+            "y": 814
+          },
+          "parentArrowId": "flow-employees-control",
+          "childArrowIds": [
+            "flow-employees-return"
+          ]
+        },
+        {
+          "id": "junc-comm-order",
+          "type": "branch",
+          "point": {
+            "x": 1010,
+            "y": 849
+          },
+          "parentArrowId": "flow-comm-stem",
+          "childArrowIds": [
+            "flow-comm-order"
+          ]
+        },
+        {
+          "id": "junc-comm-choice",
+          "type": "branch",
+          "point": {
+            "x": 730,
+            "y": 849
+          },
+          "parentArrowId": "flow-comm-order",
+          "childArrowIds": [
+            "flow-comm-choice"
+          ]
+        },
+        {
+          "id": "junc-contract-control",
+          "type": "branch",
+          "point": {
+            "x": 1030,
+            "y": 370
+          },
+          "parentArrowId": "flow-contract",
+          "childArrowIds": [
+            "flow-contract-branch-control"
+          ]
+        },
+        {
+          "id": "junc-shipped-merge",
+          "type": "merge",
+          "point": {
+            "x": 1500,
+            "y": 550
+          },
+          "parentArrowId": "flow-shipped-main",
+          "childArrowIds": [
+            "flow-shipped-return-merge"
+          ]
+        },
+        {
+          "id": "junc-schedule-control",
+          "type": "branch",
+          "point": {
+            "x": 840,
+            "y": 350
+          },
+          "parentArrowId": "flow-delivery-schedule",
+          "childArrowIds": [
+            "flow-schedule-branch-control"
+          ]
+        },
+        {
+          "id": "junc-branch-1788311739314",
+          "type": "branch",
+          "point": {
+            "x": 1010,
+            "y": 849
+          },
+          "parentArrowId": "flow-comm-stem",
+          "childArrowIds": [
+            "flow-comm-return"
+          ]
+        }
+      ]
+    }
+  ],
+  "activeDiagramId": "diag-a1"
+}
