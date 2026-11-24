@@ -29,17 +29,20 @@ export const boundaryBalanceRule: LinterRule = {
 
     if (!parentDiag || !parentBlock) return issues;
 
-    // Find parent arrows attached to parent block
+    // Find parent arrows attached to parent block (excluding tunneled connections)
+    // In IDEF0:
+    // If target has tunnelTarget: true, flow enters a tunnel at the block and does NOT appear on child decomposition diagram
+    // If source has tunnelSource: true, flow leaves a tunnel from the block and does NOT appear on child decomposition diagram
     const parentInflows = parentDiag.arrows.filter(
-      a => a.target.type === 'block' && a.target.id === parentBlock!.id
+      a => a.target.type === 'block' && a.target.id === parentBlock!.id && !a.tunnelTarget
     );
     const parentOutflows = parentDiag.arrows.filter(
-      a => a.source.type === 'block' && a.source.id === parentBlock!.id
+      a => a.source.type === 'block' && a.source.id === parentBlock!.id && !a.tunnelSource
     );
 
-    // Boundary flows in child diagram
-    const childBoundaryInputs = diagram.arrows.filter(a => a.source.type === 'border');
-    const childBoundaryOutputs = diagram.arrows.filter(a => a.target.type === 'border');
+    // Boundary flows in child diagram (excluding tunneled borders)
+    const childBoundaryInputs = diagram.arrows.filter(a => a.source.type === 'border' && !a.tunnelSource);
+    const childBoundaryOutputs = diagram.arrows.filter(a => a.target.type === 'border' && !a.tunnelTarget);
 
     const norm = (str: string) => str.replace(/\s+/g, ' ').toLowerCase().trim();
 

@@ -202,6 +202,11 @@ export class EditorStore {
     this.notify();
   }
 
+  public toggleArrowTunnel(arrowId: string, end: 'source' | 'target'): void {
+    ArrowOps.toggleArrowTunnel(this.state, arrowId, end);
+    this.notify();
+  }
+
   // --- Arrow Endpoints & Geometry ---
   public reconnectArrowEndpoint(
     arrowId: string,

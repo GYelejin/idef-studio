@@ -233,6 +233,20 @@ export class ArrowOps {
     
   }
 
+  public static toggleArrowTunnel(state: EditorState, arrowId: string, end: 'source' | 'target'): void {
+    const diag = getActiveDiagram(state);
+    if (!diag) return;
+    const arrow = diag.arrows.find(a => a.id === arrowId);
+    if (!arrow) return;
+
+    HistoryOps.pushHistory(state);
+    if (end === 'source') {
+      arrow.tunnelSource = !arrow.tunnelSource;
+    } else {
+      arrow.tunnelTarget = !arrow.tunnelTarget;
+    }
+  }
+
 
   public static toggleLeader(state: EditorState, arrowId: string): void {
     const diag = getActiveDiagram(state);

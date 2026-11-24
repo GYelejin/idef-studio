@@ -8,6 +8,7 @@ export * from './rules/icomCompleteness';
 export * from './rules/geometryOrtho';
 export * from './rules/boundaryBalance';
 export * from './rules/intersections';
+export * from './rules/arrowLabel';
 
 /**
  * Главная функция проверки диаграммы (обратная совместимость со всем приложением)

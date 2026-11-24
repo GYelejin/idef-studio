@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-// ClojureScript UIX 2 Application Component:
-import { App } from '@cljs-out/main.js';
+import App from './App';
 import './index.css';
 
 import { store } from './core/store';

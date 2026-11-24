@@ -43,7 +43,11 @@ playwright-report/
 *.zip
 
 
-# shadow-cljs
+# Python caches
+__pycache__/
+*.pyc
+
+# shadow-cljs (legacy)
 .shadow-cljs/
 .cljs-out/
 

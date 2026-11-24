@@ -9,6 +9,7 @@ import { boundaryBalanceRule } from './rules/boundaryBalance';
 import { intersectionsRule } from './rules/intersections';
 import { unattachedArrowRule } from './rules/unattachedArrow';
 import { labelOverlapRule } from './rules/labelOverlap';
+import { arrowLabelRule } from './rules/arrowLabel';
 
 /**
  * Реестр правил линтера IDEF0 (Linter Registry)
@@ -27,6 +28,7 @@ export class LinterRegistry {
     this.register(intersectionsRule);
     this.register(unattachedArrowRule);
     this.register(labelOverlapRule);
+    this.register(arrowLabelRule);
   }
 
   /**

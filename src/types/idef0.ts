@@ -34,6 +34,9 @@ export interface Arrow {
   labelPos?: Point;
   showLeader?: boolean;
   leaderPoints?: Point[];
+  tunnelSource?: boolean; // IDEF0 Arrow Tunneling at source ( )
+  tunnelTarget?: boolean; // IDEF0 Arrow Tunneling at target ( )
+  color?: string; // Unified Flow Family Color (trunk + all branches)
 }
 
 export interface Junction {

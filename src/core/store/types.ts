@@ -1,3 +1,7 @@
+import { Project, Point } from '../../types/idef0';
+
+export type ToolMode = 'select' | 'block' | 'arrow';
+
 export interface ProjectSnapshot {
   id: string;
   name: string;

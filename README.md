@@ -14,13 +14,12 @@
 
 ### Предварительные требования
 * **Bun**
-* **Java** (OpenJDK 21+)
 * **make**
 
 ### Запуск через Makefile
 ```bash
 make install    # Установка зависимостей
-make build      # Сборка ClojureScript
+make build      # Сборка проекта (Vite)
 make dev        # Запуск локального сервера (http://localhost:3000/)
 make test       # Запуск модульных тестов
 ```

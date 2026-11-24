@@ -1,0 +1,922 @@
+{
+  "id": "proj-fibonacci-matrix",
+  "name": "Матрица Фибоначчи",
+  "description": "Функциональная модель IDEF0: Заполнение случайным образом матрицы последовательными без повторений числами Фибоначчи (Автор: Artem Kulichenkov)",
+  "activeDiagramId": "diag-a0",
+  "diagrams": [
+    {
+      "id": "diag-a0",
+      "code": "A0",
+      "title": "Контекстная диаграмма: Заполнение матрицы числами Фибоначчи",
+      "parentBlockId": null,
+      "blocks": [
+        {
+          "id": "block-a0-main",
+          "nodeNumber": 0,
+          "name": "Заполнение случайным образом\nматрицы последовательными без\nповторений числами Фибоначчи",
+          "x": 520,
+          "y": 300,
+          "width": 560,
+          "height": 300,
+          "decompDiagramId": "diag-a1"
+        }
+      ],
+      "arrows": [
+        {
+          "id": "flow-a0-size",
+          "label": "Размер матрицы",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 450
+            },
+            "role": "input"
+          },
+          "target": {
+            "type": "block",
+            "id": "block-a0-main",
+            "side": "left",
+            "point": {
+              "x": 520,
+              "y": 450
+            },
+            "role": "input"
+          },
+          "role": "input",
+          "pinned": true,
+          "points": [
+            {
+              "x": 30,
+              "y": 450
+            },
+            {
+              "x": 520,
+              "y": 450
+            }
+          ],
+          "labelPos": {
+            "x": 200,
+            "y": 430
+          }
+        },
+        {
+          "id": "flow-a0-logic",
+          "label": "Логика генерации чисел\nФибоначчи",
+          "source": {
+            "type": "border",
+            "side": "top",
+            "point": {
+              "x": 800,
+              "y": 40
+            },
+            "role": "control"
+          },
+          "target": {
+            "type": "block",
+            "id": "block-a0-main",
+            "side": "top",
+            "point": {
+              "x": 800,
+              "y": 300
+            },
+            "role": "control"
+          },
+          "role": "control",
+          "pinned": true,
+          "points": [
+            {
+              "x": 800,
+              "y": 40
+            },
+            {
+              "x": 800,
+              "y": 300
+            }
+          ],
+          "labelPos": {
+            "x": 530,
+            "y": 90
+          }
+        },
+        {
+          "id": "flow-a0-matrix-out",
+          "label": "Матрица заполненная\nчислами Фибоначчи",
+          "source": {
+            "type": "block",
+            "id": "block-a0-main",
+            "side": "right",
+            "point": {
+              "x": 1080,
+              "y": 450
+            },
+            "role": "output"
+          },
+          "target": {
+            "type": "border",
+            "side": "right",
+            "point": {
+              "x": 1580,
+              "y": 450
+            },
+            "role": "output"
+          },
+          "role": "output",
+          "pinned": true,
+          "points": [
+            {
+              "x": 1080,
+              "y": 450
+            },
+            {
+              "x": 1580,
+              "y": 450
+            }
+          ],
+          "labelPos": {
+            "x": 1180,
+            "y": 400
+          }
+        },
+        {
+          "id": "flow-a0-generator",
+          "label": "Генератор\nслучайных чисел",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 800,
+              "y": 865
+            },
+            "role": "mechanism"
+          },
+          "target": {
+            "type": "block",
+            "id": "block-a0-main",
+            "side": "bottom",
+            "point": {
+              "x": 800,
+              "y": 600
+            },
+            "role": "mechanism"
+          },
+          "role": "mechanism",
+          "pinned": true,
+          "points": [
+            {
+              "x": 800,
+              "y": 865
+            },
+            {
+              "x": 800,
+              "y": 600
+            }
+          ],
+          "labelPos": {
+            "x": 620,
+            "y": 730
+          }
+        }
+      ],
+      "junctions": []
+    },
+    {
+      "id": "diag-a1",
+      "code": "A0",
+      "title": "Заполнение случайным образом матрицы последовательными без повторений числами Фибоначчи",
+      "parentBlockId": "block-a0-main",
+      "blocks": [
+        {
+          "id": "block-a1-create-matrix",
+          "nodeNumber": 1,
+          "name": "Создание матрицы\nзаданного размера",
+          "x": 320,
+          "y": 470,
+          "width": 210,
+          "height": 130,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-a2-generate-fib",
+          "nodeNumber": 2,
+          "name": "Генерация чисел\nФибоначчи в\nнеобходимом\nколичестве",
+          "x": 330,
+          "y": 220,
+          "width": 200,
+          "height": 130,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-a3-fill-matrix",
+          "nodeNumber": 3,
+          "name": "Заполнение Матрицы\nчислами Фибоначчи в\nслучайном порядке",
+          "x": 700,
+          "y": 410,
+          "width": 270,
+          "height": 160,
+          "decompDiagramId": "diag-a3"
+        }
+      ],
+      "arrows": [
+        {
+          "id": "flow-a1-size-stem",
+          "label": "Размер матрицы",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 535
+            },
+            "role": "input"
+          },
+          "target": {
+            "type": "block",
+            "id": "block-a1-create-matrix",
+            "side": "left",
+            "point": {
+              "x": 320,
+              "y": 535
+            },
+            "role": "input"
+          },
+          "role": "input",
+          "pinned": true,
+          "points": [
+            {
+              "x": 30,
+              "y": 535
+            },
+            {
+              "x": 320,
+              "y": 535
+            }
+          ],
+          "labelPos": {
+            "x": 50,
+            "y": 400
+          }
+        },
+        {
+          "id": "flow-a1-size-to-a2",
+          "label": "Размер матрицы",
+          "source": {
+            "type": "junction",
+            "id": "junc-size-branch",
+            "point": {
+              "x": 240,
+              "y": 535
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-a2-generate-fib",
+            "side": "left",
+            "point": {
+              "x": 330,
+              "y": 285
+            },
+            "role": "input"
+          },
+          "role": "input",
+          "pinned": true,
+          "points": [
+            {
+              "x": 240,
+              "y": 535
+            },
+            {
+              "x": 240,
+              "y": 285
+            },
+            {
+              "x": 330,
+              "y": 285
+            }
+          ],
+          "labelPos": {
+            "x": 245,
+            "y": 310
+          }
+        },
+        {
+          "id": "flow-a1-logic",
+          "label": "Логика генерации чисел Фибоначчи",
+          "source": {
+            "type": "border",
+            "side": "top",
+            "point": {
+              "x": 430,
+              "y": 40
+            },
+            "role": "control"
+          },
+          "target": {
+            "type": "block",
+            "id": "block-a2-generate-fib",
+            "side": "top",
+            "point": {
+              "x": 430,
+              "y": 220
+            },
+            "role": "control"
+          },
+          "role": "control",
+          "pinned": true,
+          "points": [
+            {
+              "x": 430,
+              "y": 40
+            },
+            {
+              "x": 430,
+              "y": 220
+            }
+          ],
+          "labelPos": {
+            "x": 45,
+            "y": 175
+          }
+        },
+        {
+          "id": "flow-a1-empty-matrix",
+          "label": "Пустая матрица",
+          "source": {
+            "type": "block",
+            "id": "block-a1-create-matrix",
+            "side": "right",
+            "point": {
+              "x": 530,
+              "y": 535
+            },
+            "role": "output"
+          },
+          "target": {
+            "type": "block",
+            "id": "block-a3-fill-matrix",
+            "side": "left",
+            "point": {
+              "x": 700,
+              "y": 535
+            },
+            "role": "input"
+          },
+          "role": "input",
+          "pinned": true,
+          "points": [
+            {
+              "x": 530,
+              "y": 535
+            },
+            {
+              "x": 700,
+              "y": 535
+            }
+          ],
+          "labelPos": {
+            "x": 540,
+            "y": 515
+          }
+        },
+        {
+          "id": "flow-a1-fib-seq",
+          "label": "Последовательность\nчисел Фибоначчи",
+          "source": {
+            "type": "block",
+            "id": "block-a2-generate-fib",
+            "side": "right",
+            "point": {
+              "x": 530,
+              "y": 285
+            },
+            "role": "output"
+          },
+          "target": {
+            "type": "block",
+            "id": "block-a3-fill-matrix",
+            "side": "left",
+            "point": {
+              "x": 700,
+              "y": 460
+            },
+            "role": "input"
+          },
+          "role": "input",
+          "pinned": true,
+          "points": [
+            {
+              "x": 530,
+              "y": 285
+            },
+            {
+              "x": 590,
+              "y": 285
+            },
+            {
+              "x": 590,
+              "y": 460
+            },
+            {
+              "x": 700,
+              "y": 460
+            }
+          ],
+          "labelPos": {
+            "x": 600,
+            "y": 310
+          }
+        },
+        {
+          "id": "flow-a1-matrix-out",
+          "label": "Матрица заполненная\nчислами Фибоначчи",
+          "source": {
+            "type": "block",
+            "id": "block-a3-fill-matrix",
+            "side": "right",
+            "point": {
+              "x": 970,
+              "y": 490
+            },
+            "role": "output"
+          },
+          "target": {
+            "type": "border",
+            "side": "right",
+            "point": {
+              "x": 1580,
+              "y": 490
+            },
+            "role": "output"
+          },
+          "role": "output",
+          "pinned": true,
+          "points": [
+            {
+              "x": 970,
+              "y": 490
+            },
+            {
+              "x": 1580,
+              "y": 490
+            }
+          ],
+          "labelPos": {
+            "x": 1100,
+            "y": 450
+          }
+        },
+        {
+          "id": "flow-a1-generator",
+          "label": "Генератор\nслучайных чисел",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 830,
+              "y": 865
+            },
+            "role": "mechanism"
+          },
+          "target": {
+            "type": "block",
+            "id": "block-a3-fill-matrix",
+            "side": "bottom",
+            "point": {
+              "x": 830,
+              "y": 570
+            },
+            "role": "mechanism"
+          },
+          "role": "mechanism",
+          "pinned": true,
+          "points": [
+            {
+              "x": 830,
+              "y": 865
+            },
+            {
+              "x": 830,
+              "y": 570
+            }
+          ],
+          "labelPos": {
+            "x": 630,
+            "y": 780
+          }
+        }
+      ],
+      "junctions": [
+        {
+          "id": "junc-size-branch",
+          "type": "branch",
+          "point": {
+            "x": 240,
+            "y": 535
+          },
+          "parentArrowId": "flow-a1-size-stem",
+          "childArrowIds": [
+            "flow-a1-size-to-a2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "diag-a3",
+      "code": "A3",
+      "title": "Заполнение Матрицы числами Фибоначчи в случайном порядке",
+      "parentBlockId": "block-a3-fill-matrix",
+      "blocks": [
+        {
+          "id": "block-a31-get-pos",
+          "nodeNumber": 1,
+          "name": "Получение\nпозиции числа\nФибоначи",
+          "x": 270,
+          "y": 430,
+          "width": 170,
+          "height": 100,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-a32-check-pos",
+          "nodeNumber": 2,
+          "name": "Проверка\nзанята ли\nпозиция\nдругим",
+          "x": 520,
+          "y": 530,
+          "width": 140,
+          "height": 90,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-a33-put-num",
+          "nodeNumber": 3,
+          "name": "Поставить\nчисло на\nместо",
+          "x": 920,
+          "y": 530,
+          "width": 140,
+          "height": 90,
+          "decompDiagramId": null
+        }
+      ],
+      "arrows": [
+        {
+          "id": "flow-a3-fib-seq",
+          "label": "Последовательность\nчисел Фибоначчи",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 480
+            },
+            "role": "input"
+          },
+          "target": {
+            "type": "block",
+            "id": "block-a31-get-pos",
+            "side": "left",
+            "point": {
+              "x": 270,
+              "y": 480
+            },
+            "role": "input"
+          },
+          "role": "input",
+          "pinned": true,
+          "points": [
+            {
+              "x": 30,
+              "y": 480
+            },
+            {
+              "x": 270,
+              "y": 480
+            }
+          ],
+          "labelPos": {
+            "x": 35,
+            "y": 440
+          }
+        },
+        {
+          "id": "flow-a3-empty-matrix",
+          "label": "Пустая матрица",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 585
+            },
+            "role": "input"
+          },
+          "target": {
+            "type": "block",
+            "id": "block-a32-check-pos",
+            "side": "left",
+            "point": {
+              "x": 520,
+              "y": 585
+            },
+            "role": "input"
+          },
+          "role": "input",
+          "pinned": true,
+          "points": [
+            {
+              "x": 30,
+              "y": 585
+            },
+            {
+              "x": 520,
+              "y": 585
+            }
+          ],
+          "labelPos": {
+            "x": 50,
+            "y": 565
+          }
+        },
+        {
+          "id": "flow-a3-generator",
+          "label": "Генератор\nслучайных чисел",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 330,
+              "y": 865
+            },
+            "role": "mechanism"
+          },
+          "target": {
+            "type": "block",
+            "id": "block-a31-get-pos",
+            "side": "bottom",
+            "point": {
+              "x": 330,
+              "y": 530
+            },
+            "role": "mechanism"
+          },
+          "role": "mechanism",
+          "pinned": true,
+          "points": [
+            {
+              "x": 330,
+              "y": 865
+            },
+            {
+              "x": 330,
+              "y": 530
+            }
+          ],
+          "labelPos": {
+            "x": 150,
+            "y": 780
+          }
+        },
+        {
+          "id": "flow-a3-a31-to-a32",
+          "label": "Сгенерированная позиция",
+          "source": {
+            "type": "block",
+            "id": "block-a31-get-pos",
+            "side": "right",
+            "point": {
+              "x": 440,
+              "y": 480
+            },
+            "role": "output"
+          },
+          "target": {
+            "type": "block",
+            "id": "block-a32-check-pos",
+            "side": "left",
+            "point": {
+              "x": 520,
+              "y": 555
+            },
+            "role": "input"
+          },
+          "role": "input",
+          "pinned": true,
+          "points": [
+            {
+              "x": 440,
+              "y": 480
+            },
+            {
+              "x": 470,
+              "y": 480
+            },
+            {
+              "x": 470,
+              "y": 555
+            },
+            {
+              "x": 520,
+              "y": 555
+            }
+          ],
+          "labelPos": {
+            "x": 445,
+            "y": 460
+          }
+        },
+        {
+          "id": "flow-a3-get-num-pos",
+          "label": "Получение числа\nи позиции",
+          "source": {
+            "type": "block",
+            "id": "block-a32-check-pos",
+            "side": "right",
+            "point": {
+              "x": 660,
+              "y": 575
+            },
+            "role": "output"
+          },
+          "target": {
+            "type": "block",
+            "id": "block-a33-put-num",
+            "side": "left",
+            "point": {
+              "x": 920,
+              "y": 575
+            },
+            "role": "input"
+          },
+          "role": "input",
+          "pinned": true,
+          "points": [
+            {
+              "x": 660,
+              "y": 575
+            },
+            {
+              "x": 920,
+              "y": 575
+            }
+          ],
+          "labelPos": {
+            "x": 700,
+            "y": 535
+          }
+        },
+        {
+          "id": "flow-a3-feedback-retry-pos",
+          "label": "Сигнал о занятости позиции",
+          "source": {
+            "type": "block",
+            "id": "block-a32-check-pos",
+            "side": "right",
+            "point": {
+              "x": 660,
+              "y": 550
+            },
+            "role": "output"
+          },
+          "target": {
+            "type": "block",
+            "id": "block-a31-get-pos",
+            "side": "left",
+            "point": {
+              "x": 270,
+              "y": 450
+            },
+            "role": "input"
+          },
+          "role": "input",
+          "pinned": true,
+          "points": [
+            {
+              "x": 660,
+              "y": 550
+            },
+            {
+              "x": 675,
+              "y": 550
+            },
+            {
+              "x": 675,
+              "y": 390
+            },
+            {
+              "x": 250,
+              "y": 390
+            },
+            {
+              "x": 250,
+              "y": 450
+            },
+            {
+              "x": 270,
+              "y": 450
+            }
+          ],
+          "labelPos": {
+            "x": 420,
+            "y": 370
+          }
+        },
+        {
+          "id": "flow-a3-feedback-next-num",
+          "label": "Запрос следующего числа",
+          "source": {
+            "type": "block",
+            "id": "block-a33-put-num",
+            "side": "right",
+            "point": {
+              "x": 1060,
+              "y": 550
+            },
+            "role": "output"
+          },
+          "target": {
+            "type": "block",
+            "id": "block-a31-get-pos",
+            "side": "left",
+            "point": {
+              "x": 270,
+              "y": 510
+            },
+            "role": "input"
+          },
+          "role": "input",
+          "pinned": true,
+          "points": [
+            {
+              "x": 1060,
+              "y": 550
+            },
+            {
+              "x": 1075,
+              "y": 550
+            },
+            {
+              "x": 1075,
+              "y": 270
+            },
+            {
+              "x": 230,
+              "y": 270
+            },
+            {
+              "x": 230,
+              "y": 510
+            },
+            {
+              "x": 270,
+              "y": 510
+            }
+          ],
+          "labelPos": {
+            "x": 550,
+            "y": 250
+          }
+        },
+        {
+          "id": "flow-a3-matrix-out",
+          "label": "Матрица\nзаполненная\nчислами\nФибоначчи",
+          "source": {
+            "type": "block",
+            "id": "block-a33-put-num",
+            "side": "right",
+            "point": {
+              "x": 1060,
+              "y": 575
+            },
+            "role": "output"
+          },
+          "target": {
+            "type": "border",
+            "side": "right",
+            "point": {
+              "x": 1580,
+              "y": 575
+            },
+            "role": "output"
+          },
+          "role": "output",
+          "pinned": true,
+          "points": [
+            {
+              "x": 1060,
+              "y": 575
+            },
+            {
+              "x": 1580,
+              "y": 575
+            }
+          ],
+          "labelPos": {
+            "x": 1250,
+            "y": 500
+          }
+        }
+      ],
+      "junctions": []
+    }
+  ]
+}

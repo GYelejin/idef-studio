@@ -100,7 +100,7 @@ export const CanvasArrow: React.FC<CanvasArrowProps> = ({
         markerEnd={arrow.target.type !== 'junction' ? `url(#marker-arrow-${arrow.id})` : undefined}
         id={`path-${arrow.id}`}
         style={{
-          stroke: isSelected ? 'var(--accent-primary, #2563eb)' : '#000000',
+          stroke: isSelected ? 'var(--accent-primary, #2563eb)' : (arrow.color || '#000000'),
           cursor: 'pointer',
           pointerEvents: 'stroke',
         }}
@@ -109,6 +109,36 @@ export const CanvasArrow: React.FC<CanvasArrowProps> = ({
           store.selectObject(arrow.id, 'arrow');
         }}
       />
+
+      {/* Arrow Tunneling Markers (IDEF0 Parentheses / Tunnel circles) */}
+      {arrow.tunnelSource && renderPoints.length > 0 && (
+        <circle
+          cx={renderPoints[0].x}
+          cy={renderPoints[0].y}
+          r="6"
+          fill="none"
+          stroke={arrow.color || '#000000'}
+          strokeWidth="1.5"
+          strokeDasharray="2,2"
+          id={`tunnel-src-${arrow.id}`}
+          data-testid={`tunnel-src-${arrow.id}`}
+          style={{ pointerEvents: 'none' }}
+        />
+      )}
+      {arrow.tunnelTarget && renderPoints.length > 0 && (
+        <circle
+          cx={renderPoints[renderPoints.length - 1].x}
+          cy={renderPoints[renderPoints.length - 1].y}
+          r="6"
+          fill="none"
+          stroke={arrow.color || '#000000'}
+          strokeWidth="1.5"
+          strokeDasharray="2,2"
+          id={`tunnel-tgt-${arrow.id}`}
+          data-testid={`tunnel-tgt-${arrow.id}`}
+          style={{ pointerEvents: 'none' }}
+        />
+      )}
 
       {/* Decorative Leader Path */}
       {arrow.showLeader && arrow.leaderPoints && arrow.leaderPoints.length >= 2 && (

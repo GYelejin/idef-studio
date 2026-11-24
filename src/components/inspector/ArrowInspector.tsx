@@ -371,6 +371,74 @@ export const ArrowInspector: React.FC<ArrowInspectorProps> = ({ arrow, state }) 
             );
           })()}
   
+          <div className="form-group">
+            <label className="form-label">Цвет ветки потока (Ствол + Ответвления)</label>
+            <div style={{ display: 'flex', gap: '6px', alignItems: 'center', flexWrap: 'wrap' }}>
+              {[
+                { label: 'Классический черный', color: '#1e293b' },
+                { label: 'Сапфировый синий', color: '#2563eb' },
+                { label: 'Изумрудный зеленый', color: '#059669' },
+                { label: 'Рубиновый красный', color: '#dc2626' },
+                { label: 'Фиолетовый', color: '#7c3aed' },
+                { label: 'Янтарный охра', color: '#d97706' },
+                { label: 'Морской циан', color: '#0891b2' },
+                { label: 'Малиновый', color: '#db2777' },
+              ].map((c) => (
+                <button
+                  key={c.color}
+                  onClick={() => store.setFlowFamilyColor(arrow.id, c.color)}
+                  style={{
+                    width: '24px',
+                    height: '24px',
+                    borderRadius: '4px',
+                    background: c.color,
+                    border: (arrow.color || '#1e293b') === c.color ? '2px solid #ffffff' : '1px solid var(--border-color)',
+                    cursor: 'pointer',
+                    boxShadow: (arrow.color || '#1e293b') === c.color ? '0 0 0 2px var(--accent-primary)' : 'none',
+                  }}
+                  title={c.label}
+                  data-testid={`flow-color-${c.color.replace('#', '')}`}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label className="form-label">Туннелирование стрелки ( )</label>
+            <div style={{ display: 'flex', gap: '8px' }}>
+              <button
+                className={`btn-tool ${arrow.tunnelSource ? 'active' : ''}`}
+                style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  background: arrow.tunnelSource ? 'rgba(37, 99, 235, 0.15)' : undefined,
+                  borderColor: arrow.tunnelSource ? 'var(--accent-primary)' : undefined,
+                  fontWeight: arrow.tunnelSource ? 600 : 400,
+                }}
+                onClick={() => store.toggleArrowTunnel(arrow.id, 'source')}
+                title="Включить/выключить туннелирование у истока"
+                data-testid="btn-toggle-tunnel-source"
+              >
+                У истока ( )
+              </button>
+              <button
+                className={`btn-tool ${arrow.tunnelTarget ? 'active' : ''}`}
+                style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  background: arrow.tunnelTarget ? 'rgba(37, 99, 235, 0.15)' : undefined,
+                  borderColor: arrow.tunnelTarget ? 'var(--accent-primary)' : undefined,
+                  fontWeight: arrow.tunnelTarget ? 600 : 400,
+                }}
+                onClick={() => store.toggleArrowTunnel(arrow.id, 'target')}
+                title="Включить/выключить туннелирование у стока"
+                data-testid="btn-toggle-tunnel-target"
+              >
+                У стока ( )
+              </button>
+            </div>
+          </div>
+
           <div className="form-group" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             <label
               className="checkbox-label"
