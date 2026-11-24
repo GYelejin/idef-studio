@@ -1,4 +1,5 @@
 import docx
+from pathlib import Path
 from docx.shared import Inches, Pt, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml import OxmlElement, parse_xml
@@ -62,7 +63,7 @@ def create_article_docx(template_path, output_path):
         "Body Text"
     )
     add_p(
-        "To mitigate these vulnerabilities, this study proposes a cognitive engineering paradigm that unites visual structured analysis with contextual generative intelligence. We leverage the established IDEF0 (Integration Definition for Function Modeling) standard—grounded in Input-Control-Output-Mechanism (ICOM) formalisms—as a cognitive scaffolding mechanism for hierarchical code generation [4]. We introduce IDEF0 Studio, a reactive web-based architectural modeling environment implemented in React and TypeScript with ClojureScript state primitives, featuring an automated generative orchestration engine.",
+        "To mitigate these vulnerabilities, this study proposes a cognitive engineering paradigm that unites visual structured analysis with contextual generative intelligence. We leverage the established IDEF0 (Integration Definition for Function Modeling) standard—grounded in Input-Control-Output-Mechanism (ICOM) formalisms—as a cognitive scaffolding mechanism for hierarchical code generation [4]. We introduce IDEF0 Studio, a reactive web-based architectural modeling environment implemented in React and TypeScript with a high-performance state machine and SVG graph engine, featuring an automated generative orchestration engine.",
         "Body Text"
     )
     add_p(
@@ -225,11 +226,12 @@ def create_article_docx(template_path, output_path):
     for r in refs:
         add_p(r, "references")
 
-    # Save to intermediate file
-    doc.save("/tmp/article_temp.docx")
-    print("Saved intermediate docx successfully")
+    out_path = Path(output_path)
+    doc.save(str(out_path))
+    print(f"Saved generated docx successfully to {out_path}")
 
-create_article_docx(
-    "/home/gy/Documents/University/ramus-lsp/template_fixed.docx",
-    "/home/gy/Documents/University/ramus-lsp/ICIICE_Paper1_IDEF0_Code_Synthesis.docx"
-)
+if __name__ == "__main__":
+    paper_dir = Path(__file__).resolve().parent
+    template = paper_dir / "template_fixed.docx"
+    output = paper_dir / "ICIICE_Paper1_IDEF0_Code_Synthesis.docx"
+    create_article_docx(str(template), str(output))
