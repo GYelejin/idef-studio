@@ -1,5 +1,5 @@
 import { Diagram, Project } from '../types/idef0';
-import { pointsToSvgPath, getRenderPointsForArrow, getBlockCode } from './geometry';
+import { pointsToSvgPath, getRenderPointsForArrow, getBlockCode, getTunnelParenthesisPath } from './geometry';
 
 function escapeXml(unsafe: string): string {
   if (!unsafe) return '';
@@ -78,11 +78,13 @@ export function exportDiagramToSvg(diagram: Diagram): string {
     svg += `  <g id="${arrow.id}" class="flow-group">\n`;
     svg += `    <path class="flow-line" d="${pathD}" stroke="${arrowCol}"${hasMarker ? ` marker-end="url(#marker-arrow-${arrow.id})"` : ''} id="path-${arrow.id}" />\n`;
 
-    if (arrow.tunnelSource && renderPoints.length > 0) {
-      svg += `    <circle cx="${renderPoints[0].x}" cy="${renderPoints[0].y}" r="6" fill="none" stroke="${arrowCol}" stroke-width="1.5" stroke-dasharray="2,2" id="tunnel-src-${arrow.id}" />\n`;
+    if (arrow.tunnelSource && renderPoints.length >= 2) {
+      const pD = getTunnelParenthesisPath(renderPoints[0], renderPoints[1], false);
+      svg += `    <path d="${pD}" fill="none" stroke="${arrowCol}" stroke-width="1.8" stroke-linecap="round" id="tunnel-src-${arrow.id}" />\n`;
     }
-    if (arrow.tunnelTarget && renderPoints.length > 0) {
-      svg += `    <circle cx="${renderPoints[renderPoints.length - 1].x}" cy="${renderPoints[renderPoints.length - 1].y}" r="6" fill="none" stroke="${arrowCol}" stroke-width="1.5" stroke-dasharray="2,2" id="tunnel-tgt-${arrow.id}" />\n`;
+    if (arrow.tunnelTarget && renderPoints.length >= 2) {
+      const pD = getTunnelParenthesisPath(renderPoints[renderPoints.length - 2], renderPoints[renderPoints.length - 1], true);
+      svg += `    <path d="${pD}" fill="none" stroke="${arrowCol}" stroke-width="1.8" stroke-linecap="round" id="tunnel-tgt-${arrow.id}" />\n`;
     }
 
     if (arrow.showLeader && arrow.leaderPoints && arrow.leaderPoints.length >= 2) {

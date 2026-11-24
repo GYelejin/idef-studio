@@ -404,7 +404,12 @@ export const ArrowInspector: React.FC<ArrowInspectorProps> = ({ arrow, state }) 
           </div>
 
           <div className="form-group">
-            <label className="form-label">Туннелирование стрелки ( )</label>
+            <label className="form-label">
+              Туннелирование стрелки (IDEF0)
+              <span style={{ display: 'block', fontSize: '11px', color: 'var(--text-muted)', fontWeight: 400, marginTop: '2px' }}>
+                Круглые скобки ( ) скрывают поток на родительской или дочерней диаграмме
+              </span>
+            </label>
             <div style={{ display: 'flex', gap: '8px' }}>
               <button
                 className={`btn-tool ${arrow.tunnelSource ? 'active' : ''}`}
@@ -414,12 +419,14 @@ export const ArrowInspector: React.FC<ArrowInspectorProps> = ({ arrow, state }) 
                   background: arrow.tunnelSource ? 'rgba(37, 99, 235, 0.15)' : undefined,
                   borderColor: arrow.tunnelSource ? 'var(--accent-primary)' : undefined,
                   fontWeight: arrow.tunnelSource ? 600 : 400,
+                  fontSize: '12px',
+                  padding: '6px 8px',
                 }}
                 onClick={() => store.toggleArrowTunnel(arrow.id, 'source')}
-                title="Включить/выключить туннелирование у истока"
+                title="Исток (откуда выходит поток): ( ) на начале стрелки означает, что поток скрыт на родительской диаграмме"
                 data-testid="btn-toggle-tunnel-source"
               >
-                У истока ( )
+                ( Исток ) {arrow.tunnelSource ? '✓' : ''}
               </button>
               <button
                 className={`btn-tool ${arrow.tunnelTarget ? 'active' : ''}`}
@@ -429,12 +436,14 @@ export const ArrowInspector: React.FC<ArrowInspectorProps> = ({ arrow, state }) 
                   background: arrow.tunnelTarget ? 'rgba(37, 99, 235, 0.15)' : undefined,
                   borderColor: arrow.tunnelTarget ? 'var(--accent-primary)' : undefined,
                   fontWeight: arrow.tunnelTarget ? 600 : 400,
+                  fontSize: '12px',
+                  padding: '6px 8px',
                 }}
                 onClick={() => store.toggleArrowTunnel(arrow.id, 'target')}
-                title="Включить/выключить туннелирование у стока"
+                title="Сток (куда входит стрелка): ( ) у наконечника означает, что поток не продолжается на дочерней декомпозиции"
                 data-testid="btn-toggle-tunnel-target"
               >
-                У стока ( )
+                ( Сток ) {arrow.tunnelTarget ? '✓' : ''}
               </button>
             </div>
           </div>

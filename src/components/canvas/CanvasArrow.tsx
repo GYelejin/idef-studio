@@ -6,6 +6,7 @@ import {
   getSegmentsFromPoints,
   distanceToSegment,
   findSnapTarget,
+  getTunnelParenthesisPath,
 } from '../../core/geometry';
 import { store } from '../../core/store';
 
@@ -110,30 +111,26 @@ export const CanvasArrow: React.FC<CanvasArrowProps> = ({
         }}
       />
 
-      {/* Arrow Tunneling Markers (IDEF0 Parentheses / Tunnel circles) */}
-      {arrow.tunnelSource && renderPoints.length > 0 && (
-        <circle
-          cx={renderPoints[0].x}
-          cy={renderPoints[0].y}
-          r="6"
+      {/* Arrow Tunneling Markers (IDEF0 Parentheses / Tunnel markers) */}
+      {arrow.tunnelSource && renderPoints.length >= 2 && (
+        <path
+          d={getTunnelParenthesisPath(renderPoints[0], renderPoints[1], false)}
           fill="none"
-          stroke={arrow.color || '#000000'}
-          strokeWidth="1.5"
-          strokeDasharray="2,2"
+          stroke={isSelected ? 'var(--accent-primary, #2563eb)' : (arrow.color || '#000000')}
+          strokeWidth="1.8"
+          strokeLinecap="round"
           id={`tunnel-src-${arrow.id}`}
           data-testid={`tunnel-src-${arrow.id}`}
           style={{ pointerEvents: 'none' }}
         />
       )}
-      {arrow.tunnelTarget && renderPoints.length > 0 && (
-        <circle
-          cx={renderPoints[renderPoints.length - 1].x}
-          cy={renderPoints[renderPoints.length - 1].y}
-          r="6"
+      {arrow.tunnelTarget && renderPoints.length >= 2 && (
+        <path
+          d={getTunnelParenthesisPath(renderPoints[renderPoints.length - 2], renderPoints[renderPoints.length - 1], true)}
           fill="none"
-          stroke={arrow.color || '#000000'}
-          strokeWidth="1.5"
-          strokeDasharray="2,2"
+          stroke={isSelected ? 'var(--accent-primary, #2563eb)' : (arrow.color || '#000000')}
+          strokeWidth="1.8"
+          strokeLinecap="round"
           id={`tunnel-tgt-${arrow.id}`}
           data-testid={`tunnel-tgt-${arrow.id}`}
           style={{ pointerEvents: 'none' }}

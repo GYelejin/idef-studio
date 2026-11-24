@@ -381,7 +381,47 @@ export function snapLabelToArrow(
 }
 
 /**
- * IDEF0 Standard Auto-Layout Engine («Лесенка» по ГОСТ Р 50.1.028-2001):
- * Aligns functional blocks diagonally from top-left to bottom-right with optimal ICOM channel spacing.
- * Re-routes all attached and boundary flows.
+ * Generates IDEF0 canonical parenthesis path around an arrow endpoint for tunneling.
+ * Standard FIPS 183 defines tunneling as a pair of parentheses ( ) enclosing:
+ * - the arrow head/tip (at target)
+ * - or the arrow origin/stub (at source)
  */
+export function getTunnelParenthesisPath(p1: Point, p2: Point, isTarget = false): string {
+  const dx = p2.x - p1.x;
+  const dy = p2.y - p1.y;
+  const len = Math.hypot(dx, dy);
+  if (len < 0.001) return '';
+
+  const ux = dx / len;
+  const uy = dy / len;
+  const px = -uy;
+  const py = ux;
+
+  // For target: tip is at p2, parentheses surround the arrowhead near p2
+  // For source: start is at p1, parentheses surround the origin stub near p1
+  const baseOffset = isTarget ? -10 : 8;
+  const cx = (isTarget ? p2.x : p1.x) + ux * baseOffset;
+  const cy = (isTarget ? p2.y : p1.y) + uy * baseOffset;
+
+  const halfWidth = 6.5; // distance from centerline to parenthesis
+  const halfHeight = 6;  // along the arrow axis
+
+  // Left/upper arc: curves outwards from arrow
+  const arc1_start_x = cx - ux * halfHeight + px * halfWidth;
+  const arc1_start_y = cy - uy * halfHeight + py * halfWidth;
+  const arc1_mid_x = cx + px * (halfWidth + 3.5);
+  const arc1_mid_y = cy + py * (halfWidth + 3.5);
+  const arc1_end_x = cx + ux * halfHeight + px * halfWidth;
+  const arc1_end_y = cy + uy * halfHeight + py * halfWidth;
+
+  // Right/lower arc
+  const arc2_start_x = cx - ux * halfHeight - px * halfWidth;
+  const arc2_start_y = cy - uy * halfHeight - py * halfWidth;
+  const arc2_mid_x = cx - px * (halfWidth + 3.5);
+  const arc2_mid_y = cy - py * (halfWidth + 3.5);
+  const arc2_end_x = cx + ux * halfHeight - px * halfWidth;
+  const arc2_end_y = cy + uy * halfHeight - py * halfWidth;
+
+  return `M ${arc1_start_x},${arc1_start_y} Q ${arc1_mid_x},${arc1_mid_y} ${arc1_end_x},${arc1_end_y} M ${arc2_start_x},${arc2_start_y} Q ${arc2_mid_x},${arc2_mid_y} ${arc2_end_x},${arc2_end_y}`;
+}
+
