@@ -10,21 +10,19 @@ test.describe('IDEF0 Studio Core UI & E2E Flow', () => {
     const canvas = page.locator('[data-testid="idef0-svg-canvas"]');
     await expect(canvas).toBeVisible();
 
-    const titleInput = page.locator('[data-testid="input-project-title"]');
-    await expect(titleInput).toBeVisible();
+    const header = page.locator('[data-testid="header-bar"]');
+    await expect(header).toBeVisible();
+
+    const btnExample = page.locator('[data-testid="btn-example"]');
+    await expect(btnExample).toBeVisible();
   });
 
   test('can load example model and navigate diagrams', async ({ page }) => {
-    // Open Help / Examples modal or click load example
-    const loadExampleBtn = page.locator('button:has-text("Пример"), [data-testid="btn-load-example"]').first();
-    if (await loadExampleBtn.isVisible()) {
-      await loadExampleBtn.click();
-    } else {
-      await page.evaluate(() => (window as any).store?.loadExample());
-    }
+    const btnExample = page.locator('[data-testid="btn-example"]');
+    await btnExample.click();
 
     // Verify blocks exist on canvas
-    const blocks = page.locator('.canvas-block, [data-testid^="block-node-"]');
+    const blocks = page.locator('.block-rect, [data-testid^="block-group-"]');
     await expect(blocks.first()).toBeVisible({ timeout: 5000 });
   });
 

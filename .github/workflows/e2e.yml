@@ -25,7 +25,7 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Run Unit Tests (482 tests)
-        run: bun test
+        run: bun test tests/unit
 
       - name: Build Application
         run: bun run build
