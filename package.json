@@ -8,6 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "bun test tests/unit",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
     "test:coverage": "bun test tests/unit --coverage",
     "test:coverage:e2e": "bun tests/e2e/collect-coverage.ts",
     "test:coverage:merge": "bun tests/e2e/merge-coverage.ts",
