@@ -7,6 +7,13 @@
   ],
   authors: (
     (
+      name: "Marina Yurievna Baryshnikova",
+      department: [Department of Computer Software and Information Technologies],
+      organization: [Bauman Moscow State Technical University],
+      location: [Moscow, Russia],
+      email: "baryshnikovam@bmstu.ru",
+    ),
+    (
       name: "Artem Pavlovich Kulichenkov",
       department: [Department of Computer Software and Information Technologies],
       organization: [Bauman Moscow State Technical University],
@@ -40,13 +47,6 @@
       organization: [Bauman Moscow State Technical University],
       location: [Moscow, Russia],
       email: "chirikovnv@student.bmstu.ru",
-    ),
-    (
-      name: "Marina Yurievna Baryshnikova",
-      department: [Department of Computer Software and Information Technologies],
-      organization: [Bauman Moscow State Technical University],
-      location: [Moscow, Russia],
-      email: "baryshnikovam@bmstu.ru",
     ),
   ),
   index-terms: (
