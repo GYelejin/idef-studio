@@ -1,0 +1,704 @@
+{
+  "id": "proj-rsf-1795616070971",
+  "name": "Автоматическое составление расписания на основе загрузки аудиторий",
+  "description": "Импортировано из Ramus (3.rsf)",
+  "diagrams": [
+    {
+      "id": "diag-rsf-3",
+      "code": "A-0",
+      "title": "Диаграмма A-0",
+      "parentBlockId": null,
+      "blocks": [
+        {
+          "id": "block-rsf-5",
+          "nodeNumber": 0,
+          "name": "Автоматическое составление расписания на основе загрузки аудиторий",
+          "x": 639,
+          "y": 360,
+          "width": 255,
+          "height": 133,
+          "decompDiagramId": "diag-rsf-5"
+        }
+      ],
+      "arrows": [
+        {
+          "id": "flow-rsf-7",
+          "label": "Видео с камер наблюдения в аудиториях.",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 424
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-5",
+            "side": "left",
+            "point": {
+              "x": 639,
+              "y": 427
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 427
+            },
+            {
+              "x": 639,
+              "y": 427
+            }
+          ],
+          "labelPos": {
+            "x": 639,
+            "y": 411
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-9",
+          "label": "Правила составления расписания.",
+          "source": {
+            "type": "border",
+            "side": "top",
+            "point": {
+              "x": 773,
+              "y": 30
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-5",
+            "side": "top",
+            "point": {
+              "x": 767,
+              "y": 360
+            }
+          },
+          "role": "control",
+          "points": [
+            {
+              "x": 767,
+              "y": 30
+            },
+            {
+              "x": 767,
+              "y": 360
+            }
+          ],
+          "labelPos": {
+            "x": 767,
+            "y": 344
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-11",
+          "label": "Алгоритмы анализа плотности заполнения аудиторий.",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 762,
+              "y": 870
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-5",
+            "side": "bottom",
+            "point": {
+              "x": 767,
+              "y": 493
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 767,
+              "y": 870
+            },
+            {
+              "x": 767,
+              "y": 493
+            }
+          ],
+          "labelPos": {
+            "x": 767,
+            "y": 477
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-13",
+          "label": "Оптимизированное расписание.",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-5",
+            "side": "right",
+            "point": {
+              "x": 894,
+              "y": 427
+            }
+          },
+          "target": {
+            "type": "border",
+            "side": "right",
+            "point": {
+              "x": 1570,
+              "y": 423
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 894,
+              "y": 427
+            },
+            {
+              "x": 1570,
+              "y": 427
+            }
+          ],
+          "labelPos": {
+            "x": 1570,
+            "y": 411
+          },
+          "pinned": false
+        }
+      ],
+      "junctions": []
+    },
+    {
+      "id": "diag-rsf-5",
+      "code": "A0",
+      "title": "Декомпозиция: Автоматическое составление расписания на основе загрузки аудиторий",
+      "parentBlockId": "block-rsf-5",
+      "blocks": [
+        {
+          "id": "block-rsf-18",
+          "nodeNumber": 1,
+          "name": "Захват видео с камер.",
+          "x": 188,
+          "y": 182,
+          "width": 133,
+          "height": 90,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-19",
+          "nodeNumber": 2,
+          "name": "Обнаружение людей в аудиториях.",
+          "x": 456,
+          "y": 290,
+          "width": 133,
+          "height": 90,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-20",
+          "nodeNumber": 3,
+          "name": "Сравнение с текущим расписанием.",
+          "x": 723,
+          "y": 397,
+          "width": 133,
+          "height": 91,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-21",
+          "nodeNumber": 4,
+          "name": "Оптимизация загрузки аудиторий.",
+          "x": 993,
+          "y": 505,
+          "width": 133,
+          "height": 90,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-22",
+          "nodeNumber": 5,
+          "name": "Генерация нового расписания.",
+          "x": 1261,
+          "y": 612,
+          "width": 133,
+          "height": 90,
+          "decompDiagramId": null
+        }
+      ],
+      "arrows": [
+        {
+          "id": "flow-rsf-6",
+          "label": "Видео с камер наблюдения в аудиториях.",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 225
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-18",
+            "side": "left",
+            "point": {
+              "x": 188,
+              "y": 227
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 227
+            },
+            {
+              "x": 188,
+              "y": 227
+            }
+          ],
+          "labelPos": {
+            "x": 188,
+            "y": 211
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-8",
+          "label": "Правила составления расписания.",
+          "source": {
+            "type": "border",
+            "side": "top",
+            "point": {
+              "x": 1313,
+              "y": 30
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-22",
+            "side": "top",
+            "point": {
+              "x": 1328,
+              "y": 612
+            }
+          },
+          "role": "control",
+          "points": [
+            {
+              "x": 1313,
+              "y": 30
+            },
+            {
+              "x": 1313,
+              "y": 65
+            },
+            {
+              "x": 1328,
+              "y": 65
+            },
+            {
+              "x": 1328,
+              "y": 612
+            }
+          ],
+          "labelPos": {
+            "x": 1328,
+            "y": 49
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-10",
+          "label": "Алгоритмы анализа плотности заполнения аудиторий.",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 512,
+              "y": 870
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 512,
+              "y": 680
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 512,
+              "y": 870
+            },
+            {
+              "x": 512,
+              "y": 680
+            }
+          ],
+          "labelPos": {
+            "x": 512,
+            "y": 664
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-12",
+          "label": "Оптимизированное расписание.",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-22",
+            "side": "right",
+            "point": {
+              "x": 1394,
+              "y": 657
+            }
+          },
+          "target": {
+            "type": "border",
+            "side": "right",
+            "point": {
+              "x": 1570,
+              "y": 429
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 1394,
+              "y": 657
+            },
+            {
+              "x": 1424,
+              "y": 657
+            },
+            {
+              "x": 1424,
+              "y": 429
+            },
+            {
+              "x": 1570,
+              "y": 429
+            }
+          ],
+          "labelPos": {
+            "x": 1424,
+            "y": 413
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-26",
+          "label": "Алгоритмы анализа плотности заполнения аудиторий.",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 512,
+              "y": 680
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-19",
+            "side": "bottom",
+            "point": {
+              "x": 523,
+              "y": 380
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 512,
+              "y": 680
+            },
+            {
+              "x": 523,
+              "y": 680
+            },
+            {
+              "x": 523,
+              "y": 380
+            }
+          ],
+          "labelPos": {
+            "x": 523,
+            "y": 664
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-28",
+          "label": "Алгоритмы анализа плотности заполнения аудиторий.",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 512,
+              "y": 680
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-20",
+            "side": "bottom",
+            "point": {
+              "x": 790,
+              "y": 488
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 512,
+              "y": 680
+            },
+            {
+              "x": 790,
+              "y": 680
+            },
+            {
+              "x": 790,
+              "y": 488
+            }
+          ],
+          "labelPos": {
+            "x": 790,
+            "y": 664
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-31",
+          "label": "Алгоритмы анализа плотности заполнения аудиторий.",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 512,
+              "y": 680
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-21",
+            "side": "bottom",
+            "point": {
+              "x": 1060,
+              "y": 595
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 512,
+              "y": 680
+            },
+            {
+              "x": 1060,
+              "y": 680
+            },
+            {
+              "x": 1060,
+              "y": 595
+            }
+          ],
+          "labelPos": {
+            "x": 1060,
+            "y": 664
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-34",
+          "label": "кадры видео",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-18",
+            "side": "right",
+            "point": {
+              "x": 321,
+              "y": 227
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-19",
+            "side": "left",
+            "point": {
+              "x": 456,
+              "y": 335
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 321,
+              "y": 227
+            },
+            {
+              "x": 389,
+              "y": 227
+            },
+            {
+              "x": 389,
+              "y": 335
+            },
+            {
+              "x": 456,
+              "y": 335
+            }
+          ],
+          "labelPos": {
+            "x": 389,
+            "y": 319
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-37",
+          "label": "информация о количестве людей в аудиториях",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-19",
+            "side": "right",
+            "point": {
+              "x": 589,
+              "y": 335
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-20",
+            "side": "left",
+            "point": {
+              "x": 723,
+              "y": 443
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 589,
+              "y": 335
+            },
+            {
+              "x": 656,
+              "y": 335
+            },
+            {
+              "x": 656,
+              "y": 443
+            },
+            {
+              "x": 723,
+              "y": 443
+            }
+          ],
+          "labelPos": {
+            "x": 656,
+            "y": 427
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-40",
+          "label": "результаты сравнения",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-20",
+            "side": "right",
+            "point": {
+              "x": 856,
+              "y": 443
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-21",
+            "side": "left",
+            "point": {
+              "x": 993,
+              "y": 550
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 856,
+              "y": 443
+            },
+            {
+              "x": 925,
+              "y": 443
+            },
+            {
+              "x": 925,
+              "y": 550
+            },
+            {
+              "x": 993,
+              "y": 550
+            }
+          ],
+          "labelPos": {
+            "x": 925,
+            "y": 534
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-43",
+          "label": "проанализированная информация",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-21",
+            "side": "right",
+            "point": {
+              "x": 1126,
+              "y": 550
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-22",
+            "side": "left",
+            "point": {
+              "x": 1261,
+              "y": 657
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 1126,
+              "y": 550
+            },
+            {
+              "x": 1194,
+              "y": 550
+            },
+            {
+              "x": 1194,
+              "y": 657
+            },
+            {
+              "x": 1261,
+              "y": 657
+            }
+          ],
+          "labelPos": {
+            "x": 1194,
+            "y": 641
+          },
+          "pinned": false
+        }
+      ],
+      "junctions": []
+    }
+  ],
+  "activeDiagramId": "diag-rsf-3"
+}

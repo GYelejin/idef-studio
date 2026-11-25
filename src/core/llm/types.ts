@@ -31,6 +31,9 @@ export interface BlockGenerationTask {
   status: TaskStatus;
   generatedCode?: string;
   error?: string;
+  verificationStatus?: 'verified' | 'warning';
+  verificationNotes?: string[];
+  repairAttempts?: number;
   block: Block;
   diagram: Diagram;
 }

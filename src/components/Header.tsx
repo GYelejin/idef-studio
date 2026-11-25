@@ -22,10 +22,13 @@ import {
   PanelBottomOpen,
   HelpCircle,
   Wand2,
+  ChevronDown,
 } from 'lucide-react';
 import { store } from '../core/store';
 import { exportProjectToJson, importProjectFromJson } from '../core/exporter';
-import { isTauriRuntime, openTextFileNative, saveFileNativeOrBrowser } from '../core/filePlatform';
+import { importProjectFromRsf } from '../core/ramusImporter';
+import { EXAMPLE_PROJECTS } from '../core/examplesCatalog';
+import { isTauriRuntime, openProjectFileNative, saveFileNativeOrBrowser } from '../core/filePlatform';
 import CreateProjectModal from './CreateProjectModal';
 import { runIDEF0Linter } from '../core/linter';
 import { EditorState } from '../core/store/types';
@@ -50,6 +53,7 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [createModalOpen, setCreateModalOpen] = useState(false);
+  const [examplesOpen, setExamplesOpen] = useState(false);
 
   const {
     activeTool,
@@ -104,22 +108,34 @@ export const Header: React.FC<HeaderProps> = ({
     );
   };
 
-  const handleOpenFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleOpenFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (evt) => {
-        const content = evt.target?.result as string;
-        const res = importProjectFromJson(content);
-        if (res.success && res.project) {
-          store.importProject(res.project);
-        } else {
-          alert(`Ошибка при открытии проекта: ${res.error}`);
-        }
-      };
-      reader.readAsText(file);
+    if (!file) return;
+
+    if (file.name.toLowerCase().endsWith('.rsf')) {
+      const buffer = await file.arrayBuffer();
+      const res = await importProjectFromRsf(buffer, file.name);
+      if (res.success && res.project) {
+        store.importProject(res.project);
+      } else {
+        alert(`Ошибка при импорте .rsf: ${res.error}`);
+      }
       e.target.value = '';
+      return;
     }
+
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      const content = evt.target?.result as string;
+      const res = importProjectFromJson(content);
+      if (res.success && res.project) {
+        store.importProject(res.project);
+      } else {
+        alert(`Ошибка при открытии проекта: ${res.error}`);
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = '';
   };
 
   const handleDelete = () => {
@@ -139,7 +155,7 @@ export const Header: React.FC<HeaderProps> = ({
         type="file"
         ref={fileInputRef}
         onChange={handleOpenFile}
-        accept=".json"
+        accept=".json,.rsf"
         style={{ display: 'none' }}
       />
 
@@ -157,20 +173,31 @@ export const Header: React.FC<HeaderProps> = ({
           className="btn-icon"
           onClick={async () => {
             if (isTauriRuntime()) {
-              const content = await openTextFileNative([{ name: 'JSON Project', extensions: ['json'] }]);
-              if (content !== null) {
-                const res = importProjectFromJson(content);
-                if (res.success && res.project) {
-                  store.importProject(res.project);
-                } else {
-                  alert(`Ошибка при открытии проекта: ${res.error}`);
+              const opened = await openProjectFileNative([
+                { name: 'IDEF0 Project (JSON / Ramus RSF)', extensions: ['json', 'rsf'] },
+              ]);
+              if (opened) {
+                if (opened.bytes) {
+                  const res = await importProjectFromRsf(opened.bytes, opened.name);
+                  if (res.success && res.project) {
+                    store.importProject(res.project);
+                  } else {
+                    alert(`Ошибка при импорте .rsf: ${res.error}`);
+                  }
+                } else if (opened.text !== undefined) {
+                  const res = importProjectFromJson(opened.text);
+                  if (res.success && res.project) {
+                    store.importProject(res.project);
+                  } else {
+                    alert(`Ошибка при открытии проекта: ${res.error}`);
+                  }
                 }
               }
               return;
             }
             fileInputRef.current?.click();
           }}
-          title="Открыть проект JSON"
+          title="Открыть проект (JSON / Ramus .rsf)"
           data-testid="btn-open"
         >
           <FolderOpen size={16} />
@@ -207,6 +234,16 @@ export const Header: React.FC<HeaderProps> = ({
           data-testid="btn-example"
         >
           <BookOpen size={16} />
+        </button>
+        <button
+          className="btn-icon"
+          onClick={() => setExamplesOpen((prev) => !prev)}
+          title="Вкладка примеров (IDEF0 Studio и импорт из Ramus)"
+          data-testid="btn-examples-menu"
+          style={{ display: 'flex', alignItems: 'center', gap: '3px', padding: '0 6px', width: 'auto', fontSize: '12px' }}
+        >
+          <span>Примеры</span>
+          <ChevronDown size={13} />
         </button>
       </div>
 
@@ -366,6 +403,94 @@ export const Header: React.FC<HeaderProps> = ({
       </div>
 
       {/* Custom Modal Dialog: Create New Project */}
+      {examplesOpen && (
+        <div
+          className="modal-backdrop"
+          data-testid="examples-modal"
+          onClick={() => setExamplesOpen(false)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(0, 0, 0, 0.4)',
+            zIndex: 9999,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              width: '100%',
+              maxWidth: '560px',
+              maxHeight: '75vh',
+              background: 'var(--bg-panel)',
+              border: '1px solid var(--border-color)',
+              borderRadius: '8px',
+              boxShadow: '0 16px 36px rgba(0,0,0,0.3)',
+              display: 'flex',
+              flexDirection: 'column',
+              overflow: 'hidden',
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '14px 18px',
+                borderBottom: '1px solid var(--border-color)',
+                background: 'var(--bg-panel-header)',
+                fontWeight: 600,
+                fontSize: '14px',
+              }}
+            >
+              <span>Примеры моделей IDEF0 ({EXAMPLE_PROJECTS.length})</span>
+              <button
+                className="btn-icon"
+                onClick={() => setExamplesOpen(false)}
+                data-testid="btn-close-examples"
+                title="Закрыть"
+              >
+                ✕
+              </button>
+            </div>
+            <div style={{ overflowY: 'auto', padding: '10px 14px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              {EXAMPLE_PROJECTS.map((item) => (
+                <button
+                  key={item.id}
+                  data-testid={`example-item-${item.id}`}
+                  onClick={() => {
+                    store.importProject(JSON.parse(JSON.stringify(item.project)));
+                    setExamplesOpen(false);
+                  }}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: '12px',
+                    width: '100%',
+                    textAlign: 'left',
+                    padding: '10px 12px',
+                    borderRadius: '6px',
+                    border: '1px solid var(--border-color)',
+                    background: 'var(--bg-card)',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <span style={{ fontSize: '13px', fontWeight: 500, color: 'var(--text-primary)' }}>
+                    {item.title}
+                  </span>
+                  <span style={{ fontSize: '11px', color: 'var(--text-muted)', flexShrink: 0 }}>
+                    {item.source} · {item.project.diagrams.length} диагр.
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       {createModalOpen && (
         <CreateProjectModal
           onClose={() => setCreateModalOpen(false)}

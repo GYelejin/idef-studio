@@ -1,0 +1,1057 @@
+{
+  "id": "proj-rsf-1795616071051",
+  "name": "Заполнение случайным образом матрицы последовательными без повторений числами Фибоначчи",
+  "description": "Импортировано из Ramus (task_4.rsf)",
+  "diagrams": [
+    {
+      "id": "diag-rsf-3",
+      "code": "A-0",
+      "title": "Диаграмма A-0",
+      "parentBlockId": null,
+      "blocks": [
+        {
+          "id": "block-rsf-5",
+          "nodeNumber": 0,
+          "name": "Заполнение случайным образом матрицы последовательными без повторений числами Фибоначчи",
+          "x": 517,
+          "y": 216,
+          "width": 588,
+          "height": 347,
+          "decompDiagramId": "diag-rsf-5"
+        }
+      ],
+      "arrows": [
+        {
+          "id": "flow-rsf-7",
+          "label": "Размер матрицы",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 381
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-5",
+            "side": "left",
+            "point": {
+              "x": 517,
+              "y": 390
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 390
+            },
+            {
+              "x": 517,
+              "y": 390
+            }
+          ],
+          "labelPos": {
+            "x": 517,
+            "y": 374
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-9",
+          "label": "Матрица заполненая числами Фибоначчи",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-5",
+            "side": "right",
+            "point": {
+              "x": 1105,
+              "y": 390
+            }
+          },
+          "target": {
+            "type": "border",
+            "side": "right",
+            "point": {
+              "x": 1570,
+              "y": 376
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 1105,
+              "y": 390
+            },
+            {
+              "x": 1135,
+              "y": 390
+            },
+            {
+              "x": 1135,
+              "y": 376
+            },
+            {
+              "x": 1570,
+              "y": 376
+            }
+          ],
+          "labelPos": {
+            "x": 1135,
+            "y": 360
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-13",
+          "label": "Логика генерации чисел Фибоначчи",
+          "source": {
+            "type": "border",
+            "side": "top",
+            "point": {
+              "x": 784,
+              "y": 30
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-5",
+            "side": "top",
+            "point": {
+              "x": 811,
+              "y": 216
+            }
+          },
+          "role": "control",
+          "points": [
+            {
+              "x": 784,
+              "y": 30
+            },
+            {
+              "x": 784,
+              "y": 65
+            },
+            {
+              "x": 811,
+              "y": 65
+            },
+            {
+              "x": 811,
+              "y": 216
+            }
+          ],
+          "labelPos": {
+            "x": 811,
+            "y": 49
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-16",
+          "label": "Генерация случайных чисел",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 792,
+              "y": 870
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-5",
+            "side": "bottom",
+            "point": {
+              "x": 811,
+              "y": 563
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 792,
+              "y": 870
+            },
+            {
+              "x": 792,
+              "y": 835
+            },
+            {
+              "x": 811,
+              "y": 835
+            },
+            {
+              "x": 811,
+              "y": 563
+            }
+          ],
+          "labelPos": {
+            "x": 811,
+            "y": 819
+          },
+          "pinned": false
+        }
+      ],
+      "junctions": []
+    },
+    {
+      "id": "diag-rsf-5",
+      "code": "A0",
+      "title": "Декомпозиция: Заполнение случайным образом матрицы последовательными без повторений числами Фибоначчи",
+      "parentBlockId": "block-rsf-5",
+      "blocks": [
+        {
+          "id": "block-rsf-18",
+          "nodeNumber": 1,
+          "name": "Создание матрицы заданого размера",
+          "x": 334,
+          "y": 413,
+          "width": 194,
+          "height": 133,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-19",
+          "nodeNumber": 2,
+          "name": "Генерация чисел Фибоначчи в необходимом количестве",
+          "x": 340,
+          "y": 184,
+          "width": 189,
+          "height": 128,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-20",
+          "nodeNumber": 3,
+          "name": "Заполнение Матрицы числами Фибоначчи в случайном порядке",
+          "x": 689,
+          "y": 344,
+          "width": 255,
+          "height": 171,
+          "decompDiagramId": "diag-rsf-20"
+        }
+      ],
+      "arrows": [
+        {
+          "id": "flow-rsf-6",
+          "label": "Размер матрицы",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 482
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 256,
+              "y": 482
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 482
+            },
+            {
+              "x": 256,
+              "y": 482
+            }
+          ],
+          "labelPos": {
+            "x": 256,
+            "y": 466
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-8",
+          "label": "Матрица заполненая числами Фибоначчи",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-20",
+            "side": "right",
+            "point": {
+              "x": 944,
+              "y": 430
+            }
+          },
+          "target": {
+            "type": "border",
+            "side": "right",
+            "point": {
+              "x": 1570,
+              "y": 429
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 944,
+              "y": 430
+            },
+            {
+              "x": 1570,
+              "y": 430
+            }
+          ],
+          "labelPos": {
+            "x": 1570,
+            "y": 414
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-12",
+          "label": "Логика генерации чисел Фибоначчи",
+          "source": {
+            "type": "border",
+            "side": "top",
+            "point": {
+              "x": 434,
+              "y": 30
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-19",
+            "side": "top",
+            "point": {
+              "x": 435,
+              "y": 184
+            }
+          },
+          "role": "control",
+          "points": [
+            {
+              "x": 435,
+              "y": 30
+            },
+            {
+              "x": 435,
+              "y": 184
+            }
+          ],
+          "labelPos": {
+            "x": 435,
+            "y": 168
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-15",
+          "label": "Генерация случайных чисел",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 811,
+              "y": 870
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-20",
+            "side": "bottom",
+            "point": {
+              "x": 817,
+              "y": 515
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 817,
+              "y": 870
+            },
+            {
+              "x": 817,
+              "y": 515
+            }
+          ],
+          "labelPos": {
+            "x": 817,
+            "y": 499
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-23",
+          "label": "Размер матрицы",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 256,
+              "y": 482
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-18",
+            "side": "left",
+            "point": {
+              "x": 334,
+              "y": 480
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 256,
+              "y": 482
+            },
+            {
+              "x": 334,
+              "y": 482
+            }
+          ],
+          "labelPos": {
+            "x": 334,
+            "y": 466
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-25",
+          "label": "Размер матрицы",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 256,
+              "y": 482
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-19",
+            "side": "left",
+            "point": {
+              "x": 340,
+              "y": 248
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 256,
+              "y": 482
+            },
+            {
+              "x": 298,
+              "y": 482
+            },
+            {
+              "x": 298,
+              "y": 248
+            },
+            {
+              "x": 340,
+              "y": 248
+            }
+          ],
+          "labelPos": {
+            "x": 298,
+            "y": 232
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-30",
+          "label": "Пустая матрица",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-18",
+            "side": "right",
+            "point": {
+              "x": 528,
+              "y": 480
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-20",
+            "side": "left",
+            "point": {
+              "x": 689,
+              "y": 430
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 528,
+              "y": 480
+            },
+            {
+              "x": 609,
+              "y": 480
+            },
+            {
+              "x": 609,
+              "y": 430
+            },
+            {
+              "x": 689,
+              "y": 430
+            }
+          ],
+          "labelPos": {
+            "x": 609,
+            "y": 414
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-33",
+          "label": "Последовательность чисел Фибоначчи",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-19",
+            "side": "right",
+            "point": {
+              "x": 529,
+              "y": 248
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-20",
+            "side": "left",
+            "point": {
+              "x": 689,
+              "y": 430
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 529,
+              "y": 248
+            },
+            {
+              "x": 609,
+              "y": 248
+            },
+            {
+              "x": 609,
+              "y": 430
+            },
+            {
+              "x": 689,
+              "y": 430
+            }
+          ],
+          "labelPos": {
+            "x": 609,
+            "y": 414
+          },
+          "pinned": false
+        }
+      ],
+      "junctions": []
+    },
+    {
+      "id": "diag-rsf-20",
+      "code": "A3",
+      "title": "Декомпозиция: Заполнение Матрицы числами Фибоначчи в случайном порядке",
+      "parentBlockId": "block-rsf-20",
+      "blocks": [
+        {
+          "id": "block-rsf-37",
+          "nodeNumber": 1,
+          "name": "Получение позиции числа Фибоначи",
+          "x": 301,
+          "y": 371,
+          "width": 150,
+          "height": 91,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-38",
+          "nodeNumber": 2,
+          "name": "Проверка занята ли позиция другим числом",
+          "x": 540,
+          "y": 488,
+          "width": 133,
+          "height": 91,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-39",
+          "nodeNumber": 3,
+          "name": "Поставить число на место",
+          "x": 922,
+          "y": 488,
+          "width": 133,
+          "height": 91,
+          "decompDiagramId": null
+        }
+      ],
+      "arrows": [
+        {
+          "id": "flow-rsf-27",
+          "label": "Генерация случайных чисел",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 361,
+              "y": 870
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-37",
+            "side": "bottom",
+            "point": {
+              "x": 376,
+              "y": 462
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 361,
+              "y": 870
+            },
+            {
+              "x": 361,
+              "y": 835
+            },
+            {
+              "x": 376,
+              "y": 835
+            },
+            {
+              "x": 376,
+              "y": 462
+            }
+          ],
+          "labelPos": {
+            "x": 376,
+            "y": 819
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-29",
+          "label": "Пустая матрица",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 545
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 256,
+              "y": 545
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 545
+            },
+            {
+              "x": 256,
+              "y": 545
+            }
+          ],
+          "labelPos": {
+            "x": 256,
+            "y": 529
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-32",
+          "label": "Последовательность чисел Фибоначчи",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 428
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-37",
+            "side": "left",
+            "point": {
+              "x": 301,
+              "y": 417
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 428
+            },
+            {
+              "x": 70,
+              "y": 428
+            },
+            {
+              "x": 70,
+              "y": 417
+            },
+            {
+              "x": 301,
+              "y": 417
+            }
+          ],
+          "labelPos": {
+            "x": 70,
+            "y": 401
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-34",
+          "label": "Матрица заполненая числами Фибоначчи",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-39",
+            "side": "right",
+            "point": {
+              "x": 1055,
+              "y": 534
+            }
+          },
+          "target": {
+            "type": "border",
+            "side": "right",
+            "point": {
+              "x": 1570,
+              "y": 552
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 1055,
+              "y": 534
+            },
+            {
+              "x": 1085,
+              "y": 534
+            },
+            {
+              "x": 1085,
+              "y": 552
+            },
+            {
+              "x": 1570,
+              "y": 552
+            }
+          ],
+          "labelPos": {
+            "x": 1085,
+            "y": 536
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-45",
+          "label": "",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-37",
+            "side": "right",
+            "point": {
+              "x": 451,
+              "y": 417
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-38",
+            "side": "left",
+            "point": {
+              "x": 540,
+              "y": 534
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 451,
+              "y": 417
+            },
+            {
+              "x": 496,
+              "y": 417
+            },
+            {
+              "x": 496,
+              "y": 534
+            },
+            {
+              "x": 540,
+              "y": 534
+            }
+          ],
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-49",
+          "label": "",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-38",
+            "side": "right",
+            "point": {
+              "x": 673,
+              "y": 534
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-39",
+            "side": "left",
+            "point": {
+              "x": 922,
+              "y": 534
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 673,
+              "y": 534
+            },
+            {
+              "x": 922,
+              "y": 534
+            }
+          ],
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-62",
+          "label": "",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-38",
+            "side": "right",
+            "point": {
+              "x": 673,
+              "y": 534
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-37",
+            "side": "left",
+            "point": {
+              "x": 301,
+              "y": 417
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 673,
+              "y": 534
+            },
+            {
+              "x": 693,
+              "y": 534
+            },
+            {
+              "x": 693,
+              "y": 599
+            },
+            {
+              "x": 281,
+              "y": 599
+            },
+            {
+              "x": 281,
+              "y": 417
+            },
+            {
+              "x": 301,
+              "y": 417
+            }
+          ],
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-58",
+          "label": "Пустая матрица",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 256,
+              "y": 545
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-38",
+            "side": "left",
+            "point": {
+              "x": 540,
+              "y": 534
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 256,
+              "y": 545
+            },
+            {
+              "x": 398,
+              "y": 545
+            },
+            {
+              "x": 398,
+              "y": 534
+            },
+            {
+              "x": 540,
+              "y": 534
+            }
+          ],
+          "labelPos": {
+            "x": 398,
+            "y": 518
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-59",
+          "label": "Пустая матрица",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-39",
+            "side": "right",
+            "point": {
+              "x": 1055,
+              "y": 534
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 256,
+              "y": 545
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 1055,
+              "y": 534
+            },
+            {
+              "x": 1055,
+              "y": 609
+            },
+            {
+              "x": 515,
+              "y": 609
+            },
+            {
+              "x": 515,
+              "y": 534
+            },
+            {
+              "x": 515,
+              "y": 609
+            },
+            {
+              "x": 698,
+              "y": 609
+            },
+            {
+              "x": 698,
+              "y": 534
+            },
+            {
+              "x": 698,
+              "y": 609
+            },
+            {
+              "x": 515,
+              "y": 609
+            },
+            {
+              "x": 515,
+              "y": 534
+            },
+            {
+              "x": 515,
+              "y": 609
+            },
+            {
+              "x": 698,
+              "y": 609
+            },
+            {
+              "x": 698,
+              "y": 534
+            },
+            {
+              "x": 698,
+              "y": 609
+            },
+            {
+              "x": 515,
+              "y": 609
+            },
+            {
+              "x": 515,
+              "y": 534
+            },
+            {
+              "x": 515,
+              "y": 609
+            },
+            {
+              "x": 698,
+              "y": 609
+            },
+            {
+              "x": 698,
+              "y": 534
+            },
+            {
+              "x": 656,
+              "y": 534
+            },
+            {
+              "x": 656,
+              "y": 545
+            },
+            {
+              "x": 256,
+              "y": 545
+            }
+          ],
+          "labelPos": {
+            "x": 698,
+            "y": 593
+          },
+          "pinned": false
+        }
+      ],
+      "junctions": []
+    }
+  ],
+  "activeDiagramId": "diag-rsf-3"
+}

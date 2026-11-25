@@ -1,0 +1,78 @@
+{
+  "id": "proj-rsf-1795616071036",
+  "name": "Купить продуктов на неделю",
+  "description": "Импортировано из Ramus (RK_2_1.rsf)",
+  "diagrams": [
+    {
+      "id": "diag-rsf-3",
+      "code": "A-0",
+      "title": "Диаграмма A-0",
+      "parentBlockId": null,
+      "blocks": [
+        {
+          "id": "block-rsf-4",
+          "nodeNumber": 0,
+          "name": "Купить продуктов на неделю",
+          "x": 632,
+          "y": 275,
+          "width": 266,
+          "height": 199,
+          "decompDiagramId": "diag-rsf-4"
+        }
+      ],
+      "arrows": [],
+      "junctions": []
+    },
+    {
+      "id": "diag-rsf-4",
+      "code": "A0",
+      "title": "Декомпозиция: Купить продуктов на неделю",
+      "parentBlockId": "block-rsf-4",
+      "blocks": [
+        {
+          "id": "block-rsf-29",
+          "nodeNumber": 1,
+          "name": "Составить список на основе количества потребителей и количества приемов пищи",
+          "x": 188,
+          "y": 182,
+          "width": 170,
+          "height": 164,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-30",
+          "nodeNumber": 2,
+          "name": "Запросить деньги у спонсора",
+          "x": 546,
+          "y": 315,
+          "width": 133,
+          "height": 90,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-31",
+          "nodeNumber": 3,
+          "name": "Выполнить закупку продуктов",
+          "x": 906,
+          "y": 232,
+          "width": 133,
+          "height": 92,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-32",
+          "nodeNumber": 4,
+          "name": "Транспонтировать продукты на склад (холодильник)",
+          "x": 1202,
+          "y": 211,
+          "width": 170,
+          "height": 121,
+          "decompDiagramId": null
+        }
+      ],
+      "arrows": [],
+      "junctions": []
+    }
+  ],
+  "activeDiagramId": "diag-rsf-3"
+}

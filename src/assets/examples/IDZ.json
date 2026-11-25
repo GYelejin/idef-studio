@@ -1,0 +1,6501 @@
+{
+  "id": "proj-rsf-1795616071007",
+  "name": "программа для управления расписанием",
+  "description": "Импортировано из Ramus (IDZ.rsf)",
+  "diagrams": [
+    {
+      "id": "diag-rsf-3",
+      "code": "A-0",
+      "title": "Диаграмма A-0",
+      "parentBlockId": null,
+      "blocks": [
+        {
+          "id": "block-rsf-5",
+          "nodeNumber": 0,
+          "name": "программа для управления расписанием",
+          "x": 700,
+          "y": 333,
+          "width": 228,
+          "height": 123,
+          "decompDiagramId": "diag-rsf-5"
+        }
+      ],
+      "arrows": [
+        {
+          "id": "flow-rsf-12",
+          "label": "Пользователь",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 753,
+              "y": 870
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-5",
+            "side": "bottom",
+            "point": {
+              "x": 814,
+              "y": 456
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 753,
+              "y": 870
+            },
+            {
+              "x": 753,
+              "y": 835
+            },
+            {
+              "x": 814,
+              "y": 835
+            },
+            {
+              "x": 814,
+              "y": 456
+            }
+          ],
+          "labelPos": {
+            "x": 814,
+            "y": 819
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-9",
+          "label": "Запрос пользователя",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 423
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-5",
+            "side": "left",
+            "point": {
+              "x": 700,
+              "y": 395
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 423
+            },
+            {
+              "x": 70,
+              "y": 423
+            },
+            {
+              "x": 70,
+              "y": 395
+            },
+            {
+              "x": 700,
+              "y": 395
+            }
+          ],
+          "labelPos": {
+            "x": 70,
+            "y": 379
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-14",
+          "label": "Интерфейс",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 889,
+              "y": 870
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-5",
+            "side": "bottom",
+            "point": {
+              "x": 814,
+              "y": 456
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 889,
+              "y": 870
+            },
+            {
+              "x": 889,
+              "y": 835
+            },
+            {
+              "x": 814,
+              "y": 835
+            },
+            {
+              "x": 814,
+              "y": 456
+            }
+          ],
+          "labelPos": {
+            "x": 814,
+            "y": 819
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-16",
+          "label": "Сообщение об ошибке",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-5",
+            "side": "right",
+            "point": {
+              "x": 928,
+              "y": 395
+            }
+          },
+          "target": {
+            "type": "border",
+            "side": "right",
+            "point": {
+              "x": 1570,
+              "y": 451
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 928,
+              "y": 395
+            },
+            {
+              "x": 958,
+              "y": 395
+            },
+            {
+              "x": 958,
+              "y": 451
+            },
+            {
+              "x": 1570,
+              "y": 451
+            }
+          ],
+          "labelPos": {
+            "x": 958,
+            "y": 435
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-18",
+          "label": "Файл",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 350
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-5",
+            "side": "left",
+            "point": {
+              "x": 700,
+              "y": 395
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 350
+            },
+            {
+              "x": 70,
+              "y": 350
+            },
+            {
+              "x": 70,
+              "y": 395
+            },
+            {
+              "x": 700,
+              "y": 395
+            }
+          ],
+          "labelPos": {
+            "x": 70,
+            "y": 379
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-20",
+          "label": "Выполненный запрос",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-5",
+            "side": "right",
+            "point": {
+              "x": 928,
+              "y": 395
+            }
+          },
+          "target": {
+            "type": "border",
+            "side": "right",
+            "point": {
+              "x": 1570,
+              "y": 362
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 928,
+              "y": 395
+            },
+            {
+              "x": 958,
+              "y": 395
+            },
+            {
+              "x": 958,
+              "y": 362
+            },
+            {
+              "x": 1570,
+              "y": 362
+            }
+          ],
+          "labelPos": {
+            "x": 958,
+            "y": 346
+          },
+          "pinned": false
+        }
+      ],
+      "junctions": []
+    },
+    {
+      "id": "diag-rsf-5",
+      "code": "A0",
+      "title": "Декомпозиция: программа для управления расписанием",
+      "parentBlockId": "block-rsf-5",
+      "blocks": [
+        {
+          "id": "block-rsf-26",
+          "nodeNumber": 1,
+          "name": "Обработка запроса",
+          "x": 188,
+          "y": 182,
+          "width": 133,
+          "height": 90,
+          "decompDiagramId": "diag-rsf-26"
+        },
+        {
+          "id": "block-rsf-27",
+          "nodeNumber": 2,
+          "name": "Исполнение",
+          "x": 723,
+          "y": 397,
+          "width": 133,
+          "height": 91,
+          "decompDiagramId": "diag-rsf-27"
+        },
+        {
+          "id": "block-rsf-28",
+          "nodeNumber": 3,
+          "name": "Обработка результата",
+          "x": 1217,
+          "y": 605,
+          "width": 133,
+          "height": 91,
+          "decompDiagramId": null
+        }
+      ],
+      "arrows": [
+        {
+          "id": "flow-rsf-11",
+          "label": "Пользователь",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 762,
+              "y": 870
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 762,
+              "y": 771
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 762,
+              "y": 870
+            },
+            {
+              "x": 762,
+              "y": 771
+            }
+          ],
+          "labelPos": {
+            "x": 762,
+            "y": 755
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-8",
+          "label": "Запрос пользователя",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 245
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 157,
+              "y": 245
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 245
+            },
+            {
+              "x": 157,
+              "y": 245
+            }
+          ],
+          "labelPos": {
+            "x": 157,
+            "y": 229
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-13",
+          "label": "Интерфейс",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 823,
+              "y": 870
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 823,
+              "y": 744
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 823,
+              "y": 870
+            },
+            {
+              "x": 823,
+              "y": 744
+            }
+          ],
+          "labelPos": {
+            "x": 823,
+            "y": 728
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-15",
+          "label": "Сообщение об ошибке",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-28",
+            "side": "right",
+            "point": {
+              "x": 1350,
+              "y": 651
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 1419,
+              "y": 647
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 1350,
+              "y": 651
+            },
+            {
+              "x": 1385,
+              "y": 651
+            },
+            {
+              "x": 1385,
+              "y": 647
+            },
+            {
+              "x": 1419,
+              "y": 647
+            }
+          ],
+          "labelPos": {
+            "x": 1385,
+            "y": 631
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-17",
+          "label": "Файл",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 467
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-27",
+            "side": "left",
+            "point": {
+              "x": 723,
+              "y": 443
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 467
+            },
+            {
+              "x": 70,
+              "y": 467
+            },
+            {
+              "x": 70,
+              "y": 443
+            },
+            {
+              "x": 723,
+              "y": 443
+            }
+          ],
+          "labelPos": {
+            "x": 70,
+            "y": 427
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-19",
+          "label": "Выполненный запрос",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-26",
+            "side": "right",
+            "point": {
+              "x": 321,
+              "y": 227
+            }
+          },
+          "target": {
+            "type": "border",
+            "side": "right",
+            "point": {
+              "x": 1570,
+              "y": 207
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 321,
+              "y": 227
+            },
+            {
+              "x": 351,
+              "y": 227
+            },
+            {
+              "x": 351,
+              "y": 207
+            },
+            {
+              "x": 1570,
+              "y": 207
+            }
+          ],
+          "labelPos": {
+            "x": 351,
+            "y": 191
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-33",
+          "label": "Пользователь",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 762,
+              "y": 771
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-27",
+            "side": "bottom",
+            "point": {
+              "x": 790,
+              "y": 488
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 762,
+              "y": 771
+            },
+            {
+              "x": 790,
+              "y": 771
+            },
+            {
+              "x": 790,
+              "y": 488
+            }
+          ],
+          "labelPos": {
+            "x": 790,
+            "y": 755
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-35",
+          "label": "Пользователь",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 762,
+              "y": 771
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-26",
+            "side": "bottom",
+            "point": {
+              "x": 255,
+              "y": 272
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 762,
+              "y": 771
+            },
+            {
+              "x": 255,
+              "y": 771
+            },
+            {
+              "x": 255,
+              "y": 272
+            }
+          ],
+          "labelPos": {
+            "x": 255,
+            "y": 755
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-38",
+          "label": "Интерфейс",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 823,
+              "y": 744
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-27",
+            "side": "bottom",
+            "point": {
+              "x": 790,
+              "y": 488
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 823,
+              "y": 744
+            },
+            {
+              "x": 790,
+              "y": 744
+            },
+            {
+              "x": 790,
+              "y": 488
+            }
+          ],
+          "labelPos": {
+            "x": 790,
+            "y": 728
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-40",
+          "label": "Интерфейс",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 823,
+              "y": 744
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-28",
+            "side": "bottom",
+            "point": {
+              "x": 1284,
+              "y": 696
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 823,
+              "y": 744
+            },
+            {
+              "x": 1284,
+              "y": 744
+            },
+            {
+              "x": 1284,
+              "y": 696
+            }
+          ],
+          "labelPos": {
+            "x": 1284,
+            "y": 728
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-42",
+          "label": "Интерфейс",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 823,
+              "y": 744
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-26",
+            "side": "bottom",
+            "point": {
+              "x": 255,
+              "y": 272
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 823,
+              "y": 744
+            },
+            {
+              "x": 255,
+              "y": 744
+            },
+            {
+              "x": 255,
+              "y": 272
+            }
+          ],
+          "labelPos": {
+            "x": 255,
+            "y": 728
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-47",
+          "label": "Режим работы",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-26",
+            "side": "right",
+            "point": {
+              "x": 321,
+              "y": 227
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-27",
+            "side": "left",
+            "point": {
+              "x": 723,
+              "y": 443
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 321,
+              "y": 227
+            },
+            {
+              "x": 522,
+              "y": 227
+            },
+            {
+              "x": 522,
+              "y": 443
+            },
+            {
+              "x": 723,
+              "y": 443
+            }
+          ],
+          "labelPos": {
+            "x": 522,
+            "y": 427
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-54",
+          "label": "Код возврата",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-27",
+            "side": "right",
+            "point": {
+              "x": 856,
+              "y": 443
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-28",
+            "side": "left",
+            "point": {
+              "x": 1217,
+              "y": 651
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 856,
+              "y": 443
+            },
+            {
+              "x": 1037,
+              "y": 443
+            },
+            {
+              "x": 1037,
+              "y": 651
+            },
+            {
+              "x": 1217,
+              "y": 651
+            }
+          ],
+          "labelPos": {
+            "x": 1037,
+            "y": 635
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-206",
+          "label": "Запрос пользователя",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 157,
+              "y": 245
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-26",
+            "side": "left",
+            "point": {
+              "x": 188,
+              "y": 227
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 157,
+              "y": 245
+            },
+            {
+              "x": 173,
+              "y": 245
+            },
+            {
+              "x": 173,
+              "y": 227
+            },
+            {
+              "x": 188,
+              "y": 227
+            }
+          ],
+          "labelPos": {
+            "x": 173,
+            "y": 211
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-207",
+          "label": "Запрос пользователя",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-28",
+            "side": "right",
+            "point": {
+              "x": 1350,
+              "y": 651
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 157,
+              "y": 245
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 1350,
+              "y": 651
+            },
+            {
+              "x": 693,
+              "y": 651
+            },
+            {
+              "x": 693,
+              "y": 245
+            },
+            {
+              "x": 754,
+              "y": 245
+            },
+            {
+              "x": 754,
+              "y": 302
+            },
+            {
+              "x": 157,
+              "y": 302
+            },
+            {
+              "x": 157,
+              "y": 245
+            }
+          ],
+          "labelPos": {
+            "x": 754,
+            "y": 229
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-334",
+          "label": "Сообщение об ошибке",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 1419,
+              "y": 647
+            }
+          },
+          "target": {
+            "type": "border",
+            "side": "right",
+            "point": {
+              "x": 1570,
+              "y": 647
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 1419,
+              "y": 647
+            },
+            {
+              "x": 1570,
+              "y": 647
+            }
+          ],
+          "labelPos": {
+            "x": 1570,
+            "y": 631
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-335",
+          "label": "Сообщение об ошибке",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-27",
+            "side": "right",
+            "point": {
+              "x": 856,
+              "y": 443
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 1419,
+              "y": 647
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 856,
+              "y": 443
+            },
+            {
+              "x": 1138,
+              "y": 443
+            },
+            {
+              "x": 1138,
+              "y": 647
+            },
+            {
+              "x": 1138,
+              "y": 575
+            },
+            {
+              "x": 1419,
+              "y": 575
+            },
+            {
+              "x": 1419,
+              "y": 647
+            }
+          ],
+          "labelPos": {
+            "x": 1138,
+            "y": 559
+          },
+          "pinned": false
+        }
+      ],
+      "junctions": []
+    },
+    {
+      "id": "diag-rsf-26",
+      "code": "A1",
+      "title": "Декомпозиция: Обработка запроса",
+      "parentBlockId": "block-rsf-26",
+      "blocks": [
+        {
+          "id": "block-rsf-56",
+          "nodeNumber": 1,
+          "name": "Выбор режима работы",
+          "x": 190,
+          "y": 317,
+          "width": 133,
+          "height": 91,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-57",
+          "nodeNumber": 2,
+          "name": "чтение данных из файла",
+          "x": 484,
+          "y": 93,
+          "width": 272,
+          "height": 91,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-61",
+          "nodeNumber": 3,
+          "name": "поиск информации на конкретный день недели",
+          "x": 484,
+          "y": 520,
+          "width": 272,
+          "height": 91,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-62",
+          "nodeNumber": 4,
+          "name": "добавления информации о студенте и/или предмете",
+          "x": 484,
+          "y": 312,
+          "width": 272,
+          "height": 91,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-63",
+          "nodeNumber": 5,
+          "name": "сохранения данных в файле",
+          "x": 484,
+          "y": 205,
+          "width": 272,
+          "height": 91,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-64",
+          "nodeNumber": 6,
+          "name": "удаления информации о студенте и/или предмете",
+          "x": 484,
+          "y": 419,
+          "width": 272,
+          "height": 91,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-65",
+          "nodeNumber": 7,
+          "name": "вывод расписания на неделю для конкретной группы",
+          "x": 484,
+          "y": 621,
+          "width": 272,
+          "height": 91,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-308",
+          "nodeNumber": 8,
+          "name": "Выход из программы",
+          "x": 484,
+          "y": 717,
+          "width": 272,
+          "height": 91,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-90",
+          "nodeNumber": 9,
+          "name": "Выбранный режим работы",
+          "x": 1095,
+          "y": 323,
+          "width": 133,
+          "height": 91,
+          "decompDiagramId": null
+        }
+      ],
+      "arrows": [
+        {
+          "id": "flow-rsf-29",
+          "label": "Запрос пользователя",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 362
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 153,
+              "y": 362
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 362
+            },
+            {
+              "x": 153,
+              "y": 362
+            }
+          ],
+          "labelPos": {
+            "x": 153,
+            "y": 346
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-34",
+          "label": "Пользователь",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 212,
+              "y": 870
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-56",
+            "side": "bottom",
+            "point": {
+              "x": 257,
+              "y": 408
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 212,
+              "y": 870
+            },
+            {
+              "x": 212,
+              "y": 835
+            },
+            {
+              "x": 257,
+              "y": 835
+            },
+            {
+              "x": 257,
+              "y": 408
+            }
+          ],
+          "labelPos": {
+            "x": 257,
+            "y": 819
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-41",
+          "label": "Интерфейс",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 301,
+              "y": 870
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-56",
+            "side": "bottom",
+            "point": {
+              "x": 257,
+              "y": 408
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 301,
+              "y": 870
+            },
+            {
+              "x": 301,
+              "y": 835
+            },
+            {
+              "x": 257,
+              "y": 835
+            },
+            {
+              "x": 257,
+              "y": 408
+            }
+          ],
+          "labelPos": {
+            "x": 257,
+            "y": 819
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-45",
+          "label": "Режим работы",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-90",
+            "side": "right",
+            "point": {
+              "x": 1228,
+              "y": 369
+            }
+          },
+          "target": {
+            "type": "border",
+            "side": "right",
+            "point": {
+              "x": 1570,
+              "y": 376
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 1228,
+              "y": 369
+            },
+            {
+              "x": 1570,
+              "y": 369
+            }
+          ],
+          "labelPos": {
+            "x": 1570,
+            "y": 353
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-327",
+          "label": "Запрос пользователя",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 153,
+              "y": 362
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-56",
+            "side": "left",
+            "point": {
+              "x": 190,
+              "y": 363
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 153,
+              "y": 362
+            },
+            {
+              "x": 190,
+              "y": 362
+            }
+          ],
+          "labelPos": {
+            "x": 190,
+            "y": 346
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-329",
+          "label": "Выполненный запрос",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-90",
+            "side": "right",
+            "point": {
+              "x": 1228,
+              "y": 369
+            }
+          },
+          "target": {
+            "type": "border",
+            "side": "right",
+            "point": {
+              "x": 1570,
+              "y": 404
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 1228,
+              "y": 369
+            },
+            {
+              "x": 1258,
+              "y": 369
+            },
+            {
+              "x": 1258,
+              "y": 404
+            },
+            {
+              "x": 1570,
+              "y": 404
+            }
+          ],
+          "labelPos": {
+            "x": 1258,
+            "y": 388
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-69",
+          "label": "",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-56",
+            "side": "right",
+            "point": {
+              "x": 323,
+              "y": 363
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 356,
+              "y": 359
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 323,
+              "y": 363
+            },
+            {
+              "x": 340,
+              "y": 363
+            },
+            {
+              "x": 340,
+              "y": 359
+            },
+            {
+              "x": 356,
+              "y": 359
+            }
+          ],
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-76",
+          "label": "",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 356,
+              "y": 359
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-62",
+            "side": "left",
+            "point": {
+              "x": 484,
+              "y": 358
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 356,
+              "y": 359
+            },
+            {
+              "x": 484,
+              "y": 359
+            }
+          ],
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-78",
+          "label": "",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 356,
+              "y": 359
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-57",
+            "side": "left",
+            "point": {
+              "x": 484,
+              "y": 139
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 356,
+              "y": 359
+            },
+            {
+              "x": 420,
+              "y": 359
+            },
+            {
+              "x": 420,
+              "y": 139
+            },
+            {
+              "x": 484,
+              "y": 139
+            }
+          ],
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-81",
+          "label": "",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 356,
+              "y": 359
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-63",
+            "side": "left",
+            "point": {
+              "x": 484,
+              "y": 251
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 356,
+              "y": 359
+            },
+            {
+              "x": 420,
+              "y": 359
+            },
+            {
+              "x": 420,
+              "y": 251
+            },
+            {
+              "x": 484,
+              "y": 251
+            }
+          ],
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-83",
+          "label": "",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 356,
+              "y": 359
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-64",
+            "side": "left",
+            "point": {
+              "x": 484,
+              "y": 465
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 356,
+              "y": 359
+            },
+            {
+              "x": 420,
+              "y": 359
+            },
+            {
+              "x": 420,
+              "y": 465
+            },
+            {
+              "x": 484,
+              "y": 465
+            }
+          ],
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-86",
+          "label": "",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 356,
+              "y": 359
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-61",
+            "side": "left",
+            "point": {
+              "x": 484,
+              "y": 566
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 356,
+              "y": 359
+            },
+            {
+              "x": 420,
+              "y": 359
+            },
+            {
+              "x": 420,
+              "y": 566
+            },
+            {
+              "x": 484,
+              "y": 566
+            }
+          ],
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-89",
+          "label": "",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 356,
+              "y": 359
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-65",
+            "side": "left",
+            "point": {
+              "x": 484,
+              "y": 667
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 356,
+              "y": 359
+            },
+            {
+              "x": 420,
+              "y": 359
+            },
+            {
+              "x": 420,
+              "y": 667
+            },
+            {
+              "x": 484,
+              "y": 667
+            }
+          ],
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-96",
+          "label": "",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-62",
+            "side": "right",
+            "point": {
+              "x": 756,
+              "y": 358
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 1017,
+              "y": 366
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 756,
+              "y": 358
+            },
+            {
+              "x": 887,
+              "y": 358
+            },
+            {
+              "x": 887,
+              "y": 366
+            },
+            {
+              "x": 1017,
+              "y": 366
+            }
+          ],
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-99",
+          "label": "",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-63",
+            "side": "right",
+            "point": {
+              "x": 756,
+              "y": 251
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 1017,
+              "y": 366
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 756,
+              "y": 251
+            },
+            {
+              "x": 887,
+              "y": 251
+            },
+            {
+              "x": 887,
+              "y": 366
+            },
+            {
+              "x": 1017,
+              "y": 366
+            }
+          ],
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-102",
+          "label": "",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-57",
+            "side": "right",
+            "point": {
+              "x": 756,
+              "y": 139
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 1017,
+              "y": 366
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 756,
+              "y": 139
+            },
+            {
+              "x": 887,
+              "y": 139
+            },
+            {
+              "x": 887,
+              "y": 366
+            },
+            {
+              "x": 1017,
+              "y": 366
+            }
+          ],
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-104",
+          "label": "",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-64",
+            "side": "right",
+            "point": {
+              "x": 756,
+              "y": 465
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 1017,
+              "y": 366
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 756,
+              "y": 465
+            },
+            {
+              "x": 887,
+              "y": 465
+            },
+            {
+              "x": 887,
+              "y": 366
+            },
+            {
+              "x": 1017,
+              "y": 366
+            }
+          ],
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-107",
+          "label": "",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-61",
+            "side": "right",
+            "point": {
+              "x": 756,
+              "y": 566
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 1017,
+              "y": 366
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 756,
+              "y": 566
+            },
+            {
+              "x": 887,
+              "y": 566
+            },
+            {
+              "x": 887,
+              "y": 366
+            },
+            {
+              "x": 1017,
+              "y": 366
+            }
+          ],
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-109",
+          "label": "",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 1017,
+              "y": 366
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-90",
+            "side": "left",
+            "point": {
+              "x": 1095,
+              "y": 369
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 1017,
+              "y": 366
+            },
+            {
+              "x": 1095,
+              "y": 366
+            }
+          ],
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-110",
+          "label": "",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-65",
+            "side": "right",
+            "point": {
+              "x": 756,
+              "y": 667
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 1017,
+              "y": 366
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 756,
+              "y": 667
+            },
+            {
+              "x": 887,
+              "y": 667
+            },
+            {
+              "x": 887,
+              "y": 366
+            },
+            {
+              "x": 1017,
+              "y": 366
+            }
+          ],
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-312",
+          "label": "",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 356,
+              "y": 359
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-308",
+            "side": "left",
+            "point": {
+              "x": 484,
+              "y": 763
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 356,
+              "y": 359
+            },
+            {
+              "x": 420,
+              "y": 359
+            },
+            {
+              "x": 420,
+              "y": 763
+            },
+            {
+              "x": 484,
+              "y": 763
+            }
+          ],
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-325",
+          "label": "",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-308",
+            "side": "right",
+            "point": {
+              "x": 756,
+              "y": 763
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 1017,
+              "y": 366
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 756,
+              "y": 763
+            },
+            {
+              "x": 887,
+              "y": 763
+            },
+            {
+              "x": 887,
+              "y": 366
+            },
+            {
+              "x": 1017,
+              "y": 366
+            }
+          ],
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-328",
+          "label": "Запрос пользователя",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-90",
+            "side": "right",
+            "point": {
+              "x": 1228,
+              "y": 369
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 153,
+              "y": 362
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 1228,
+              "y": 369
+            },
+            {
+              "x": 1228,
+              "y": 433
+            },
+            {
+              "x": 1228,
+              "y": 389
+            },
+            {
+              "x": 1228,
+              "y": 433
+            },
+            {
+              "x": 1228,
+              "y": 389
+            },
+            {
+              "x": 1228,
+              "y": 433
+            },
+            {
+              "x": 1228,
+              "y": 389
+            },
+            {
+              "x": 459,
+              "y": 389
+            },
+            {
+              "x": 459,
+              "y": 433
+            },
+            {
+              "x": 459,
+              "y": 389
+            },
+            {
+              "x": 459,
+              "y": 433
+            },
+            {
+              "x": 459,
+              "y": 389
+            },
+            {
+              "x": 459,
+              "y": 433
+            },
+            {
+              "x": 459,
+              "y": 369
+            },
+            {
+              "x": 691,
+              "y": 369
+            },
+            {
+              "x": 691,
+              "y": 362
+            },
+            {
+              "x": 153,
+              "y": 362
+            }
+          ],
+          "labelPos": {
+            "x": 459,
+            "y": 417
+          },
+          "pinned": false
+        }
+      ],
+      "junctions": []
+    },
+    {
+      "id": "diag-rsf-27",
+      "code": "A2",
+      "title": "Декомпозиция: Исполнение",
+      "parentBlockId": "block-rsf-27",
+      "blocks": [
+        {
+          "id": "block-rsf-111",
+          "nodeNumber": 1,
+          "name": "Чтение/сохранение данных",
+          "x": 195,
+          "y": 637,
+          "width": 189,
+          "height": 91,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-112",
+          "nodeNumber": 2,
+          "name": "Изменение",
+          "x": 723,
+          "y": 360,
+          "width": 133,
+          "height": 91,
+          "decompDiagramId": "diag-rsf-112"
+        },
+        {
+          "id": "block-rsf-113",
+          "nodeNumber": 3,
+          "name": "поиск информации",
+          "x": 1017,
+          "y": 136,
+          "width": 133,
+          "height": 91,
+          "decompDiagramId": "diag-rsf-113"
+        }
+      ],
+      "arrows": [
+        {
+          "id": "flow-rsf-30",
+          "label": "Файл",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 682
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-111",
+            "side": "left",
+            "point": {
+              "x": 195,
+              "y": 683
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 683
+            },
+            {
+              "x": 195,
+              "y": 683
+            }
+          ],
+          "labelPos": {
+            "x": 195,
+            "y": 667
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-31",
+          "label": "Интерфейс",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 828,
+              "y": 870
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 828,
+              "y": 784
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 828,
+              "y": 870
+            },
+            {
+              "x": 828,
+              "y": 784
+            }
+          ],
+          "labelPos": {
+            "x": 828,
+            "y": 768
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-32",
+          "label": "Пользователь",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 756,
+              "y": 870
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 756,
+              "y": 742
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 756,
+              "y": 870
+            },
+            {
+              "x": 756,
+              "y": 742
+            }
+          ],
+          "labelPos": {
+            "x": 756,
+            "y": 726
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-46",
+          "label": "Режим работы",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 381
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 146,
+              "y": 381
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 381
+            },
+            {
+              "x": 146,
+              "y": 381
+            }
+          ],
+          "labelPos": {
+            "x": 146,
+            "y": 365
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-333",
+          "label": "Сообщение об ошибке",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-111",
+            "side": "right",
+            "point": {
+              "x": 384,
+              "y": 683
+            }
+          },
+          "target": {
+            "type": "border",
+            "side": "right",
+            "point": {
+              "x": 1570,
+              "y": 715
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 384,
+              "y": 683
+            },
+            {
+              "x": 414,
+              "y": 683
+            },
+            {
+              "x": 414,
+              "y": 715
+            },
+            {
+              "x": 1570,
+              "y": 715
+            }
+          ],
+          "labelPos": {
+            "x": 414,
+            "y": 699
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-52",
+          "label": "Код возврата",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-112",
+            "side": "right",
+            "point": {
+              "x": 856,
+              "y": 406
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 1293,
+              "y": 409
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 856,
+              "y": 406
+            },
+            {
+              "x": 1075,
+              "y": 406
+            },
+            {
+              "x": 1075,
+              "y": 409
+            },
+            {
+              "x": 1293,
+              "y": 409
+            }
+          ],
+          "labelPos": {
+            "x": 1075,
+            "y": 393
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-116",
+          "label": "Режим работы",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 570,
+              "y": 381
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-112",
+            "side": "left",
+            "point": {
+              "x": 723,
+              "y": 406
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 570,
+              "y": 381
+            },
+            {
+              "x": 647,
+              "y": 381
+            },
+            {
+              "x": 647,
+              "y": 406
+            },
+            {
+              "x": 723,
+              "y": 406
+            }
+          ],
+          "labelPos": {
+            "x": 647,
+            "y": 390
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-118",
+          "label": "Режим работы",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 570,
+              "y": 381
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-113",
+            "side": "left",
+            "point": {
+              "x": 1017,
+              "y": 182
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 570,
+              "y": 381
+            },
+            {
+              "x": 570,
+              "y": 330
+            },
+            {
+              "x": 881,
+              "y": 330
+            },
+            {
+              "x": 881,
+              "y": 381
+            },
+            {
+              "x": 881,
+              "y": 330
+            },
+            {
+              "x": 698,
+              "y": 330
+            },
+            {
+              "x": 698,
+              "y": 381
+            },
+            {
+              "x": 698,
+              "y": 330
+            },
+            {
+              "x": 881,
+              "y": 330
+            },
+            {
+              "x": 881,
+              "y": 381
+            },
+            {
+              "x": 881,
+              "y": 330
+            },
+            {
+              "x": 698,
+              "y": 330
+            },
+            {
+              "x": 698,
+              "y": 381
+            },
+            {
+              "x": 698,
+              "y": 330
+            },
+            {
+              "x": 881,
+              "y": 330
+            },
+            {
+              "x": 881,
+              "y": 381
+            },
+            {
+              "x": 881,
+              "y": 330
+            },
+            {
+              "x": 698,
+              "y": 330
+            },
+            {
+              "x": 698,
+              "y": 381
+            },
+            {
+              "x": 794,
+              "y": 381
+            },
+            {
+              "x": 794,
+              "y": 182
+            },
+            {
+              "x": 1017,
+              "y": 182
+            }
+          ],
+          "labelPos": {
+            "x": 698,
+            "y": 314
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-121",
+          "label": "Данные о студентах и расписании",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-111",
+            "side": "right",
+            "point": {
+              "x": 384,
+              "y": 683
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 612,
+              "y": 664
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 384,
+              "y": 683
+            },
+            {
+              "x": 498,
+              "y": 683
+            },
+            {
+              "x": 498,
+              "y": 664
+            },
+            {
+              "x": 612,
+              "y": 664
+            }
+          ],
+          "labelPos": {
+            "x": 498,
+            "y": 648
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-125",
+          "label": "Данные о студентах и расписании",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 612,
+              "y": 664
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-112",
+            "side": "left",
+            "point": {
+              "x": 723,
+              "y": 406
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 612,
+              "y": 664
+            },
+            {
+              "x": 668,
+              "y": 664
+            },
+            {
+              "x": 668,
+              "y": 406
+            },
+            {
+              "x": 723,
+              "y": 406
+            }
+          ],
+          "labelPos": {
+            "x": 668,
+            "y": 390
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-127",
+          "label": "Данные о студентах и расписании",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 612,
+              "y": 664
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-113",
+            "side": "left",
+            "point": {
+              "x": 1017,
+              "y": 182
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 612,
+              "y": 664
+            },
+            {
+              "x": 886,
+              "y": 664
+            },
+            {
+              "x": 886,
+              "y": 182
+            },
+            {
+              "x": 815,
+              "y": 182
+            },
+            {
+              "x": 1017,
+              "y": 182
+            }
+          ],
+          "labelPos": {
+            "x": 886,
+            "y": 166
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-130",
+          "label": "Интерфейс",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 828,
+              "y": 784
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-112",
+            "side": "bottom",
+            "point": {
+              "x": 790,
+              "y": 451
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 828,
+              "y": 784
+            },
+            {
+              "x": 790,
+              "y": 784
+            },
+            {
+              "x": 790,
+              "y": 451
+            }
+          ],
+          "labelPos": {
+            "x": 790,
+            "y": 768
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-132",
+          "label": "Интерфейс",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 828,
+              "y": 784
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-113",
+            "side": "bottom",
+            "point": {
+              "x": 1084,
+              "y": 227
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 828,
+              "y": 784
+            },
+            {
+              "x": 1084,
+              "y": 784
+            },
+            {
+              "x": 1084,
+              "y": 227
+            }
+          ],
+          "labelPos": {
+            "x": 1084,
+            "y": 768
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-133",
+          "label": "Пользователь",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 756,
+              "y": 742
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-112",
+            "side": "bottom",
+            "point": {
+              "x": 790,
+              "y": 451
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 756,
+              "y": 742
+            },
+            {
+              "x": 790,
+              "y": 742
+            },
+            {
+              "x": 790,
+              "y": 451
+            }
+          ],
+          "labelPos": {
+            "x": 790,
+            "y": 726
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-135",
+          "label": "Пользователь",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 756,
+              "y": 742
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-113",
+            "side": "bottom",
+            "point": {
+              "x": 1084,
+              "y": 227
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 756,
+              "y": 742
+            },
+            {
+              "x": 1084,
+              "y": 742
+            },
+            {
+              "x": 1084,
+              "y": 227
+            }
+          ],
+          "labelPos": {
+            "x": 1084,
+            "y": 726
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-138",
+          "label": "Код возврата",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 1293,
+              "y": 409
+            }
+          },
+          "target": {
+            "type": "border",
+            "side": "right",
+            "point": {
+              "x": 1570,
+              "y": 409
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 1293,
+              "y": 409
+            },
+            {
+              "x": 1570,
+              "y": 409
+            }
+          ],
+          "labelPos": {
+            "x": 1570,
+            "y": 393
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-139",
+          "label": "Код возврата",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-111",
+            "side": "right",
+            "point": {
+              "x": 384,
+              "y": 683
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 1293,
+              "y": 409
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 384,
+              "y": 683
+            },
+            {
+              "x": 886,
+              "y": 683
+            },
+            {
+              "x": 886,
+              "y": 335
+            },
+            {
+              "x": 839,
+              "y": 335
+            },
+            {
+              "x": 886,
+              "y": 335
+            },
+            {
+              "x": 886,
+              "y": 476
+            },
+            {
+              "x": 839,
+              "y": 476
+            },
+            {
+              "x": 886,
+              "y": 476
+            },
+            {
+              "x": 886,
+              "y": 335
+            },
+            {
+              "x": 839,
+              "y": 335
+            },
+            {
+              "x": 886,
+              "y": 335
+            },
+            {
+              "x": 886,
+              "y": 476
+            },
+            {
+              "x": 839,
+              "y": 476
+            },
+            {
+              "x": 886,
+              "y": 476
+            },
+            {
+              "x": 886,
+              "y": 335
+            },
+            {
+              "x": 839,
+              "y": 335
+            },
+            {
+              "x": 886,
+              "y": 335
+            },
+            {
+              "x": 886,
+              "y": 476
+            },
+            {
+              "x": 839,
+              "y": 476
+            },
+            {
+              "x": 839,
+              "y": 409
+            },
+            {
+              "x": 1293,
+              "y": 409
+            }
+          ],
+          "labelPos": {
+            "x": 886,
+            "y": 319
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-141",
+          "label": "Код возврата",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-113",
+            "side": "right",
+            "point": {
+              "x": 1150,
+              "y": 182
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 1293,
+              "y": 409
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 1150,
+              "y": 182
+            },
+            {
+              "x": 1222,
+              "y": 182
+            },
+            {
+              "x": 1222,
+              "y": 409
+            },
+            {
+              "x": 1293,
+              "y": 409
+            }
+          ],
+          "labelPos": {
+            "x": 1222,
+            "y": 393
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-200",
+          "label": "Режим работы",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 146,
+              "y": 381
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-111",
+            "side": "left",
+            "point": {
+              "x": 195,
+              "y": 683
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 146,
+              "y": 381
+            },
+            {
+              "x": 171,
+              "y": 381
+            },
+            {
+              "x": 171,
+              "y": 683
+            },
+            {
+              "x": 195,
+              "y": 683
+            }
+          ],
+          "labelPos": {
+            "x": 171,
+            "y": 667
+          },
+          "pinned": false
+        }
+      ],
+      "junctions": []
+    },
+    {
+      "id": "diag-rsf-112",
+      "code": "A22",
+      "title": "Декомпозиция: Изменение",
+      "parentBlockId": "block-rsf-112",
+      "blocks": [
+        {
+          "id": "block-rsf-208",
+          "nodeNumber": 1,
+          "name": "добавление информации о студенте и/или предмете",
+          "x": 540,
+          "y": 173,
+          "width": 133,
+          "height": 91,
+          "decompDiagramId": "diag-rsf-208"
+        },
+        {
+          "id": "block-rsf-209",
+          "nodeNumber": 2,
+          "name": "удаление информации о студенте и/или предмете",
+          "x": 956,
+          "y": 435,
+          "width": 133,
+          "height": 91,
+          "decompDiagramId": "diag-rsf-209"
+        }
+      ],
+      "arrows": [
+        {
+          "id": "flow-rsf-115",
+          "label": "Режим работы",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 189
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 464,
+              "y": 189
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 189
+            },
+            {
+              "x": 464,
+              "y": 189
+            }
+          ],
+          "labelPos": {
+            "x": 464,
+            "y": 173
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-120",
+          "label": "Данные о студентах и расписании",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 234
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 398,
+              "y": 234
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 234
+            },
+            {
+              "x": 398,
+              "y": 234
+            }
+          ],
+          "labelPos": {
+            "x": 398,
+            "y": 218
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-128",
+          "label": "Пользователь",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 995,
+              "y": 870
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 995,
+              "y": 739
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 995,
+              "y": 870
+            },
+            {
+              "x": 995,
+              "y": 739
+            }
+          ],
+          "labelPos": {
+            "x": 995,
+            "y": 723
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-129",
+          "label": "Интерфейс",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 1057,
+              "y": 870
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 1057,
+              "y": 694
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 1057,
+              "y": 870
+            },
+            {
+              "x": 1057,
+              "y": 694
+            }
+          ],
+          "labelPos": {
+            "x": 1057,
+            "y": 678
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-136",
+          "label": "Код возврата",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-209",
+            "side": "right",
+            "point": {
+              "x": 1089,
+              "y": 481
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 1294,
+              "y": 473
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 1089,
+              "y": 481
+            },
+            {
+              "x": 1192,
+              "y": 481
+            },
+            {
+              "x": 1192,
+              "y": 473
+            },
+            {
+              "x": 1294,
+              "y": 473
+            }
+          ],
+          "labelPos": {
+            "x": 1192,
+            "y": 457
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-212",
+          "label": "Данные о студентах и расписании",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 398,
+              "y": 234
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-208",
+            "side": "left",
+            "point": {
+              "x": 540,
+              "y": 219
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 398,
+              "y": 234
+            },
+            {
+              "x": 469,
+              "y": 234
+            },
+            {
+              "x": 469,
+              "y": 219
+            },
+            {
+              "x": 540,
+              "y": 219
+            }
+          ],
+          "labelPos": {
+            "x": 469,
+            "y": 203
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-214",
+          "label": "Данные о студентах и расписании",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 398,
+              "y": 234
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-209",
+            "side": "left",
+            "point": {
+              "x": 956,
+              "y": 481
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 398,
+              "y": 234
+            },
+            {
+              "x": 398,
+              "y": 294
+            },
+            {
+              "x": 698,
+              "y": 294
+            },
+            {
+              "x": 698,
+              "y": 234
+            },
+            {
+              "x": 677,
+              "y": 234
+            },
+            {
+              "x": 677,
+              "y": 481
+            },
+            {
+              "x": 956,
+              "y": 481
+            }
+          ],
+          "labelPos": {
+            "x": 698,
+            "y": 218
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-215",
+          "label": "Режим работы",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 464,
+              "y": 189
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-208",
+            "side": "left",
+            "point": {
+              "x": 540,
+              "y": 219
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 464,
+              "y": 189
+            },
+            {
+              "x": 502,
+              "y": 189
+            },
+            {
+              "x": 502,
+              "y": 219
+            },
+            {
+              "x": 540,
+              "y": 219
+            }
+          ],
+          "labelPos": {
+            "x": 502,
+            "y": 203
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-217",
+          "label": "Режим работы",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 464,
+              "y": 189
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-209",
+            "side": "left",
+            "point": {
+              "x": 956,
+              "y": 481
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 464,
+              "y": 189
+            },
+            {
+              "x": 464,
+              "y": 143
+            },
+            {
+              "x": 710,
+              "y": 143
+            },
+            {
+              "x": 710,
+              "y": 481
+            },
+            {
+              "x": 956,
+              "y": 481
+            }
+          ],
+          "labelPos": {
+            "x": 710,
+            "y": 127
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-220",
+          "label": "Пользователь",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 995,
+              "y": 739
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-209",
+            "side": "bottom",
+            "point": {
+              "x": 1023,
+              "y": 526
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 995,
+              "y": 739
+            },
+            {
+              "x": 1023,
+              "y": 739
+            },
+            {
+              "x": 1023,
+              "y": 526
+            }
+          ],
+          "labelPos": {
+            "x": 1023,
+            "y": 723
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-222",
+          "label": "Пользователь",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 995,
+              "y": 739
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-208",
+            "side": "bottom",
+            "point": {
+              "x": 607,
+              "y": 264
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 995,
+              "y": 739
+            },
+            {
+              "x": 607,
+              "y": 739
+            },
+            {
+              "x": 607,
+              "y": 264
+            }
+          ],
+          "labelPos": {
+            "x": 607,
+            "y": 723
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-223",
+          "label": "Интерфейс",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 1057,
+              "y": 694
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-209",
+            "side": "bottom",
+            "point": {
+              "x": 1023,
+              "y": 526
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 1057,
+              "y": 694
+            },
+            {
+              "x": 1023,
+              "y": 694
+            },
+            {
+              "x": 1023,
+              "y": 526
+            }
+          ],
+          "labelPos": {
+            "x": 1023,
+            "y": 678
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-225",
+          "label": "Интерфейс",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 1057,
+              "y": 694
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-208",
+            "side": "bottom",
+            "point": {
+              "x": 607,
+              "y": 264
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 1057,
+              "y": 694
+            },
+            {
+              "x": 607,
+              "y": 694
+            },
+            {
+              "x": 607,
+              "y": 264
+            }
+          ],
+          "labelPos": {
+            "x": 607,
+            "y": 678
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-228",
+          "label": "Код возврата",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 1294,
+              "y": 473
+            }
+          },
+          "target": {
+            "type": "border",
+            "side": "right",
+            "point": {
+              "x": 1570,
+              "y": 473
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 1294,
+              "y": 473
+            },
+            {
+              "x": 1570,
+              "y": 473
+            }
+          ],
+          "labelPos": {
+            "x": 1570,
+            "y": 457
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-229",
+          "label": "Код возврата",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-208",
+            "side": "right",
+            "point": {
+              "x": 673,
+              "y": 219
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 1294,
+              "y": 473
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 673,
+              "y": 219
+            },
+            {
+              "x": 984,
+              "y": 219
+            },
+            {
+              "x": 926,
+              "y": 219
+            },
+            {
+              "x": 926,
+              "y": 551
+            },
+            {
+              "x": 984,
+              "y": 551
+            },
+            {
+              "x": 926,
+              "y": 551
+            },
+            {
+              "x": 926,
+              "y": 410
+            },
+            {
+              "x": 984,
+              "y": 410
+            },
+            {
+              "x": 926,
+              "y": 410
+            },
+            {
+              "x": 926,
+              "y": 551
+            },
+            {
+              "x": 984,
+              "y": 551
+            },
+            {
+              "x": 926,
+              "y": 551
+            },
+            {
+              "x": 926,
+              "y": 410
+            },
+            {
+              "x": 984,
+              "y": 410
+            },
+            {
+              "x": 926,
+              "y": 410
+            },
+            {
+              "x": 926,
+              "y": 551
+            },
+            {
+              "x": 984,
+              "y": 551
+            },
+            {
+              "x": 926,
+              "y": 551
+            },
+            {
+              "x": 926,
+              "y": 410
+            },
+            {
+              "x": 984,
+              "y": 410
+            },
+            {
+              "x": 984,
+              "y": 473
+            },
+            {
+              "x": 1294,
+              "y": 473
+            }
+          ],
+          "labelPos": {
+            "x": 926,
+            "y": 535
+          },
+          "pinned": false
+        }
+      ],
+      "junctions": []
+    },
+    {
+      "id": "diag-rsf-113",
+      "code": "A23",
+      "title": "Декомпозиция: поиск информации",
+      "parentBlockId": "block-rsf-113",
+      "blocks": [
+        {
+          "id": "block-rsf-143",
+          "nodeNumber": 1,
+          "name": "поиск информации на конкретный день недели",
+          "x": 545,
+          "y": 157,
+          "width": 194,
+          "height": 128,
+          "decompDiagramId": "diag-rsf-143"
+        },
+        {
+          "id": "block-rsf-144",
+          "nodeNumber": 2,
+          "name": "вывода расписания на неделю для конкретной группы",
+          "x": 928,
+          "y": 387,
+          "width": 189,
+          "height": 139,
+          "decompDiagramId": "diag-rsf-144"
+        }
+      ],
+      "arrows": [
+        {
+          "id": "flow-rsf-117",
+          "label": "Режим работы",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 175
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 467,
+              "y": 175
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 175
+            },
+            {
+              "x": 467,
+              "y": 175
+            }
+          ],
+          "labelPos": {
+            "x": 467,
+            "y": 159
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-126",
+          "label": "Данные о студентах и расписании",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 252
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 399,
+              "y": 252
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 252
+            },
+            {
+              "x": 399,
+              "y": 252
+            }
+          ],
+          "labelPos": {
+            "x": 399,
+            "y": 236
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-131",
+          "label": "Интерфейс",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 1090,
+              "y": 870
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 1090,
+              "y": 645
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 1090,
+              "y": 870
+            },
+            {
+              "x": 1090,
+              "y": 645
+            }
+          ],
+          "labelPos": {
+            "x": 1090,
+            "y": 629
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-134",
+          "label": "Пользователь",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 949,
+              "y": 870
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 949,
+              "y": 704
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 949,
+              "y": 870
+            },
+            {
+              "x": 949,
+              "y": 704
+            }
+          ],
+          "labelPos": {
+            "x": 949,
+            "y": 688
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-140",
+          "label": "Код возврата",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-144",
+            "side": "right",
+            "point": {
+              "x": 1117,
+              "y": 457
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 1289,
+              "y": 449
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 1117,
+              "y": 457
+            },
+            {
+              "x": 1203,
+              "y": 457
+            },
+            {
+              "x": 1203,
+              "y": 449
+            },
+            {
+              "x": 1289,
+              "y": 449
+            }
+          ],
+          "labelPos": {
+            "x": 1203,
+            "y": 433
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-147",
+          "label": "Режим работы",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 467,
+              "y": 175
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-143",
+            "side": "left",
+            "point": {
+              "x": 545,
+              "y": 221
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 467,
+              "y": 175
+            },
+            {
+              "x": 506,
+              "y": 175
+            },
+            {
+              "x": 506,
+              "y": 221
+            },
+            {
+              "x": 545,
+              "y": 221
+            }
+          ],
+          "labelPos": {
+            "x": 506,
+            "y": 205
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-149",
+          "label": "Режим работы",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 467,
+              "y": 175
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-144",
+            "side": "left",
+            "point": {
+              "x": 928,
+              "y": 457
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 467,
+              "y": 175
+            },
+            {
+              "x": 467,
+              "y": 127
+            },
+            {
+              "x": 764,
+              "y": 127
+            },
+            {
+              "x": 764,
+              "y": 175
+            },
+            {
+              "x": 764,
+              "y": 127
+            },
+            {
+              "x": 520,
+              "y": 127
+            },
+            {
+              "x": 520,
+              "y": 175
+            },
+            {
+              "x": 520,
+              "y": 127
+            },
+            {
+              "x": 764,
+              "y": 127
+            },
+            {
+              "x": 764,
+              "y": 175
+            },
+            {
+              "x": 764,
+              "y": 127
+            },
+            {
+              "x": 520,
+              "y": 127
+            },
+            {
+              "x": 520,
+              "y": 175
+            },
+            {
+              "x": 520,
+              "y": 127
+            },
+            {
+              "x": 764,
+              "y": 127
+            },
+            {
+              "x": 764,
+              "y": 175
+            },
+            {
+              "x": 764,
+              "y": 127
+            },
+            {
+              "x": 520,
+              "y": 127
+            },
+            {
+              "x": 520,
+              "y": 175
+            },
+            {
+              "x": 698,
+              "y": 175
+            },
+            {
+              "x": 698,
+              "y": 457
+            },
+            {
+              "x": 928,
+              "y": 457
+            }
+          ],
+          "labelPos": {
+            "x": 520,
+            "y": 111
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-151",
+          "label": "Данные о студентах и расписании",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 399,
+              "y": 252
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-143",
+            "side": "left",
+            "point": {
+              "x": 545,
+              "y": 221
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 399,
+              "y": 252
+            },
+            {
+              "x": 472,
+              "y": 252
+            },
+            {
+              "x": 472,
+              "y": 221
+            },
+            {
+              "x": 545,
+              "y": 221
+            }
+          ],
+          "labelPos": {
+            "x": 472,
+            "y": 205
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-153",
+          "label": "Данные о студентах и расписании",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 399,
+              "y": 252
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-144",
+            "side": "left",
+            "point": {
+              "x": 928,
+              "y": 457
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 399,
+              "y": 252
+            },
+            {
+              "x": 399,
+              "y": 315
+            },
+            {
+              "x": 764,
+              "y": 315
+            },
+            {
+              "x": 764,
+              "y": 252
+            },
+            {
+              "x": 764,
+              "y": 315
+            },
+            {
+              "x": 520,
+              "y": 315
+            },
+            {
+              "x": 520,
+              "y": 252
+            },
+            {
+              "x": 520,
+              "y": 315
+            },
+            {
+              "x": 764,
+              "y": 315
+            },
+            {
+              "x": 764,
+              "y": 252
+            },
+            {
+              "x": 764,
+              "y": 315
+            },
+            {
+              "x": 520,
+              "y": 315
+            },
+            {
+              "x": 520,
+              "y": 252
+            },
+            {
+              "x": 520,
+              "y": 315
+            },
+            {
+              "x": 764,
+              "y": 315
+            },
+            {
+              "x": 764,
+              "y": 252
+            },
+            {
+              "x": 764,
+              "y": 315
+            },
+            {
+              "x": 520,
+              "y": 315
+            },
+            {
+              "x": 520,
+              "y": 252
+            },
+            {
+              "x": 664,
+              "y": 252
+            },
+            {
+              "x": 664,
+              "y": 457
+            },
+            {
+              "x": 928,
+              "y": 457
+            }
+          ],
+          "labelPos": {
+            "x": 520,
+            "y": 299
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-156",
+          "label": "Пользователь",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 949,
+              "y": 704
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-144",
+            "side": "bottom",
+            "point": {
+              "x": 1023,
+              "y": 526
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 949,
+              "y": 704
+            },
+            {
+              "x": 1023,
+              "y": 704
+            },
+            {
+              "x": 1023,
+              "y": 526
+            }
+          ],
+          "labelPos": {
+            "x": 1023,
+            "y": 688
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-158",
+          "label": "Пользователь",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 949,
+              "y": 704
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-143",
+            "side": "bottom",
+            "point": {
+              "x": 642,
+              "y": 285
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 949,
+              "y": 704
+            },
+            {
+              "x": 642,
+              "y": 704
+            },
+            {
+              "x": 642,
+              "y": 285
+            }
+          ],
+          "labelPos": {
+            "x": 642,
+            "y": 688
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-159",
+          "label": "Интерфейс",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 1090,
+              "y": 645
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-144",
+            "side": "bottom",
+            "point": {
+              "x": 1023,
+              "y": 526
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 1090,
+              "y": 645
+            },
+            {
+              "x": 1023,
+              "y": 645
+            },
+            {
+              "x": 1023,
+              "y": 526
+            }
+          ],
+          "labelPos": {
+            "x": 1023,
+            "y": 629
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-161",
+          "label": "Интерфейс",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 1090,
+              "y": 645
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-143",
+            "side": "bottom",
+            "point": {
+              "x": 642,
+              "y": 285
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 1090,
+              "y": 645
+            },
+            {
+              "x": 642,
+              "y": 645
+            },
+            {
+              "x": 642,
+              "y": 285
+            }
+          ],
+          "labelPos": {
+            "x": 642,
+            "y": 629
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-165",
+          "label": "Код возврата",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 1289,
+              "y": 449
+            }
+          },
+          "target": {
+            "type": "border",
+            "side": "right",
+            "point": {
+              "x": 1570,
+              "y": 449
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 1289,
+              "y": 449
+            },
+            {
+              "x": 1570,
+              "y": 449
+            }
+          ],
+          "labelPos": {
+            "x": 1570,
+            "y": 433
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-166",
+          "label": "Код возврата",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-143",
+            "side": "right",
+            "point": {
+              "x": 739,
+              "y": 221
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 1289,
+              "y": 449
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 739,
+              "y": 221
+            },
+            {
+              "x": 1014,
+              "y": 221
+            },
+            {
+              "x": 898,
+              "y": 221
+            },
+            {
+              "x": 898,
+              "y": 551
+            },
+            {
+              "x": 1014,
+              "y": 551
+            },
+            {
+              "x": 898,
+              "y": 551
+            },
+            {
+              "x": 898,
+              "y": 362
+            },
+            {
+              "x": 1014,
+              "y": 362
+            },
+            {
+              "x": 898,
+              "y": 362
+            },
+            {
+              "x": 898,
+              "y": 551
+            },
+            {
+              "x": 1014,
+              "y": 551
+            },
+            {
+              "x": 898,
+              "y": 551
+            },
+            {
+              "x": 898,
+              "y": 362
+            },
+            {
+              "x": 1014,
+              "y": 362
+            },
+            {
+              "x": 898,
+              "y": 362
+            },
+            {
+              "x": 898,
+              "y": 551
+            },
+            {
+              "x": 1014,
+              "y": 551
+            },
+            {
+              "x": 898,
+              "y": 551
+            },
+            {
+              "x": 898,
+              "y": 362
+            },
+            {
+              "x": 1014,
+              "y": 362
+            },
+            {
+              "x": 1014,
+              "y": 449
+            },
+            {
+              "x": 1289,
+              "y": 449
+            }
+          ],
+          "labelPos": {
+            "x": 898,
+            "y": 535
+          },
+          "pinned": false
+        }
+      ],
+      "junctions": []
+    },
+    {
+      "id": "diag-rsf-208",
+      "code": "A221",
+      "title": "Декомпозиция: добавление информации о студенте и/или предмете",
+      "parentBlockId": "block-rsf-208",
+      "blocks": [
+        {
+          "id": "block-rsf-231",
+          "nodeNumber": 1,
+          "name": "Запрос какую информацию нужно добавить, о студенте или предмете",
+          "x": 462,
+          "y": 296,
+          "width": 211,
+          "height": 107,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-233",
+          "nodeNumber": 2,
+          "name": "Сравнение с обозначениями студентов/предметов",
+          "x": 756,
+          "y": 451,
+          "width": 211,
+          "height": 112,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-232",
+          "nodeNumber": 3,
+          "name": "Запрос и добавление информации о студенте или предмете",
+          "x": 1095,
+          "y": 589,
+          "width": 172,
+          "height": 117,
+          "decompDiagramId": null
+        }
+      ],
+      "arrows": [
+        {
+          "id": "flow-rsf-211",
+          "label": "Данные о студентах и расписании",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 674
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-232",
+            "side": "left",
+            "point": {
+              "x": 1095,
+              "y": 648
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 674
+            },
+            {
+              "x": 70,
+              "y": 674
+            },
+            {
+              "x": 70,
+              "y": 648
+            },
+            {
+              "x": 1095,
+              "y": 648
+            }
+          ],
+          "labelPos": {
+            "x": 70,
+            "y": 632
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-221",
+          "label": "Пользователь",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 499,
+              "y": 870
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-231",
+            "side": "bottom",
+            "point": {
+              "x": 568,
+              "y": 403
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 499,
+              "y": 870
+            },
+            {
+              "x": 499,
+              "y": 835
+            },
+            {
+              "x": 568,
+              "y": 835
+            },
+            {
+              "x": 568,
+              "y": 403
+            }
+          ],
+          "labelPos": {
+            "x": 568,
+            "y": 819
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-224",
+          "label": "Интерфейс",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 641,
+              "y": 870
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-231",
+            "side": "bottom",
+            "point": {
+              "x": 568,
+              "y": 403
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 641,
+              "y": 870
+            },
+            {
+              "x": 641,
+              "y": 835
+            },
+            {
+              "x": 568,
+              "y": 835
+            },
+            {
+              "x": 568,
+              "y": 403
+            }
+          ],
+          "labelPos": {
+            "x": 568,
+            "y": 819
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-227",
+          "label": "Код возврата",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-232",
+            "side": "right",
+            "point": {
+              "x": 1267,
+              "y": 648
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 1365,
+              "y": 647
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 1267,
+              "y": 648
+            },
+            {
+              "x": 1316,
+              "y": 648
+            },
+            {
+              "x": 1316,
+              "y": 647
+            },
+            {
+              "x": 1365,
+              "y": 647
+            }
+          ],
+          "labelPos": {
+            "x": 1316,
+            "y": 631
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-240",
+          "label": "необработанный тип информации которую нужно добавить",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-231",
+            "side": "right",
+            "point": {
+              "x": 673,
+              "y": 350
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-233",
+            "side": "left",
+            "point": {
+              "x": 756,
+              "y": 507
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 673,
+              "y": 350
+            },
+            {
+              "x": 715,
+              "y": 350
+            },
+            {
+              "x": 715,
+              "y": 507
+            },
+            {
+              "x": 756,
+              "y": 507
+            }
+          ],
+          "labelPos": {
+            "x": 715,
+            "y": 491
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-244",
+          "label": "обработанный тип информации которую нужно добавить",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-233",
+            "side": "right",
+            "point": {
+              "x": 967,
+              "y": 507
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-232",
+            "side": "left",
+            "point": {
+              "x": 1095,
+              "y": 648
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 967,
+              "y": 507
+            },
+            {
+              "x": 1031,
+              "y": 507
+            },
+            {
+              "x": 1031,
+              "y": 648
+            },
+            {
+              "x": 1095,
+              "y": 648
+            }
+          ],
+          "labelPos": {
+            "x": 1031,
+            "y": 632
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-250",
+          "label": "Код возврата",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 1365,
+              "y": 647
+            }
+          },
+          "target": {
+            "type": "border",
+            "side": "right",
+            "point": {
+              "x": 1570,
+              "y": 647
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 1365,
+              "y": 647
+            },
+            {
+              "x": 1570,
+              "y": 647
+            }
+          ],
+          "labelPos": {
+            "x": 1570,
+            "y": 631
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-251",
+          "label": "Код возврата",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-233",
+            "side": "right",
+            "point": {
+              "x": 967,
+              "y": 507
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 1365,
+              "y": 647
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 967,
+              "y": 507
+            },
+            {
+              "x": 1166,
+              "y": 507
+            },
+            {
+              "x": 1065,
+              "y": 507
+            },
+            {
+              "x": 1065,
+              "y": 731
+            },
+            {
+              "x": 1166,
+              "y": 731
+            },
+            {
+              "x": 1065,
+              "y": 731
+            },
+            {
+              "x": 1065,
+              "y": 564
+            },
+            {
+              "x": 1166,
+              "y": 564
+            },
+            {
+              "x": 1065,
+              "y": 564
+            },
+            {
+              "x": 1065,
+              "y": 731
+            },
+            {
+              "x": 1166,
+              "y": 731
+            },
+            {
+              "x": 1065,
+              "y": 731
+            },
+            {
+              "x": 1065,
+              "y": 564
+            },
+            {
+              "x": 1166,
+              "y": 564
+            },
+            {
+              "x": 1065,
+              "y": 564
+            },
+            {
+              "x": 1065,
+              "y": 731
+            },
+            {
+              "x": 1166,
+              "y": 731
+            },
+            {
+              "x": 1065,
+              "y": 731
+            },
+            {
+              "x": 1065,
+              "y": 564
+            },
+            {
+              "x": 1166,
+              "y": 564
+            },
+            {
+              "x": 1166,
+              "y": 647
+            },
+            {
+              "x": 1365,
+              "y": 647
+            }
+          ],
+          "labelPos": {
+            "x": 1065,
+            "y": 715
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-298",
+          "label": "ошибка, студент/предмет уже существует, новый запрос",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-232",
+            "side": "right",
+            "point": {
+              "x": 1267,
+              "y": 648
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-231",
+            "side": "left",
+            "point": {
+              "x": 462,
+              "y": 350
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 1267,
+              "y": 648
+            },
+            {
+              "x": 1287,
+              "y": 648
+            },
+            {
+              "x": 1287,
+              "y": 713
+            },
+            {
+              "x": 442,
+              "y": 713
+            },
+            {
+              "x": 442,
+              "y": 350
+            },
+            {
+              "x": 462,
+              "y": 350
+            }
+          ],
+          "labelPos": {
+            "x": 442,
+            "y": 697
+          },
+          "pinned": false
+        }
+      ],
+      "junctions": []
+    },
+    {
+      "id": "diag-rsf-209",
+      "code": "A222",
+      "title": "Декомпозиция: удаление информации о студенте и/или предмете",
+      "parentBlockId": "block-rsf-209",
+      "blocks": [
+        {
+          "id": "block-rsf-260",
+          "nodeNumber": 1,
+          "name": "Запрос какую информацию нужно удалить, о студенте или предмете",
+          "x": 462,
+          "y": 296,
+          "width": 211,
+          "height": 107,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-261",
+          "nodeNumber": 2,
+          "name": "Сравнение с обозначениями студентов/предметов",
+          "x": 756,
+          "y": 451,
+          "width": 211,
+          "height": 112,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-262",
+          "nodeNumber": 3,
+          "name": "Удаление информации о студенте или предмете",
+          "x": 1095,
+          "y": 589,
+          "width": 172,
+          "height": 117,
+          "decompDiagramId": null
+        }
+      ],
+      "arrows": [
+        {
+          "id": "flow-rsf-213",
+          "label": "Данные о студентах и расписании",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 684
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-262",
+            "side": "left",
+            "point": {
+              "x": 1095,
+              "y": 648
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 684
+            },
+            {
+              "x": 70,
+              "y": 684
+            },
+            {
+              "x": 70,
+              "y": 648
+            },
+            {
+              "x": 1095,
+              "y": 648
+            }
+          ],
+          "labelPos": {
+            "x": 70,
+            "y": 632
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-218",
+          "label": "Интерфейс",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 632,
+              "y": 870
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-260",
+            "side": "bottom",
+            "point": {
+              "x": 568,
+              "y": 403
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 632,
+              "y": 870
+            },
+            {
+              "x": 632,
+              "y": 835
+            },
+            {
+              "x": 568,
+              "y": 835
+            },
+            {
+              "x": 568,
+              "y": 403
+            }
+          ],
+          "labelPos": {
+            "x": 568,
+            "y": 819
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-219",
+          "label": "Пользователь",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 483,
+              "y": 870
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-260",
+            "side": "bottom",
+            "point": {
+              "x": 568,
+              "y": 403
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 483,
+              "y": 870
+            },
+            {
+              "x": 483,
+              "y": 835
+            },
+            {
+              "x": 568,
+              "y": 835
+            },
+            {
+              "x": 568,
+              "y": 403
+            }
+          ],
+          "labelPos": {
+            "x": 568,
+            "y": 819
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-226",
+          "label": "Код возврата",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-262",
+            "side": "right",
+            "point": {
+              "x": 1267,
+              "y": 648
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 1425,
+              "y": 651
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 1267,
+              "y": 648
+            },
+            {
+              "x": 1346,
+              "y": 648
+            },
+            {
+              "x": 1346,
+              "y": 651
+            },
+            {
+              "x": 1425,
+              "y": 651
+            }
+          ],
+          "labelPos": {
+            "x": 1346,
+            "y": 635
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-288",
+          "label": "Код возврата",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 1425,
+              "y": 651
+            }
+          },
+          "target": {
+            "type": "border",
+            "side": "right",
+            "point": {
+              "x": 1570,
+              "y": 651
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 1425,
+              "y": 651
+            },
+            {
+              "x": 1570,
+              "y": 651
+            }
+          ],
+          "labelPos": {
+            "x": 1570,
+            "y": 635
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-289",
+          "label": "Код возврата",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-261",
+            "side": "right",
+            "point": {
+              "x": 967,
+              "y": 507
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 1425,
+              "y": 651
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 967,
+              "y": 507
+            },
+            {
+              "x": 1297,
+              "y": 507
+            },
+            {
+              "x": 1297,
+              "y": 731
+            },
+            {
+              "x": 1196,
+              "y": 731
+            },
+            {
+              "x": 1297,
+              "y": 731
+            },
+            {
+              "x": 1297,
+              "y": 564
+            },
+            {
+              "x": 1196,
+              "y": 564
+            },
+            {
+              "x": 1297,
+              "y": 564
+            },
+            {
+              "x": 1297,
+              "y": 731
+            },
+            {
+              "x": 1196,
+              "y": 731
+            },
+            {
+              "x": 1297,
+              "y": 731
+            },
+            {
+              "x": 1297,
+              "y": 564
+            },
+            {
+              "x": 1196,
+              "y": 564
+            },
+            {
+              "x": 1297,
+              "y": 564
+            },
+            {
+              "x": 1297,
+              "y": 731
+            },
+            {
+              "x": 1196,
+              "y": 731
+            },
+            {
+              "x": 1297,
+              "y": 731
+            },
+            {
+              "x": 1297,
+              "y": 564
+            },
+            {
+              "x": 1196,
+              "y": 564
+            },
+            {
+              "x": 1196,
+              "y": 651
+            },
+            {
+              "x": 1425,
+              "y": 651
+            }
+          ],
+          "labelPos": {
+            "x": 1297,
+            "y": 715
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-266",
+          "label": "обработанный тип информации которую нужно удалить",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-261",
+            "side": "right",
+            "point": {
+              "x": 967,
+              "y": 507
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-262",
+            "side": "left",
+            "point": {
+              "x": 1095,
+              "y": 648
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 967,
+              "y": 507
+            },
+            {
+              "x": 1031,
+              "y": 507
+            },
+            {
+              "x": 1031,
+              "y": 648
+            },
+            {
+              "x": 1095,
+              "y": 648
+            }
+          ],
+          "labelPos": {
+            "x": 1031,
+            "y": 632
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-269",
+          "label": "необработанный тип информации которую нужно удалить",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-260",
+            "side": "right",
+            "point": {
+              "x": 673,
+              "y": 350
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-261",
+            "side": "left",
+            "point": {
+              "x": 756,
+              "y": 507
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 673,
+              "y": 350
+            },
+            {
+              "x": 715,
+              "y": 350
+            },
+            {
+              "x": 715,
+              "y": 507
+            },
+            {
+              "x": 756,
+              "y": 507
+            }
+          ],
+          "labelPos": {
+            "x": 715,
+            "y": 491
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-293",
+          "label": "ошибка, студента/предмета не существует, новый запрос",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-262",
+            "side": "right",
+            "point": {
+              "x": 1267,
+              "y": 648
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-260",
+            "side": "left",
+            "point": {
+              "x": 462,
+              "y": 350
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 1267,
+              "y": 648
+            },
+            {
+              "x": 1287,
+              "y": 648
+            },
+            {
+              "x": 1287,
+              "y": 713
+            },
+            {
+              "x": 442,
+              "y": 713
+            },
+            {
+              "x": 442,
+              "y": 350
+            },
+            {
+              "x": 462,
+              "y": 350
+            }
+          ],
+          "labelPos": {
+            "x": 442,
+            "y": 697
+          },
+          "pinned": false
+        }
+      ],
+      "junctions": []
+    },
+    {
+      "id": "diag-rsf-143",
+      "code": "A231",
+      "title": "Декомпозиция: поиск информации на конкретный день недели",
+      "parentBlockId": "block-rsf-143",
+      "blocks": [
+        {
+          "id": "block-rsf-168",
+          "nodeNumber": 1,
+          "name": "Запрос дня недели, для вывода информации",
+          "x": 495,
+          "y": 301,
+          "width": 155,
+          "height": 107,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-170",
+          "nodeNumber": 2,
+          "name": "Сверка запроса с обозначениями",
+          "x": 861,
+          "y": 419,
+          "width": 133,
+          "height": 91,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-169",
+          "nodeNumber": 3,
+          "name": "Вывод информации о дне недели",
+          "x": 1156,
+          "y": 557,
+          "width": 133,
+          "height": 91,
+          "decompDiagramId": null
+        }
+      ],
+      "arrows": [
+        {
+          "id": "flow-rsf-150",
+          "label": "Данные о студентах и расписании",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 477
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-170",
+            "side": "left",
+            "point": {
+              "x": 861,
+              "y": 465
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 477
+            },
+            {
+              "x": 70,
+              "y": 477
+            },
+            {
+              "x": 70,
+              "y": 465
+            },
+            {
+              "x": 861,
+              "y": 465
+            }
+          ],
+          "labelPos": {
+            "x": 70,
+            "y": 449
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-157",
+          "label": "Пользователь",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 534,
+              "y": 870
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-168",
+            "side": "bottom",
+            "point": {
+              "x": 573,
+              "y": 408
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 534,
+              "y": 870
+            },
+            {
+              "x": 534,
+              "y": 835
+            },
+            {
+              "x": 573,
+              "y": 835
+            },
+            {
+              "x": 573,
+              "y": 408
+            }
+          ],
+          "labelPos": {
+            "x": 573,
+            "y": 819
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-160",
+          "label": "Интерфейс",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 610,
+              "y": 870
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-168",
+            "side": "bottom",
+            "point": {
+              "x": 573,
+              "y": 408
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 610,
+              "y": 870
+            },
+            {
+              "x": 610,
+              "y": 835
+            },
+            {
+              "x": 573,
+              "y": 835
+            },
+            {
+              "x": 573,
+              "y": 408
+            }
+          ],
+          "labelPos": {
+            "x": 573,
+            "y": 819
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-164",
+          "label": "Код возврата",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-169",
+            "side": "right",
+            "point": {
+              "x": 1289,
+              "y": 603
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 1403,
+              "y": 598
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 1289,
+              "y": 603
+            },
+            {
+              "x": 1346,
+              "y": 603
+            },
+            {
+              "x": 1346,
+              "y": 598
+            },
+            {
+              "x": 1403,
+              "y": 598
+            }
+          ],
+          "labelPos": {
+            "x": 1346,
+            "y": 582
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-175",
+          "label": "день недели или обозначение выхода из программы",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-168",
+            "side": "right",
+            "point": {
+              "x": 650,
+              "y": 355
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-170",
+            "side": "left",
+            "point": {
+              "x": 861,
+              "y": 465
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 650,
+              "y": 355
+            },
+            {
+              "x": 756,
+              "y": 355
+            },
+            {
+              "x": 756,
+              "y": 465
+            },
+            {
+              "x": 861,
+              "y": 465
+            }
+          ],
+          "labelPos": {
+            "x": 756,
+            "y": 449
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-181",
+          "label": "номер дня недели",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-170",
+            "side": "right",
+            "point": {
+              "x": 994,
+              "y": 465
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-169",
+            "side": "left",
+            "point": {
+              "x": 1156,
+              "y": 603
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 994,
+              "y": 465
+            },
+            {
+              "x": 1075,
+              "y": 465
+            },
+            {
+              "x": 1075,
+              "y": 603
+            },
+            {
+              "x": 1156,
+              "y": 603
+            }
+          ],
+          "labelPos": {
+            "x": 1075,
+            "y": 587
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-185",
+          "label": "Код возврата",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 1403,
+              "y": 598
+            }
+          },
+          "target": {
+            "type": "border",
+            "side": "right",
+            "point": {
+              "x": 1570,
+              "y": 598
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 1403,
+              "y": 598
+            },
+            {
+              "x": 1570,
+              "y": 598
+            }
+          ],
+          "labelPos": {
+            "x": 1570,
+            "y": 582
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-186",
+          "label": "Код возврата",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-170",
+            "side": "right",
+            "point": {
+              "x": 994,
+              "y": 465
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 1403,
+              "y": 598
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 994,
+              "y": 465
+            },
+            {
+              "x": 1199,
+              "y": 465
+            },
+            {
+              "x": 1126,
+              "y": 465
+            },
+            {
+              "x": 1126,
+              "y": 673
+            },
+            {
+              "x": 1199,
+              "y": 673
+            },
+            {
+              "x": 1126,
+              "y": 673
+            },
+            {
+              "x": 1126,
+              "y": 532
+            },
+            {
+              "x": 1199,
+              "y": 532
+            },
+            {
+              "x": 1126,
+              "y": 532
+            },
+            {
+              "x": 1126,
+              "y": 673
+            },
+            {
+              "x": 1199,
+              "y": 673
+            },
+            {
+              "x": 1126,
+              "y": 673
+            },
+            {
+              "x": 1126,
+              "y": 532
+            },
+            {
+              "x": 1199,
+              "y": 532
+            },
+            {
+              "x": 1126,
+              "y": 532
+            },
+            {
+              "x": 1126,
+              "y": 673
+            },
+            {
+              "x": 1199,
+              "y": 673
+            },
+            {
+              "x": 1126,
+              "y": 673
+            },
+            {
+              "x": 1126,
+              "y": 532
+            },
+            {
+              "x": 1199,
+              "y": 532
+            },
+            {
+              "x": 1199,
+              "y": 598
+            },
+            {
+              "x": 1403,
+              "y": 598
+            }
+          ],
+          "labelPos": {
+            "x": 1126,
+            "y": 657
+          },
+          "pinned": false
+        }
+      ],
+      "junctions": []
+    },
+    {
+      "id": "diag-rsf-144",
+      "code": "A232",
+      "title": "Декомпозиция: вывода расписания на неделю для конкретной группы",
+      "parentBlockId": "block-rsf-144",
+      "blocks": [
+        {
+          "id": "block-rsf-187",
+          "nodeNumber": 1,
+          "name": "Запрос группы",
+          "x": 188,
+          "y": 182,
+          "width": 133,
+          "height": 90,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-188",
+          "nodeNumber": 2,
+          "name": "Проход по студентам принадлежащим этой группе и  добавление не повторяющихся идентификаторов предметов в массив",
+          "x": 689,
+          "y": 397,
+          "width": 244,
+          "height": 149,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-189",
+          "nodeNumber": 3,
+          "name": "Вывод информации о предметах из массива",
+          "x": 1261,
+          "y": 612,
+          "width": 133,
+          "height": 90,
+          "decompDiagramId": null
+        }
+      ],
+      "arrows": [
+        {
+          "id": "flow-rsf-155",
+          "label": "Пользователь",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 212,
+              "y": 870
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-187",
+            "side": "bottom",
+            "point": {
+              "x": 255,
+              "y": 272
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 212,
+              "y": 870
+            },
+            {
+              "x": 212,
+              "y": 835
+            },
+            {
+              "x": 255,
+              "y": 835
+            },
+            {
+              "x": 255,
+              "y": 272
+            }
+          ],
+          "labelPos": {
+            "x": 255,
+            "y": 819
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-152",
+          "label": "Данные о студентах и расписании",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 509
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-188",
+            "side": "left",
+            "point": {
+              "x": 689,
+              "y": 472
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 509
+            },
+            {
+              "x": 70,
+              "y": 509
+            },
+            {
+              "x": 70,
+              "y": 472
+            },
+            {
+              "x": 689,
+              "y": 472
+            }
+          ],
+          "labelPos": {
+            "x": 70,
+            "y": 456
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-154",
+          "label": "Интерфейс",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 288,
+              "y": 870
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-187",
+            "side": "bottom",
+            "point": {
+              "x": 255,
+              "y": 272
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 288,
+              "y": 870
+            },
+            {
+              "x": 288,
+              "y": 835
+            },
+            {
+              "x": 255,
+              "y": 835
+            },
+            {
+              "x": 255,
+              "y": 272
+            }
+          ],
+          "labelPos": {
+            "x": 255,
+            "y": 819
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-163",
+          "label": "Код возврата",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-189",
+            "side": "right",
+            "point": {
+              "x": 1394,
+              "y": 657
+            }
+          },
+          "target": {
+            "type": "border",
+            "side": "right",
+            "point": {
+              "x": 1570,
+              "y": 659
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 1394,
+              "y": 657
+            },
+            {
+              "x": 1570,
+              "y": 657
+            }
+          ],
+          "labelPos": {
+            "x": 1570,
+            "y": 641
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-195",
+          "label": "массив идентификаторов предметов",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-188",
+            "side": "right",
+            "point": {
+              "x": 933,
+              "y": 472
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-189",
+            "side": "left",
+            "point": {
+              "x": 1261,
+              "y": 657
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 933,
+              "y": 472
+            },
+            {
+              "x": 1097,
+              "y": 472
+            },
+            {
+              "x": 1097,
+              "y": 657
+            },
+            {
+              "x": 1261,
+              "y": 657
+            }
+          ],
+          "labelPos": {
+            "x": 1097,
+            "y": 641
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-302",
+          "label": "группа",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-187",
+            "side": "right",
+            "point": {
+              "x": 321,
+              "y": 227
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-188",
+            "side": "left",
+            "point": {
+              "x": 689,
+              "y": 472
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 321,
+              "y": 227
+            },
+            {
+              "x": 505,
+              "y": 227
+            },
+            {
+              "x": 505,
+              "y": 472
+            },
+            {
+              "x": 689,
+              "y": 472
+            }
+          ],
+          "labelPos": {
+            "x": 505,
+            "y": 456
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-306",
+          "label": "пустой массив, новый запрос",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-189",
+            "side": "right",
+            "point": {
+              "x": 1394,
+              "y": 657
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-187",
+            "side": "left",
+            "point": {
+              "x": 188,
+              "y": 227
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 1394,
+              "y": 657
+            },
+            {
+              "x": 1414,
+              "y": 657
+            },
+            {
+              "x": 1414,
+              "y": 722
+            },
+            {
+              "x": 168,
+              "y": 722
+            },
+            {
+              "x": 168,
+              "y": 227
+            },
+            {
+              "x": 188,
+              "y": 227
+            }
+          ],
+          "labelPos": {
+            "x": 168,
+            "y": 706
+          },
+          "pinned": false
+        }
+      ],
+      "junctions": []
+    }
+  ],
+  "activeDiagramId": "diag-rsf-3"
+}

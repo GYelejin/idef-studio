@@ -1,0 +1,656 @@
+{
+  "id": "proj-rsf-1795616070961",
+  "name": "Распознавание рукописных решений задач",
+  "description": "Импортировано из Ramus (2.rsf)",
+  "diagrams": [
+    {
+      "id": "diag-rsf-3",
+      "code": "A-0",
+      "title": "Диаграмма A-0",
+      "parentBlockId": null,
+      "blocks": [
+        {
+          "id": "block-rsf-5",
+          "nodeNumber": 0,
+          "name": "Распознавание рукописных решений задач",
+          "x": 717,
+          "y": 328,
+          "width": 161,
+          "height": 101,
+          "decompDiagramId": "diag-rsf-5"
+        }
+      ],
+      "arrows": [
+        {
+          "id": "flow-rsf-7",
+          "label": "Фото или скан рукописного текста.",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 375
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-5",
+            "side": "left",
+            "point": {
+              "x": 717,
+              "y": 379
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 379
+            },
+            {
+              "x": 717,
+              "y": 379
+            }
+          ],
+          "labelPos": {
+            "x": 717,
+            "y": 363
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-9",
+          "label": "Алгоритмы анализа текста и данных.",
+          "source": {
+            "type": "border",
+            "side": "top",
+            "point": {
+              "x": 795,
+              "y": 30
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-5",
+            "side": "top",
+            "point": {
+              "x": 798,
+              "y": 328
+            }
+          },
+          "role": "control",
+          "points": [
+            {
+              "x": 798,
+              "y": 30
+            },
+            {
+              "x": 798,
+              "y": 328
+            }
+          ],
+          "labelPos": {
+            "x": 798,
+            "y": 312
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-11",
+          "label": "Цифровой текст и оценка решения.",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-5",
+            "side": "right",
+            "point": {
+              "x": 878,
+              "y": 379
+            }
+          },
+          "target": {
+            "type": "border",
+            "side": "right",
+            "point": {
+              "x": 1570,
+              "y": 381
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 878,
+              "y": 379
+            },
+            {
+              "x": 1570,
+              "y": 379
+            }
+          ],
+          "labelPos": {
+            "x": 1570,
+            "y": 363
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-13",
+          "label": "Модель OCR (оптическое распознавание текста), база заданий.",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 800,
+              "y": 870
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-5",
+            "side": "bottom",
+            "point": {
+              "x": 798,
+              "y": 429
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 798,
+              "y": 870
+            },
+            {
+              "x": 798,
+              "y": 429
+            }
+          ],
+          "labelPos": {
+            "x": 798,
+            "y": 413
+          },
+          "pinned": false
+        }
+      ],
+      "junctions": []
+    },
+    {
+      "id": "diag-rsf-5",
+      "code": "A0",
+      "title": "Декомпозиция: Распознавание рукописных решений задач",
+      "parentBlockId": "block-rsf-5",
+      "blocks": [
+        {
+          "id": "block-rsf-18",
+          "nodeNumber": 1,
+          "name": "Захват изображения.",
+          "x": 188,
+          "y": 182,
+          "width": 133,
+          "height": 90,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-19",
+          "nodeNumber": 2,
+          "name": "Предварительная обработка (фильтрация шума).",
+          "x": 456,
+          "y": 285,
+          "width": 167,
+          "height": 112,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-20",
+          "nodeNumber": 3,
+          "name": "Распознавание текста.",
+          "x": 728,
+          "y": 408,
+          "width": 144,
+          "height": 91,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-21",
+          "nodeNumber": 4,
+          "name": "Сравнение с эталонными ответами.",
+          "x": 993,
+          "y": 505,
+          "width": 133,
+          "height": 90,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-22",
+          "nodeNumber": 5,
+          "name": "Формирование отчета с оценкой.",
+          "x": 1261,
+          "y": 611,
+          "width": 139,
+          "height": 91,
+          "decompDiagramId": null
+        }
+      ],
+      "arrows": [
+        {
+          "id": "flow-rsf-6",
+          "label": "Фото или скан рукописного текста.",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 222
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-18",
+            "side": "left",
+            "point": {
+              "x": 188,
+              "y": 227
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 227
+            },
+            {
+              "x": 188,
+              "y": 227
+            }
+          ],
+          "labelPos": {
+            "x": 188,
+            "y": 211
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-8",
+          "label": "Алгоритмы анализа текста и данных.",
+          "source": {
+            "type": "border",
+            "side": "top",
+            "point": {
+              "x": 795,
+              "y": 30
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-20",
+            "side": "top",
+            "point": {
+              "x": 800,
+              "y": 408
+            }
+          },
+          "role": "control",
+          "points": [
+            {
+              "x": 800,
+              "y": 30
+            },
+            {
+              "x": 800,
+              "y": 408
+            }
+          ],
+          "labelPos": {
+            "x": 800,
+            "y": 392
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-10",
+          "label": "Цифровой текст и оценка решения.",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-22",
+            "side": "right",
+            "point": {
+              "x": 1400,
+              "y": 657
+            }
+          },
+          "target": {
+            "type": "border",
+            "side": "right",
+            "point": {
+              "x": 1570,
+              "y": 381
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 1400,
+              "y": 657
+            },
+            {
+              "x": 1430,
+              "y": 657
+            },
+            {
+              "x": 1430,
+              "y": 381
+            },
+            {
+              "x": 1570,
+              "y": 381
+            }
+          ],
+          "labelPos": {
+            "x": 1430,
+            "y": 365
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-12",
+          "label": "Модель OCR (оптическое распознавание текста), база заданий.",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 786,
+              "y": 870
+            }
+          },
+          "target": {
+            "type": "unattached",
+            "point": {
+              "x": 786,
+              "y": 684
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 786,
+              "y": 870
+            },
+            {
+              "x": 786,
+              "y": 684
+            }
+          ],
+          "labelPos": {
+            "x": 786,
+            "y": 668
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-26",
+          "label": "изображение",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-18",
+            "side": "right",
+            "point": {
+              "x": 321,
+              "y": 227
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-19",
+            "side": "left",
+            "point": {
+              "x": 456,
+              "y": 341
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 321,
+              "y": 227
+            },
+            {
+              "x": 389,
+              "y": 227
+            },
+            {
+              "x": 389,
+              "y": 341
+            },
+            {
+              "x": 456,
+              "y": 341
+            }
+          ],
+          "labelPos": {
+            "x": 389,
+            "y": 325
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-29",
+          "label": "изображение без шума",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-19",
+            "side": "right",
+            "point": {
+              "x": 623,
+              "y": 341
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-20",
+            "side": "left",
+            "point": {
+              "x": 728,
+              "y": 454
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 623,
+              "y": 341
+            },
+            {
+              "x": 676,
+              "y": 341
+            },
+            {
+              "x": 676,
+              "y": 454
+            },
+            {
+              "x": 728,
+              "y": 454
+            }
+          ],
+          "labelPos": {
+            "x": 676,
+            "y": 438
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-32",
+          "label": "распознанный текст",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-20",
+            "side": "right",
+            "point": {
+              "x": 872,
+              "y": 454
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-21",
+            "side": "left",
+            "point": {
+              "x": 993,
+              "y": 550
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 872,
+              "y": 454
+            },
+            {
+              "x": 933,
+              "y": 454
+            },
+            {
+              "x": 933,
+              "y": 550
+            },
+            {
+              "x": 993,
+              "y": 550
+            }
+          ],
+          "labelPos": {
+            "x": 933,
+            "y": 534
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-35",
+          "label": "распознанный текст и оценка",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-21",
+            "side": "right",
+            "point": {
+              "x": 1126,
+              "y": 550
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-22",
+            "side": "left",
+            "point": {
+              "x": 1261,
+              "y": 657
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 1126,
+              "y": 550
+            },
+            {
+              "x": 1194,
+              "y": 550
+            },
+            {
+              "x": 1194,
+              "y": 657
+            },
+            {
+              "x": 1261,
+              "y": 657
+            }
+          ],
+          "labelPos": {
+            "x": 1194,
+            "y": 641
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-39",
+          "label": "Модель OCR (оптическое распознавание текста), база заданий.",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 786,
+              "y": 684
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-20",
+            "side": "bottom",
+            "point": {
+              "x": 800,
+              "y": 499
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 786,
+              "y": 684
+            },
+            {
+              "x": 800,
+              "y": 684
+            },
+            {
+              "x": 800,
+              "y": 499
+            }
+          ],
+          "labelPos": {
+            "x": 800,
+            "y": 668
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-41",
+          "label": "Модель OCR (оптическое распознавание текста), база заданий.",
+          "source": {
+            "type": "unattached",
+            "point": {
+              "x": 786,
+              "y": 684
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-21",
+            "side": "bottom",
+            "point": {
+              "x": 1060,
+              "y": 595
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 786,
+              "y": 684
+            },
+            {
+              "x": 1060,
+              "y": 684
+            },
+            {
+              "x": 1060,
+              "y": 595
+            }
+          ],
+          "labelPos": {
+            "x": 1060,
+            "y": 668
+          },
+          "pinned": false
+        }
+      ],
+      "junctions": []
+    }
+  ],
+  "activeDiagramId": "diag-rsf-3"
+}

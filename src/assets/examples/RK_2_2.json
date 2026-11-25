@@ -1,0 +1,128 @@
+{
+  "id": "proj-rsf-1795616071038",
+  "name": "Найти такой треугольник, где разность радиусов описаной и вписанной окружности минимальная",
+  "description": "Импортировано из Ramus (RK_2_2.rsf)",
+  "diagrams": [
+    {
+      "id": "diag-rsf-3",
+      "code": "A-0",
+      "title": "Диаграмма A-0",
+      "parentBlockId": null,
+      "blocks": [
+        {
+          "id": "block-rsf-4",
+          "nodeNumber": 0,
+          "name": "Найти такой треугольник, где разность радиусов описаной и вписанной окружности минимальная",
+          "x": 521,
+          "y": 268,
+          "width": 577,
+          "height": 299,
+          "decompDiagramId": "diag-rsf-4"
+        }
+      ],
+      "arrows": [],
+      "junctions": []
+    },
+    {
+      "id": "diag-rsf-4",
+      "code": "A0",
+      "title": "Декомпозиция: Найти такой треугольник, где разность радиусов описаной и вписанной окружности минимальная",
+      "parentBlockId": "block-rsf-4",
+      "blocks": [
+        {
+          "id": "block-rsf-17",
+          "nodeNumber": 1,
+          "name": "Построение последовательности не повторяющихся и уникальных троек точек",
+          "x": 225,
+          "y": 289,
+          "width": 200,
+          "height": 128,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-18",
+          "nodeNumber": 2,
+          "name": "Вычисление пар радиусов для каждого из треугольников построеных на тройках точек",
+          "x": 551,
+          "y": 289,
+          "width": 237,
+          "height": 135,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-19",
+          "nodeNumber": 3,
+          "name": "Вычисление разницы радиусов",
+          "x": 913,
+          "y": 303,
+          "width": 185,
+          "height": 121,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-20",
+          "nodeNumber": 4,
+          "name": "Выбор минимальной разницы и соответствующей ему тройку точек",
+          "x": 1202,
+          "y": 296,
+          "width": 207,
+          "height": 135,
+          "decompDiagramId": "diag-rsf-20"
+        }
+      ],
+      "arrows": [],
+      "junctions": []
+    },
+    {
+      "id": "diag-rsf-20",
+      "code": "A4",
+      "title": "Декомпозиция: Выбор минимальной разницы и соответствующей ему тройку точек",
+      "parentBlockId": "block-rsf-20",
+      "blocks": [
+        {
+          "id": "block-rsf-46",
+          "nodeNumber": 1,
+          "name": "Выбор текущей минимальной разницы\r\n(Вначале самая первая разница будет минимальной)",
+          "x": 358,
+          "y": 218,
+          "width": 185,
+          "height": 156,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-47",
+          "nodeNumber": 2,
+          "name": "Последовательный выбор  разницы из множества",
+          "x": 558,
+          "y": 410,
+          "width": 178,
+          "height": 100,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-48",
+          "nodeNumber": 3,
+          "name": "Сравнение двух разниц",
+          "x": 928,
+          "y": 417,
+          "width": 133,
+          "height": 92,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-49",
+          "nodeNumber": 4,
+          "name": "Выбор  точек соответствующих минимальной разнице",
+          "x": 1254,
+          "y": 396,
+          "width": 163,
+          "height": 128,
+          "decompDiagramId": null
+        }
+      ],
+      "arrows": [],
+      "junctions": []
+    }
+  ],
+  "activeDiagramId": "diag-rsf-3"
+}

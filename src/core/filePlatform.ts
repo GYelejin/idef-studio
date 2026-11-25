@@ -46,14 +46,21 @@ export async function saveFileNativeOrBrowser(
   return true;
 }
 
+export interface OpenedFileResult {
+  name: string;
+  text?: string;
+  bytes?: Uint8Array;
+}
+
 /**
- * Opens a native OS Open File dialog in Tauri mode and returns the file text content.
+ * Opens a native OS Open File dialog in Tauri mode and returns text or binary content
+ * depending on file extension (.rsf -> binary Uint8Array, otherwise text).
  * Returns null if cancelled or if not running in Tauri.
  */
-export async function openTextFileNative(filters?: FileDialogFilter[]): Promise<string | null> {
+export async function openProjectFileNative(filters?: FileDialogFilter[]): Promise<OpenedFileResult | null> {
   if (!isTauriRuntime()) return null;
 
-  const [{ open }, { readTextFile }] = await Promise.all([
+  const [{ open }, { readFile, readTextFile }] = await Promise.all([
     import('@tauri-apps/plugin-dialog'),
     import('@tauri-apps/plugin-fs'),
   ]);
@@ -62,5 +69,12 @@ export async function openTextFileNative(filters?: FileDialogFilter[]): Promise<
     filters,
   });
   if (!selected || Array.isArray(selected)) return null;
-  return readTextFile(selected);
+
+  const name = selected.split(/[/\\]/).pop() || selected;
+  if (name.toLowerCase().endsWith('.rsf')) {
+    const bytes = await readFile(selected);
+    return { name, bytes };
+  }
+  const text = await readTextFile(selected);
+  return { name, text };
 }

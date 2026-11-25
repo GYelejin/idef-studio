@@ -4,7 +4,7 @@ import { BlockGenerationTask, DEFAULT_LLM_CONFIG, LlmConfig } from '../../core/l
 import { buildBottomUpBlockTasks } from '../../core/llm/treeOrder';
 import {
   assembleMainPy,
-  generateFunctionInChat,
+  generateAndVerifyFunctionInChat,
   initConversationHistory,
 } from '../../core/llm/client';
 import { saveFileNativeOrBrowser } from '../../core/filePlatform';
@@ -67,6 +67,9 @@ export function useLlmGeneration(project: Project) {
       status: 'pending',
       generatedCode: undefined,
       error: undefined,
+      verificationStatus: undefined,
+      verificationNotes: undefined,
+      repairAttempts: undefined,
     }));
     setTasks([...updatedTasks]);
 
@@ -82,7 +85,7 @@ export function useLlmGeneration(project: Project) {
         setTasks([...updatedTasks]);
 
         try {
-          const code = await generateFunctionInChat(
+          const result = await generateAndVerifyFunctionInChat(
             config,
             task,
             i,
@@ -91,7 +94,10 @@ export function useLlmGeneration(project: Project) {
             controller.signal
           );
           task.status = 'completed';
-          task.generatedCode = code;
+          task.generatedCode = result.code;
+          task.verificationStatus = result.verified ? 'verified' : 'warning';
+          task.verificationNotes = result.issues;
+          task.repairAttempts = result.repairAttempts;
         } catch (err: unknown) {
           if (controller.signal.aborted) {
             task.status = 'pending';

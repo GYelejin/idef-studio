@@ -1,0 +1,538 @@
+{
+  "id": "proj-rsf-1795616070978",
+  "name": "Контроль поведения студентов во время экзаменов",
+  "description": "Импортировано из Ramus (4.rsf)",
+  "diagrams": [
+    {
+      "id": "diag-rsf-3",
+      "code": "A-0",
+      "title": "Диаграмма A-0",
+      "parentBlockId": null,
+      "blocks": [
+        {
+          "id": "block-rsf-5",
+          "nodeNumber": 0,
+          "name": "Контроль поведения студентов во время экзаменов",
+          "x": 700,
+          "y": 328,
+          "width": 189,
+          "height": 117,
+          "decompDiagramId": "diag-rsf-5"
+        }
+      ],
+      "arrows": [
+        {
+          "id": "flow-rsf-7",
+          "label": "Видео с камер в аудитории.",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 380
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-5",
+            "side": "left",
+            "point": {
+              "x": 700,
+              "y": 387
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 387
+            },
+            {
+              "x": 700,
+              "y": 387
+            }
+          ],
+          "labelPos": {
+            "x": 700,
+            "y": 371
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-9",
+          "label": "Правила проведения экзамена.",
+          "source": {
+            "type": "border",
+            "side": "top",
+            "point": {
+              "x": 795,
+              "y": 30
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-5",
+            "side": "top",
+            "point": {
+              "x": 795,
+              "y": 328
+            }
+          },
+          "role": "control",
+          "points": [
+            {
+              "x": 795,
+              "y": 30
+            },
+            {
+              "x": 795,
+              "y": 328
+            }
+          ],
+          "labelPos": {
+            "x": 795,
+            "y": 312
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-11",
+          "label": "Модели компьютерного зрения для анализа поведения.",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 793,
+              "y": 870
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-5",
+            "side": "bottom",
+            "point": {
+              "x": 795,
+              "y": 445
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 795,
+              "y": 870
+            },
+            {
+              "x": 795,
+              "y": 445
+            }
+          ],
+          "labelPos": {
+            "x": 795,
+            "y": 429
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-13",
+          "label": "Уведомления о подозрительных действиях.",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-5",
+            "side": "right",
+            "point": {
+              "x": 889,
+              "y": 387
+            }
+          },
+          "target": {
+            "type": "border",
+            "side": "right",
+            "point": {
+              "x": 1570,
+              "y": 403
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 889,
+              "y": 387
+            },
+            {
+              "x": 919,
+              "y": 387
+            },
+            {
+              "x": 919,
+              "y": 403
+            },
+            {
+              "x": 1570,
+              "y": 403
+            }
+          ],
+          "labelPos": {
+            "x": 919,
+            "y": 387
+          },
+          "pinned": false
+        }
+      ],
+      "junctions": []
+    },
+    {
+      "id": "diag-rsf-5",
+      "code": "A0",
+      "title": "Декомпозиция: Контроль поведения студентов во время экзаменов",
+      "parentBlockId": "block-rsf-5",
+      "blocks": [
+        {
+          "id": "block-rsf-19",
+          "nodeNumber": 1,
+          "name": "Захват видео.",
+          "x": 188,
+          "y": 182,
+          "width": 133,
+          "height": 90,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-20",
+          "nodeNumber": 2,
+          "name": "Анализ движений (взгляды, жесты).",
+          "x": 528,
+          "y": 323,
+          "width": 161,
+          "height": 91,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-21",
+          "nodeNumber": 3,
+          "name": "Обнаружение подозрительных действий.",
+          "x": 895,
+          "y": 467,
+          "width": 155,
+          "height": 101,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-22",
+          "nodeNumber": 4,
+          "name": "Уведомление о нарушениях.",
+          "x": 1250,
+          "y": 605,
+          "width": 144,
+          "height": 96,
+          "decompDiagramId": null
+        }
+      ],
+      "arrows": [
+        {
+          "id": "flow-rsf-6",
+          "label": "Видео с камер в аудитории.",
+          "source": {
+            "type": "border",
+            "side": "left",
+            "point": {
+              "x": 30,
+              "y": 224
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-19",
+            "side": "left",
+            "point": {
+              "x": 188,
+              "y": 227
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 30,
+              "y": 227
+            },
+            {
+              "x": 188,
+              "y": 227
+            }
+          ],
+          "labelPos": {
+            "x": 188,
+            "y": 211
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-8",
+          "label": "Правила проведения экзамена.",
+          "source": {
+            "type": "border",
+            "side": "top",
+            "point": {
+              "x": 961,
+              "y": 30
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-21",
+            "side": "top",
+            "point": {
+              "x": 973,
+              "y": 467
+            }
+          },
+          "role": "control",
+          "points": [
+            {
+              "x": 961,
+              "y": 30
+            },
+            {
+              "x": 961,
+              "y": 65
+            },
+            {
+              "x": 973,
+              "y": 65
+            },
+            {
+              "x": 973,
+              "y": 467
+            }
+          ],
+          "labelPos": {
+            "x": 973,
+            "y": 49
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-10",
+          "label": "Модели компьютерного зрения для анализа поведения.",
+          "source": {
+            "type": "border",
+            "side": "bottom",
+            "point": {
+              "x": 602,
+              "y": 870
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-20",
+            "side": "bottom",
+            "point": {
+              "x": 609,
+              "y": 414
+            }
+          },
+          "role": "mechanism",
+          "points": [
+            {
+              "x": 609,
+              "y": 870
+            },
+            {
+              "x": 609,
+              "y": 414
+            }
+          ],
+          "labelPos": {
+            "x": 609,
+            "y": 398
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-12",
+          "label": "Уведомления о подозрительных действиях.",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-22",
+            "side": "right",
+            "point": {
+              "x": 1394,
+              "y": 653
+            }
+          },
+          "target": {
+            "type": "border",
+            "side": "right",
+            "point": {
+              "x": 1570,
+              "y": 389
+            }
+          },
+          "role": "output",
+          "points": [
+            {
+              "x": 1394,
+              "y": 653
+            },
+            {
+              "x": 1424,
+              "y": 653
+            },
+            {
+              "x": 1424,
+              "y": 389
+            },
+            {
+              "x": 1570,
+              "y": 389
+            }
+          ],
+          "labelPos": {
+            "x": 1424,
+            "y": 373
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-26",
+          "label": "кадры видео",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-19",
+            "side": "right",
+            "point": {
+              "x": 321,
+              "y": 227
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-20",
+            "side": "left",
+            "point": {
+              "x": 528,
+              "y": 369
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 321,
+              "y": 227
+            },
+            {
+              "x": 425,
+              "y": 227
+            },
+            {
+              "x": 425,
+              "y": 369
+            },
+            {
+              "x": 528,
+              "y": 369
+            }
+          ],
+          "labelPos": {
+            "x": 425,
+            "y": 353
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-29",
+          "label": "классифицированная информация о текущих движениях студентов",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-20",
+            "side": "right",
+            "point": {
+              "x": 689,
+              "y": 369
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-21",
+            "side": "left",
+            "point": {
+              "x": 895,
+              "y": 518
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 689,
+              "y": 369
+            },
+            {
+              "x": 792,
+              "y": 369
+            },
+            {
+              "x": 792,
+              "y": 518
+            },
+            {
+              "x": 895,
+              "y": 518
+            }
+          ],
+          "labelPos": {
+            "x": 792,
+            "y": 502
+          },
+          "pinned": false
+        },
+        {
+          "id": "flow-rsf-32",
+          "label": "при обнаружении подозрительного действия - информация о нём",
+          "source": {
+            "type": "block",
+            "id": "block-rsf-21",
+            "side": "right",
+            "point": {
+              "x": 1050,
+              "y": 518
+            }
+          },
+          "target": {
+            "type": "block",
+            "id": "block-rsf-22",
+            "side": "left",
+            "point": {
+              "x": 1250,
+              "y": 653
+            }
+          },
+          "role": "input",
+          "points": [
+            {
+              "x": 1050,
+              "y": 518
+            },
+            {
+              "x": 1150,
+              "y": 518
+            },
+            {
+              "x": 1150,
+              "y": 653
+            },
+            {
+              "x": 1250,
+              "y": 653
+            }
+          ],
+          "labelPos": {
+            "x": 1150,
+            "y": 637
+          },
+          "pinned": false
+        }
+      ],
+      "junctions": []
+    }
+  ],
+  "activeDiagramId": "diag-rsf-3"
+}

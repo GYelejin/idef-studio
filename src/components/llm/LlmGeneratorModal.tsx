@@ -482,6 +482,42 @@ const LlmGeneratorModal: React.FC<LlmGeneratorModalProps> = ({
                           <span style={{ fontWeight: 600, fontSize: '14px', color: '#0f172a' }}>
                             {selectedTask.name}
                           </span>
+                          {selectedTask.verificationStatus === 'verified' && (
+                            <span
+                              data-testid="llm-verified-badge"
+                              style={{
+                                fontSize: '11px',
+                                fontWeight: 600,
+                                color: '#15803d',
+                                backgroundColor: '#dcfce7',
+                                padding: '2px 7px',
+                                borderRadius: '4px',
+                              }}
+                              title={
+                                selectedTask.repairAttempts
+                                  ? `Проверено независимым аудитом (исправлений: ${selectedTask.repairAttempts})`
+                                  : 'Проверено независимым аудитом без контекста'
+                              }
+                            >
+                              ✓ Проверено
+                            </span>
+                          )}
+                          {selectedTask.verificationStatus === 'warning' && (
+                            <span
+                              data-testid="llm-warning-badge"
+                              style={{
+                                fontSize: '11px',
+                                fontWeight: 600,
+                                color: '#b45309',
+                                backgroundColor: '#fef3c7',
+                                padding: '2px 7px',
+                                borderRadius: '4px',
+                              }}
+                              title={(selectedTask.verificationNotes || []).join('; ')}
+                            >
+                              ⚠ Есть замечания
+                            </span>
+                          )}
                         </div>
 
                         {selectedTask.generatedCode && (

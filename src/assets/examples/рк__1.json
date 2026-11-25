@@ -1,0 +1,178 @@
+{
+  "id": "proj-rsf-1795616071054",
+  "name": "Сходить с другом в кино",
+  "description": "Импортировано из Ramus (рк__1.rsf)",
+  "diagrams": [
+    {
+      "id": "diag-rsf-3",
+      "code": "A-0",
+      "title": "Диаграмма A-0",
+      "parentBlockId": null,
+      "blocks": [
+        {
+          "id": "block-rsf-4",
+          "nodeNumber": 0,
+          "name": "Сходить с другом в кино",
+          "x": 721,
+          "y": 360,
+          "width": 133,
+          "height": 92,
+          "decompDiagramId": "diag-rsf-4"
+        }
+      ],
+      "arrows": [],
+      "junctions": []
+    },
+    {
+      "id": "diag-rsf-4",
+      "code": "A0",
+      "title": "Декомпозиция: Сходить с другом в кино",
+      "parentBlockId": "block-rsf-4",
+      "blocks": [
+        {
+          "id": "block-rsf-29",
+          "nodeNumber": 1,
+          "name": "Купить билеты",
+          "x": 188,
+          "y": 182,
+          "width": 133,
+          "height": 90,
+          "decompDiagramId": "diag-rsf-29"
+        },
+        {
+          "id": "block-rsf-30",
+          "nodeNumber": 2,
+          "name": "Встретиться",
+          "x": 546,
+          "y": 315,
+          "width": 133,
+          "height": 90,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-31",
+          "nodeNumber": 3,
+          "name": "Посмотреть фильм",
+          "x": 903,
+          "y": 448,
+          "width": 133,
+          "height": 90,
+          "decompDiagramId": "diag-rsf-31"
+        },
+        {
+          "id": "block-rsf-32",
+          "nodeNumber": 4,
+          "name": "Разойтись по домам",
+          "x": 1261,
+          "y": 581,
+          "width": 133,
+          "height": 90,
+          "decompDiagramId": null
+        }
+      ],
+      "arrows": [],
+      "junctions": []
+    },
+    {
+      "id": "diag-rsf-29",
+      "code": "A1",
+      "title": "Декомпозиция: Купить билеты",
+      "parentBlockId": "block-rsf-29",
+      "blocks": [
+        {
+          "id": "block-rsf-66",
+          "nodeNumber": 1,
+          "name": "Выбрать кинотеатр",
+          "x": 188,
+          "y": 182,
+          "width": 133,
+          "height": 90,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-67",
+          "nodeNumber": 2,
+          "name": "Выбрать фильм",
+          "x": 546,
+          "y": 315,
+          "width": 133,
+          "height": 90,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-68",
+          "nodeNumber": 3,
+          "name": "Выбрать подходящее обоим время",
+          "x": 903,
+          "y": 448,
+          "width": 133,
+          "height": 90,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-69",
+          "nodeNumber": 4,
+          "name": "Купить билеты",
+          "x": 1261,
+          "y": 581,
+          "width": 133,
+          "height": 90,
+          "decompDiagramId": null
+        }
+      ],
+      "arrows": [],
+      "junctions": []
+    },
+    {
+      "id": "diag-rsf-31",
+      "code": "A3",
+      "title": "Декомпозиция: Посмотреть фильм",
+      "parentBlockId": "block-rsf-31",
+      "blocks": [
+        {
+          "id": "block-rsf-121",
+          "nodeNumber": 1,
+          "name": "Зайти в кинотеатр",
+          "x": 188,
+          "y": 182,
+          "width": 133,
+          "height": 90,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-122",
+          "nodeNumber": 2,
+          "name": "Предъявить билеты",
+          "x": 546,
+          "y": 315,
+          "width": 133,
+          "height": 90,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-123",
+          "nodeNumber": 3,
+          "name": "Посмотреть фильм",
+          "x": 903,
+          "y": 448,
+          "width": 133,
+          "height": 90,
+          "decompDiagramId": null
+        },
+        {
+          "id": "block-rsf-124",
+          "nodeNumber": 4,
+          "name": "Выйти из кинотеатра",
+          "x": 1261,
+          "y": 581,
+          "width": 133,
+          "height": 90,
+          "decompDiagramId": null
+        }
+      ],
+      "arrows": [],
+      "junctions": []
+    }
+  ],
+  "activeDiagramId": "diag-rsf-3"
+}
