@@ -18,7 +18,8 @@
     "test:coverage:merge": "bun tests/e2e/merge-coverage.ts",
     "test:coverage:all": "bun run test:e2e && bun tests/e2e/merge-coverage.ts",
     "videos": "bun tests/usecases/run-all.ts",
-    "assets": "bun tests/usecases/generate-assets.ts"
+    "assets": "bun tests/usecases/generate-assets.ts",
+    "benchmark": "bun scripts/benchmark-llm.ts"
   },
   "dependencies": {
     "@tauri-apps/plugin-dialog": "^2.8.4",
