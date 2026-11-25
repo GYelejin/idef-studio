@@ -46,14 +46,17 @@ function loadAllProjectModels(): { name: string; project: Project }[] {
 }
 
 async function runBenchmark() {
-  const dryRun = process.argv.includes('--dry-run') || !process.env.LLM_API_KEY;
-  const models = loadAllProjectModels();
+  const dryRun = process.argv.includes('--dry-run') || (!process.env.LLM_API_KEY && !process.env.VITE_LLM_API_KEY);
+  const limitArg = process.argv.find((a) => a.startsWith('--limit='));
+  const limit = limitArg ? parseInt(limitArg.split('=')[1], 10) : 0;
+  const allModels = loadAllProjectModels();
+  const models = limit > 0 ? allModels.slice(0, limit) : allModels;
 
   const config: LlmConfig = {
     ...DEFAULT_LLM_CONFIG,
-    apiUrl: process.env.LLM_API_URL || DEFAULT_LLM_CONFIG.apiUrl,
-    apiKey: process.env.LLM_API_KEY || '',
-    model: process.env.LLM_MODEL || DEFAULT_LLM_CONFIG.model,
+    apiUrl: process.env.LLM_API_URL || process.env.VITE_LLM_API_URL || DEFAULT_LLM_CONFIG.apiUrl,
+    apiKey: process.env.LLM_API_KEY || process.env.VITE_LLM_API_KEY || '',
+    model: process.env.LLM_MODEL || process.env.VITE_LLM_MODEL || DEFAULT_LLM_CONFIG.model,
   };
 
   console.log(`=== IDEF0 Studio Benchmark (${dryRun ? 'DRY-RUN / STRUCTURAL' : `LIVE LLM: ${config.model}`}) ===`);
