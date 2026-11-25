@@ -60,6 +60,10 @@ describe('LLM Stateless Verifier & Repair Loop', () => {
     expect(badParent.passed).toBe(false);
     expect(badParent.issues.some((i) => i.includes('фильтрация_a1'))).toBe(true);
 
+    const badClass = validatePythonStructure('class Foo:\n    pass\ndef фильтрация_a1(x):\n    global y\n    return x', leafTask);
+    expect(badClass.passed).toBe(false);
+    expect(badClass.issues.length).toBe(2);
+
     const goodParent = validatePythonStructure(
       'def конвейер_a0(x):\n    return фильтрация_a1(x)',
       parentTask

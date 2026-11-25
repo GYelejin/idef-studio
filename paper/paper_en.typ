@@ -103,7 +103,7 @@ To prevent visual clutter, the standard supports arrow tunneling (denoted by par
 IDEF0 Studio couples a reactive SVG canvas with a topological graph analyzer, an interoperability layer, and a dual-model LLM synthesis pipeline.
 
 == Interoperability and External CASE Model Import
-In industrial practice, organizations frequently maintain existing functional specifications in legacy CASE environments such as Ramus. To enable seamless migration, our framework implements a native parser for Ramus `.rsf` archives---ZIP containers storing structured XML tables (`attribute_rectangles.xml`, `attribute_sectors.xml`, `attribute_sector_borders.xml`, `attribute_hierarchicals.xml`, and `attribute_texts.xml`).
+In industrial practice, organizations frequently maintain existing functional specifications in legacy CASE environments such as Ramus. To enable seamless migration, our framework implements a native parser for Ramus `.rsf` archives---ZIP containers storing structured XML tables (`attribute_rectangles.xml`, `attribute_sector_borders.xml`, `attribute_sector_points.xml`, `attribute_hierarchicals.xml`, `attribute_texts.xml`, and `attribute_other_elements.xml`).
 
 The importer reconstructs the diagram hierarchy, rescales legacy coordinates onto the canonical $1600 times 900$ canvas, maps directional borders (`left/top/right/bottom`) to ICOM roles, and recomputes orthogonal obstacle-avoiding arrow routes. Engineers can therefore import existing `.rsf` models directly into IDEF0 Studio, validate them with the static linter, and immediately execute code synthesis.
 
@@ -120,10 +120,10 @@ The importer reconstructs the diagram hierarchy, rescales legacy coordinates ont
 As illustrated in @fig:context_en and @fig:decomp_en, the editor displays the diagram hierarchy tree, ICOM flow properties, and real-time static linting diagnostics.
 
 == Post-Order Tree Serialization
-To synthesize executable source code without unresolved symbol references, child subroutines must be materialized and verified prior to the parent coordination function. We formalize this using a post-order traversal algorithm over the hierarchical decomposition tree $T$ rooted at context block $A_0$. Within each diagram, blocks are topologically ordered along forward data edges $E_i$, producing the linear synthesis schedule $sigma$:
+To synthesize executable source code without unresolved symbol references, child subroutines must be materialized and verified prior to the parent coordination function. We formalize this using a post-order traversal algorithm over the hierarchical decomposition tree $T$ rooted at context block $A_0$. Within each diagram, blocks are ordered by canonical IDEF0 dominance index ($A_1 dots A_6$), producing the linear synthesis schedule $sigma$:
 $ sigma(T) = [sigma(D_1), sigma(D_2), ..., sigma(D_k), A_"root"] $
 
-When feedback loops occur (e.g., control or correction arrows from block $B_j$ back to an earlier block $B_i$), backward edges are tagged as iterative state parameters, breaking cycles during topological sorting.
+When feedback loops occur (e.g., control or correction arrows from block $B_j$ back to an earlier block $B_i$), backward control parameters are initialized with safe default values so cyclic flows do not block bottom-up synthesis.
 
 == Contract Enforcing Prompt Scaffolding
 Rather than delegating the entire architectural composition to an open-ended single-shot prompt, the orchestration client initiates a structured conversational session maintaining continuous context memory. Prior to synthesis, a high-level project blueprint is delivered to establish mutual grounding. Subsequently, for each task in $sigma$, a dedicated conversational prompt is constructed specifying:
@@ -144,7 +144,7 @@ IDEF0 Studio addresses this via a *two-model cross-verification pipeline (Genera
 == Dual-Stage Verification Pipeline
 Once the primary generator model ($M_"gen"$) synthesizes a candidate implementation $c_i$ for activity node $A_i$, $c_i$ is not admitted directly into the final program. Instead, it traverses two sequential verification gates:
 
-+ *Deterministic AST & Structural Gate:* validates target-language syntax, verifies function naming against $N_i$, and rejects forbidden global variables, external wrapper classes, or leaked modeling terminology.
++ *Deterministic Structural Gate:* verifies the presence of the `def` signature matching $N_i$, a `return` statement, explicit calls to all child subroutines, and rejects `global` declarations, `class` wrappers, or leaked IDEF0/ICOM terminology.
 + *Independent Semantic Audit by a Second LLM ($M_"ver"$):* candidate code $c_i$, its formal ICOM specification $(I_i, C_i, O_i, M_i)$, and expected child function signatures are passed to a second independent verifier LLM (drawn from a separate model family or an isolated critic context @zheng2023judging @shinn2023reflexion). Crucially, $M_"ver"$ has no access to $M_"gen"$'s intermediate chain-of-thought, preventing shared confirmation bias.
 
 == Formal Audit Invariants

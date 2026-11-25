@@ -161,6 +161,15 @@ export function validatePythonStructure(code: string, task: BlockGenerationTask)
   if (!/\breturn\b/.test(code)) {
     issues.push('Отсутствует оператор return');
   }
+  if (/^\s*class\s+/m.test(code)) {
+    issues.push('Обнаружено объявление класса (ожидается чистая функция)');
+  }
+  if (/^\s*global\s+/m.test(code)) {
+    issues.push('Обнаружено использование global (запрещено)');
+  }
+  if (/\b(?:IDEF0|ICOM)\b/i.test(code)) {
+    issues.push('Обнаружено упоминание терминологии IDEF0/ICOM в коде');
+  }
   if (!task.isLeaf && task.childFunctionNames && task.childFunctionNames.length > 0) {
     for (const childFn of task.childFunctionNames) {
       if (!new RegExp(`(?:^|[^\\p{L}0-9_])${childFn}\\s*\\(`, 'u').test(code)) {
@@ -239,7 +248,7 @@ export async function generateAndVerifyFunctionInChat(
   totalTasks: number,
   history: ChatMessage[],
   signal?: AbortSignal,
-  maxRepairs = 2
+  maxRepairs = 3
 ): Promise<{ code: string; verified: boolean; issues: string[]; repairAttempts: number }> {
   let code = await generateFunctionInChat(config, task, taskIndex, totalTasks, history, signal);
   let repairAttempts = 0;
