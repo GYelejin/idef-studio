@@ -1,5 +1,4 @@
-import { Arrow, Block, Junction } from "../../types/idef0";
-import { buildOrthogonalRoute } from "../router";
+import { Arrow, Block, Junction } from "../../../types/idef0";
 import { generateLeaderPoints } from "../math";
 
 /**
@@ -10,8 +9,8 @@ export function adjustArrowOnBlockResize(
   block: Block,
   oldBounds: { x: number; y: number; width: number; height: number },
   newBounds: { x: number; y: number; width: number; height: number },
-  junctions: Junction[] = [],
-  allBlocks: Block[] = []
+  _junctions: Junction[] = [],
+  _allBlocks: Block[] = []
 ): void {
   const isSource = arrow.source.type === 'block' && arrow.source.id === block.id;
   const isTarget = arrow.target.type === 'block' && arrow.target.id === block.id;

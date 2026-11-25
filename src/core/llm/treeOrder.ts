@@ -5,7 +5,7 @@ import { BlockGenerationTask, BlockIcomContext } from './types';
 function sanitizeFunctionName(code: string, name: string): string {
   // Use pure Russian identifier (Python 3 natively supports UTF-8 Russian identifiers)
   // No transliteration, as requested by user.
-  let clean = name
+  const clean = name
     .toLowerCase()
     .replace(/[^а-яё0-9_]/g, '_')
     .replace(/_+/g, '_')
@@ -85,7 +85,7 @@ export function buildBottomUpBlockTasks(project: Project): BlockGenerationTask[]
 
   const visited = new Set<string>();
 
-  function traverseBlock(block: Block, diag: Diagram) {
+  function traverseBlock(block: Block, _diag: Diagram) {
     if (visited.has(block.id)) return;
 
     // Check if this block has a child diagram

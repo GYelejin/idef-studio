@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { X, Download, FileCode, Image, Eye, FolderArchive } from 'lucide-react';
 import { exportDiagramToSvg, exportSvgToPngBlob, exportDiagramsToZip } from '../core/exporter';
+import { saveFileNativeOrBrowser } from '../core/filePlatform';
 import { getBlockCode } from '../core/geometry';
 import { EditorState } from '../core/store/types';
 import { Diagram, Block } from '../types/idef0';
@@ -19,7 +20,7 @@ function cleanTitle(title?: string): string {
 
 export const ExportModal: React.FC<ExportModalProps> = ({ state, onClose }) => {
   const { project, activeDiagramId } = state;
-  const diagrams = project?.diagrams || [];
+  const diagrams = useMemo(() => project?.diagrams || [], [project?.diagrams]);
   const [format, setFormat] = useState<'svg' | 'png'>('svg');
   const [selectedIds, setSelectedIds] = useState<Set<string>>(
     () => new Set(diagrams.map((d: Diagram) => d.id))
@@ -77,31 +78,22 @@ export const ExportModal: React.FC<ExportModalProps> = ({ state, onClose }) => {
           if (format === 'svg') {
             const svgContent = exportDiagramToSvg(diag);
             const blob = new Blob([svgContent], { type: 'image/svg+xml;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `${fileName}.svg`;
-            a.click();
-            URL.revokeObjectURL(url);
+            return saveFileNativeOrBrowser(`${fileName}.svg`, blob, [
+              { name: 'SVG Vector Image', extensions: ['svg'] },
+            ]);
           } else {
-            return exportSvgToPngBlob(exportDiagramToSvg(diag), 2).then((pngBlob) => {
-              const url = URL.createObjectURL(pngBlob);
-              const a = document.createElement('a');
-              a.href = url;
-              a.download = `${fileName}.png`;
-              a.click();
-              URL.revokeObjectURL(url);
-            });
+            return exportSvgToPngBlob(exportDiagramToSvg(diag), 2).then((pngBlob) =>
+              saveFileNativeOrBrowser(`${fileName}.png`, pngBlob, [
+                { name: 'PNG Image', extensions: ['png'] },
+              ])
+            );
           }
         } else {
           return exportDiagramsToZip(chosen, format).then((zipBlob) => {
-            const url = URL.createObjectURL(zipBlob);
-            const a = document.createElement('a');
             const safeProj = (project?.name || 'idef0-project').replace(/[/\\:*?"<>|]/g, '_');
-            a.href = url;
-            a.download = `${safeProj}_${format}_diagrams.zip`;
-            a.click();
-            URL.revokeObjectURL(url);
+            return saveFileNativeOrBrowser(`${safeProj}_${format}_diagrams.zip`, zipBlob, [
+              { name: 'ZIP Archive', extensions: ['zip'] },
+            ]);
           });
         }
       })

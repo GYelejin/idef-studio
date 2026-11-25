@@ -214,7 +214,7 @@ export function getRenderPointsForArrow(arrow: Arrow, junctions?: Junction[], ar
   return pts;
 }
 
-export function getSegmentsFromPoints(points: Point[], arrowId?: string, sourceSide?: Side, targetSide?: Side): Segment[] {
+export function getSegmentsFromPoints(points: Point[], arrowId?: string, sourceSide?: Side, _targetSide?: Side): Segment[] {
   const segments: Segment[] = [];
   if (!points || points.length < 2) return segments;
 
@@ -304,11 +304,17 @@ export function generateLeaderPoints(labelPos: Point, arrowPoints: Point[]): Poi
   return [p0, p1, p2, p3];
 }
 
+export function syncArrowLeader(arrow: { showLeader?: boolean; labelPos?: Point; points: Point[]; leaderPoints?: Point[] }): void {
+  if (arrow.showLeader && arrow.labelPos) {
+    arrow.leaderPoints = generateLeaderPoints(arrow.labelPos, arrow.points);
+  }
+}
+
 /**
  * Builds guaranteed 100% strictly orthogonal path between endpoints with proper entry/exit normals.
  */
 
-export function clampLabelToCanvas(pt: Point, labelText = '', margin = 20): Point {
+export function clampLabelToCanvas(pt: Point, _labelText = '', margin = 20): Point {
   const minX = margin;
   const maxX = CANVAS_WIDTH - margin;
   const minY = margin;

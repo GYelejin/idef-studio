@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { store } from '../core/store';
 import { CANVAS_WIDTH, CANVAS_HEIGHT } from '../core/geometry';
 import CanvasDefs from './canvas/CanvasDefs';
@@ -24,20 +24,47 @@ export const Canvas: React.FC<CanvasProps> = ({ state, onCursorChange }) => {
     selectedObjectType,
     activeTool,
     zoom,
+    pan,
     gridVisible,
   } = state;
 
   const diagrams = project?.diagrams || [];
   const diag = diagrams.find((d: Diagram) => d.id === activeDiagramId);
   const svgRef = useRef<SVGSVGElement>(null);
+  const [isSpacePressed, setIsSpacePressed] = useState(false);
+  const [panDrag, setPanDrag] = useState<{
+    startX: number;
+    startY: number;
+    startPan: { x: number; y: number };
+  } | null>(null);
 
-  if (!diag) {
-    return (
-      <div className="canvas-viewport" data-testid="canvas-empty">
-        <div style={{ color: 'var(--text-muted)' }}>Диаграмма не найдена</div>
-      </div>
-    );
-  }
+  useEffect(() => {
+    const isInputFocused = (target: EventTarget | null) => {
+      const el = target as HTMLElement | null;
+      return el?.tagName === 'INPUT' || el?.tagName === 'TEXTAREA' || el?.isContentEditable;
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.code === 'Space' && !isInputFocused(e.target)) {
+        e.preventDefault();
+        setIsSpacePressed(true);
+      }
+    };
+
+    const handleKeyUp = (e: KeyboardEvent) => {
+      if (e.code === 'Space') {
+        setIsSpacePressed(false);
+        setPanDrag(null);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  }, []);
 
   const dnd = useCanvasDnd({
     diag,
@@ -46,6 +73,14 @@ export const Canvas: React.FC<CanvasProps> = ({ state, onCursorChange }) => {
     svgRef,
     onCursorChange,
   });
+
+  if (!diag) {
+    return (
+      <div className="canvas-viewport" data-testid="canvas-empty">
+        <div style={{ color: 'var(--text-muted)' }}>Диаграмма не найдена</div>
+      </div>
+    );
+  }
 
   const {
     dragState,
@@ -80,6 +115,35 @@ export const Canvas: React.FC<CanvasProps> = ({ state, onCursorChange }) => {
     }
   };
 
+  const handleViewportMouseDown = (e: React.MouseEvent) => {
+    if (e.button === 1 || (isSpacePressed && e.button === 0)) {
+      e.preventDefault();
+      e.stopPropagation();
+      setPanDrag({
+        startX: e.clientX,
+        startY: e.clientY,
+        startPan: { ...pan },
+      });
+    }
+  };
+
+  const handleViewportMouseMove = (e: React.MouseEvent) => {
+    if (panDrag) {
+      store.setPan({
+        x: Math.round(panDrag.startPan.x + (e.clientX - panDrag.startX)),
+        y: Math.round(panDrag.startPan.y + (e.clientY - panDrag.startY)),
+      });
+      return;
+    }
+    handleCanvasMouseMove(e);
+  };
+
+  const handleViewportMouseUp = () => {
+    if (panDrag) {
+      setPanDrag(null);
+    }
+  };
+
   const selectedArrow =
     selectedObjectType === 'arrow'
       ? diag.arrows.find((a: Arrow) => a.id === selectedObjectId)
@@ -88,8 +152,14 @@ export const Canvas: React.FC<CanvasProps> = ({ state, onCursorChange }) => {
   return (
     <div
       className="canvas-viewport"
-      onMouseMove={handleCanvasMouseMove}
+      onMouseDown={handleViewportMouseDown}
+      onMouseMove={handleViewportMouseMove}
+      onMouseUp={handleViewportMouseUp}
+      onMouseLeave={handleViewportMouseUp}
       onWheel={handleViewportWheel}
+      style={{
+        cursor: panDrag ? 'grabbing' : isSpacePressed ? 'grab' : undefined,
+      }}
       data-testid="canvas-viewport"
     >
       <div
@@ -98,6 +168,7 @@ export const Canvas: React.FC<CanvasProps> = ({ state, onCursorChange }) => {
           width: `${CANVAS_WIDTH * zoom}px`,
           height: `${CANVAS_HEIGHT * zoom}px`,
           position: 'relative',
+          transform: `translate(${pan.x}px, ${pan.y}px)`,
         }}
       >
         <svg
@@ -162,8 +233,7 @@ export const Canvas: React.FC<CanvasProps> = ({ state, onCursorChange }) => {
 
           {/* Junctions (Branch / Merge Dots) */}
           {diag.junctions.map((junc: Junction) => {
-            const parentArr = diag.arrows.find((a: Arrow) => a.id === junc.parentArrowId);
-            const dotColor = parentArr && (parentArr as any).color ? (parentArr as any).color : '#000000';
+            const dotColor = '#000000';
             const isDragging =
               dragState && dragState.type === 'junction_drag' && dragState.juncId === junc.id;
 

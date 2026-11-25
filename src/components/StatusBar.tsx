@@ -1,6 +1,7 @@
 import React from 'react';
 import { XCircle, AlertTriangle } from 'lucide-react';
 import { runIDEF0Linter } from '../core/linter';
+import { store } from '../core/store';
 import { EditorState } from '../core/store/types';
 import { Diagram } from '../types/idef0';
 
@@ -87,8 +88,30 @@ export const StatusBar: React.FC<StatusBarProps> = ({
         </div>
       </div>
 
-      {/* Right side: Coordinates & Autosave */}
+      {/* Right side: Grid toggle, Coordinates & Autosave */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <label
+          className="status-item"
+          data-testid="status-grid-label"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            cursor: 'pointer',
+            userSelect: 'none',
+            fontSize: '12px',
+          }}
+          title="Показать / скрыть сетку холста"
+        >
+          <input
+            type="checkbox"
+            checked={state.gridVisible}
+            onChange={() => store.toggleGrid()}
+            data-testid="status-grid-toggle"
+            style={{ cursor: 'pointer', margin: 0 }}
+          />
+          <span>Сетка</span>
+        </label>
         <div
           className="status-item"
           data-testid="status-coords"

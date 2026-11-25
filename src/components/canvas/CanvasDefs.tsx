@@ -4,7 +4,7 @@ interface CanvasDefsProps {
   gridVisible: boolean;
 }
 
-export const CanvasDefs: React.FC<CanvasDefsProps> = ({ gridVisible }) => (
+const CanvasDefs: React.FC<CanvasDefsProps> = ({ gridVisible }) => (
   <defs>
     <pattern
       id="grid"

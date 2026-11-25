@@ -11,7 +11,7 @@ interface CanvasJunctionProps {
   onStartJunctionDrag: (juncId: string, pt: Point) => void;
 }
 
-export const CanvasJunction: React.FC<CanvasJunctionProps> = ({
+const CanvasJunction: React.FC<CanvasJunctionProps> = ({
   junction,
   activeTool,
   dotColor = '#000000',

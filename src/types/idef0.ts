@@ -36,7 +36,9 @@ export interface Arrow {
   leaderPoints?: Point[];
   tunnelSource?: boolean; // IDEF0 Arrow Tunneling at source ( )
   tunnelTarget?: boolean; // IDEF0 Arrow Tunneling at target ( )
-  color?: string; // Unified Flow Family Color (trunk + all branches)
+  hasArcCorners?: boolean;
+  arcRadius?: number;
+  pathMode?: 'auto' | 'pinned';
 }
 
 export interface Junction {
@@ -71,9 +73,10 @@ export interface Diagram {
 export interface ProjectSnapshot {
   id: string;
   name: string;
-  timestamp: number;
-  diagramsCount: number;
-  blocksCount: number;
+  timestamp?: number;
+  createdAt?: string;
+  diagramsCount?: number;
+  blocksCount?: number;
   project: Project;
 }
 

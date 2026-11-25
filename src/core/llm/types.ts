@@ -1,4 +1,4 @@
-import { Block, Diagram, Project } from '../../types/idef0';
+import { Block, Diagram } from '../../types/idef0';
 
 export interface LlmConfig {
   apiUrl: string;
@@ -8,7 +8,7 @@ export interface LlmConfig {
   systemPrompt: string;
 }
 
-export type TaskStatus = 'pending' | 'generating' | 'completed' | 'error';
+type TaskStatus = 'pending' | 'generating' | 'completed' | 'error';
 
 export interface BlockIcomContext {
   inputs: string[];
@@ -40,10 +40,12 @@ export interface ChatMessage {
   content: string;
 }
 
+const env = (import.meta as { env?: Record<string, string | undefined> }).env;
+
 export const DEFAULT_LLM_CONFIG: LlmConfig = {
-  apiUrl: (import.meta as any).env?.VITE_LLM_API_URL || 'https://assistant.korolev-ai.bmstu.ru/v1',
-  apiKey: (import.meta as any).env?.VITE_LLM_API_KEY || '',
-  model: (import.meta as any).env?.VITE_LLM_MODEL || 'korolev-k5',
+  apiUrl: env?.VITE_LLM_API_URL || 'https://assistant.korolev-ai.bmstu.ru/v1',
+  apiKey: '',
+  model: env?.VITE_LLM_MODEL || 'korolev-k5',
   timeoutSeconds: 120,
   systemPrompt: `Ты ведущий инженер функционального программирования на Python.
 Мы пошагово создаем полностью РАБОЧЕЕ приложение в одном непрерывном диалоге.

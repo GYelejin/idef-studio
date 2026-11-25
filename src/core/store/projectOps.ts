@@ -4,8 +4,8 @@ import { createExampleModel } from '../exampleModel';
 import { EditorState } from './types';
 import { HistoryOps } from './historyOps';
 
-export class ProjectOps {
-  public static resetProject(state: EditorState): void {
+export const ProjectOps = {
+  resetProject(state: EditorState): void {
     HistoryOps.pushHistory(state);
     const newProject: Project = {
       id: `proj-${Date.now()}`,
@@ -39,23 +39,23 @@ export class ProjectOps {
     state.activeDiagramId = 'diag-a0';
     state.selectedObjectId = null;
     state.selectedObjectType = null;
-  }
+  },
 
-  public static loadExample(state: EditorState): void {
+  loadExample(state: EditorState): void {
     HistoryOps.pushHistory(state);
     const ex = createExampleModel();
     state.project = ex;
     state.activeDiagramId = ex.activeDiagramId || 'diag-a1';
     state.selectedObjectId = null;
     state.selectedObjectType = null;
-  }
+  },
 
-  public static importProject(state: EditorState, projOrJson: Project | string): boolean {
+  importProject(state: EditorState, projOrJson: Project | string): boolean {
     let proj: Project;
     if (typeof projOrJson === 'string') {
       try {
         proj = JSON.parse(projOrJson);
-      } catch (e) {
+      } catch {
         console.warn('[Import Error] Некорректный JSON проекта');
         return false;
       }
@@ -74,15 +74,15 @@ export class ProjectOps {
     state.selectedObjectId = null;
     state.selectedObjectType = null;
     return true;
-  }
+  },
 
-  public static updateProjectMeta(state: EditorState, name: string, description: string): void {
+  updateProjectMeta(state: EditorState, name: string, description: string): void {
     HistoryOps.pushHistory(state);
     state.project.name = name;
     state.project.description = description;
-  }
+  },
 
-  public static autoLayoutCurrentDiagram(state: EditorState): void {
+  autoLayoutCurrentDiagram(state: EditorState): void {
     const diag = state.project.diagrams.find((d) => d.id === state.activeDiagramId);
     if (!diag) return;
     HistoryOps.pushHistory(state);
@@ -92,4 +92,4 @@ export class ProjectOps {
       state.project.diagrams[idx] = updated;
     }
   }
-}
+};

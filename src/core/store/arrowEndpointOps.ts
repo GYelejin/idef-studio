@@ -1,6 +1,7 @@
-import { Arrow, ArrowEndpoint, Point, SnapTarget, ICOMRole, Side, Diagram } from "../../types/idef0";
+import { ArrowEndpoint, Point, SnapTarget, ICOMRole, Side, Diagram } from "../../types/idef0";
 import { EditorState } from "./types";
 import { HistoryOps } from "./historyOps";
+import { JunctionOps } from "./junctionOps";
 import {
   CANVAS_WIDTH,
   buildOrthogonalRoute,
@@ -8,7 +9,6 @@ import {
   generateLeaderPoints,
   getSegmentsFromPoints,
   distanceToSegment,
-  findSnapTarget,
   clampLabelToCanvas,
   synchronizeJunctions,
   pointInRect,
@@ -18,8 +18,8 @@ function getActiveDiagram(state: EditorState): Diagram | undefined {
   return state.project.diagrams.find((d) => d.id === state.activeDiagramId);
 }
 
-export class ArrowEndpointOps {
-  public static reconnectArrowEndpoint(state: EditorState, 
+export const ArrowEndpointOps = {
+  reconnectArrowEndpoint(state: EditorState, 
     arrowId: string,
     endType: 'source' | 'target',
     newEndpoint: ArrowEndpoint | SnapTarget | null,
@@ -63,19 +63,18 @@ export class ArrowEndpointOps {
         }
 
         if (newEndpoint.type === 'arrow_segment') {
-          const juncId = `junc-merge-${Date.now()}`;
+          const junc = JunctionOps.createJunction(
+            diag,
+            'merge',
+            newEndpoint.point,
+            (newEndpoint as { targetArrowId?: string }).targetArrowId || newEndpoint.id || '',
+            [arrow.id]
+          );
           arrow.target = {
             type: 'junction',
-            id: juncId,
+            id: junc.id,
             point: { ...newEndpoint.point },
           };
-          diag.junctions.push({
-            id: juncId,
-            type: 'merge',
-            point: { ...newEndpoint.point },
-            parentArrowId: (newEndpoint as any).targetArrowId || newEndpoint.id || '',
-            childArrowIds: [arrow.id],
-          });
         } else {
           arrow.target = {
             type: newEndpoint.type,
@@ -179,19 +178,18 @@ export class ArrowEndpointOps {
         }
 
         if (newEndpoint.type === 'arrow_segment') {
-          const juncId = `junc-branch-${Date.now()}`;
+          const junc = JunctionOps.createJunction(
+            diag,
+            'branch',
+            newEndpoint.point,
+            (newEndpoint as { targetArrowId?: string }).targetArrowId || newEndpoint.id || '',
+            [arrow.id]
+          );
           arrow.source = {
             type: 'junction',
-            id: juncId,
+            id: junc.id,
             point: { ...newEndpoint.point },
           };
-          diag.junctions.push({
-            id: juncId,
-            type: 'branch',
-            point: { ...newEndpoint.point },
-            parentArrowId: (newEndpoint as any).targetArrowId || newEndpoint.id || '',
-            childArrowIds: [arrow.id],
-          });
         } else {
           arrow.source = {
             type: newEndpoint.type,
@@ -286,10 +284,10 @@ export class ArrowEndpointOps {
     synchronizeJunctions(diag);
     
     return true;
-  }
+  },
 
 
-  public static setArrowEndpointKey(state: EditorState, 
+  setArrowEndpointKey(state: EditorState, 
     arrowId: string,
     endType: 'source' | 'target',
     key: string
@@ -420,34 +418,20 @@ export class ArrowEndpointOps {
       }
 
       if (juncMode === 'branch' && endType === 'source') {
-        const juncId = `junc-branch-${Date.now()}`;
-        diag.junctions.push({
-          id: juncId,
-          type: 'branch',
-          point: { ...bestProj },
-          parentArrowId: parentArrow.id,
-          childArrowIds: [arrow.id],
-        });
+        const junc = JunctionOps.createJunction(diag, 'branch', bestProj, parentArrow.id, [arrow.id]);
         arrow.source = {
           type: 'junction',
-          id: juncId,
+          id: junc.id,
           point: { ...bestProj },
         };
         arrow.role = parentArrow.role;
         arrow.pinned = false;
         arrow.points = buildOrthogonalRoute(arrow.source, arrow.target, diag.blocks);
       } else if (juncMode === 'merge' && endType === 'target') {
-        const juncId = `junc-merge-${Date.now()}`;
-        diag.junctions.push({
-          id: juncId,
-          type: 'merge',
-          point: { ...bestProj },
-          parentArrowId: parentArrow.id,
-          childArrowIds: [arrow.id],
-        });
+        const junc = JunctionOps.createJunction(diag, 'merge', bestProj, parentArrow.id, [arrow.id]);
         arrow.target = {
           type: 'junction',
-          id: juncId,
+          id: junc.id,
           point: { ...bestProj },
         };
         arrow.role = parentArrow.role;
@@ -463,4 +447,4 @@ export class ArrowEndpointOps {
     return false;
   }
 
-}
+};

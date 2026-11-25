@@ -4,12 +4,12 @@ import * as fs from 'fs';
 import { execSync } from 'child_process';
 import { injectVisibleCursor } from '../helpers/cursor-helper';
 
-export const OUTPUT_DIRS = [
+const OUTPUT_DIRS = [
   path.resolve('./wiki/videos'),
   '/home/gy/Documents/antigravity/lspramusclojurescript2026.wiki/videos',
 ];
 
-export function ensureOutputDirs() {
+function ensureOutputDirs() {
   for (const dir of OUTPUT_DIRS) {
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true });

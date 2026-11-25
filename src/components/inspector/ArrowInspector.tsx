@@ -1,8 +1,8 @@
 import React from "react";
 import { CornerDownRight, GitFork, GitMerge, Unlink, Trash2, Box, Square, ArrowDown, ArrowUp, ArrowRight } from "lucide-react";
 import { store, EditorState } from "../../core/store";
-import { Arrow, ICOMRole, Side } from "../../types/idef0";
-import { getSegmentsFromPoints, getBlockCode, getArrowParent, getArrowDisplayName } from "../../core/geometry";
+import { Arrow } from "../../types/idef0";
+import { getBlockCode, getArrowParent, getArrowDisplayName } from "../../core/geometry";
 import AutoResizingTextarea from "./AutoResizingTextarea";
 import EndpointDropdown from "./EndpointDropdown";
 import ArrowSegmentsList from "./ArrowSegmentsList";
@@ -12,7 +12,7 @@ interface ArrowInspectorProps {
   state: EditorState;
 }
 
-export const ArrowInspector: React.FC<ArrowInspectorProps> = ({ arrow, state }) => {
+const ArrowInspector: React.FC<ArrowInspectorProps> = ({ arrow, state }) => {
   const diag = state.project.diagrams.find(d => d.id === state.activeDiagramId);
   if (!diag) return null;
 
@@ -371,38 +371,6 @@ export const ArrowInspector: React.FC<ArrowInspectorProps> = ({ arrow, state }) 
             );
           })()}
   
-          <div className="form-group">
-            <label className="form-label">Цвет ветки потока (Ствол + Ответвления)</label>
-            <div style={{ display: 'flex', gap: '6px', alignItems: 'center', flexWrap: 'wrap' }}>
-              {[
-                { label: 'Классический черный', color: '#1e293b' },
-                { label: 'Сапфировый синий', color: '#2563eb' },
-                { label: 'Изумрудный зеленый', color: '#059669' },
-                { label: 'Рубиновый красный', color: '#dc2626' },
-                { label: 'Фиолетовый', color: '#7c3aed' },
-                { label: 'Янтарный охра', color: '#d97706' },
-                { label: 'Морской циан', color: '#0891b2' },
-                { label: 'Малиновый', color: '#db2777' },
-              ].map((c) => (
-                <button
-                  key={c.color}
-                  onClick={() => store.setFlowFamilyColor(arrow.id, c.color)}
-                  style={{
-                    width: '24px',
-                    height: '24px',
-                    borderRadius: '4px',
-                    background: c.color,
-                    border: (arrow.color || '#1e293b') === c.color ? '2px solid #ffffff' : '1px solid var(--border-color)',
-                    cursor: 'pointer',
-                    boxShadow: (arrow.color || '#1e293b') === c.color ? '0 0 0 2px var(--accent-primary)' : 'none',
-                  }}
-                  title={c.label}
-                  data-testid={`flow-color-${c.color.replace('#', '')}`}
-                />
-              ))}
-            </div>
-          </div>
-
           <div className="form-group">
             <label className="form-label">
               Туннелирование стрелки (IDEF0)

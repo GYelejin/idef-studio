@@ -13,9 +13,9 @@ import LlmGeneratorModal from './components/llm/LlmGeneratorModal';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 // Register linter globally for debugging/e2e tests
-(window as any).__IDEF0_LINTER__ = runIDEF0Linter;
+(window as Window & { __IDEF0_LINTER__?: typeof runIDEF0Linter }).__IDEF0_LINTER__ = runIDEF0Linter;
 
-export const App: React.FC = () => {
+const App: React.FC = () => {
   const [state, setState] = useState(() => store.getState());
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [exportOpen, setExportOpen] = useState(false);

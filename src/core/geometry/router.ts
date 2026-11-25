@@ -145,7 +145,7 @@ export function buildOrthogonalRoute(
 export function buildRawOrthogonalRoute(
   source: ArrowEndpoint | SnapTarget,
   target: ArrowEndpoint | SnapTarget,
-  blocks: Block[] = []
+  _blocks: Block[] = []
 ): Point[] {
   const pStart = { ...source.point };
   const pEnd = { ...target.point };

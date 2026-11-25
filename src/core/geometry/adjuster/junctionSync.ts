@@ -1,4 +1,4 @@
-import { Arrow, Junction } from "../../types/idef0";
+import { Arrow, Junction, Segment } from "../../../types/idef0";
 import { getSegmentsFromPoints, distanceToSegment, generateLeaderPoints } from "../math";
 import { buildOrthogonalRoute } from "../router";
 

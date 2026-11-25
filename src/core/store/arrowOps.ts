@@ -1,11 +1,11 @@
-import { Arrow, ICOMRole, Point, Diagram } from "../../types/idef0";
+import { Arrow, ICOMRole, Point, Diagram, Side } from "../../types/idef0";
 import { EditorState } from "./types";
 import { HistoryOps } from "./historyOps";
+import { JunctionOps } from "./junctionOps";
 import {
   validateArrowConnection,
   buildOrthogonalRoute,
   generateLeaderPoints,
-  getArrowParent,
   clampLabelToCanvas,
   synchronizeJunctions,
 } from "../geometry";
@@ -14,8 +14,8 @@ function getActiveDiagram(state: EditorState): Diagram | undefined {
   return state.project.diagrams.find((d) => d.id === state.activeDiagramId);
 }
 
-export class ArrowOps {
-  public static createArrow(state: EditorState, arrowData: Omit<Arrow, 'id'> & { id?: string }): Arrow | null {
+export const ArrowOps = {
+  createArrow(state: EditorState, arrowData: Omit<Arrow, 'id'> & { id?: string }): Arrow | null {
     const diag = getActiveDiagram(state);
     if (!diag) return null;
 
@@ -40,80 +40,41 @@ export class ArrowOps {
       newArrow.points = buildOrthogonalRoute(newArrow.source, newArrow.target, diag.blocks);
     }
 
-    // Inherit flow family color from parent if branch
-    if (arrowData.source.type === 'junction' && arrowData.source.id && !newArrow.color) {
-      const parentJunc = diag.junctions.find(j => j.id === arrowData.source.id);
-      const parentArrow = parentJunc
-        ? diag.arrows.find(a => a.id === parentJunc.parentArrowId)
-        : diag.arrows.find(a => a.id === arrowData.source.id);
-      if (parentArrow && parentArrow.color) {
-        newArrow.color = parentArrow.color;
-      }
-    }
-
     // If source or target is junction / segment, register junction
     if ((arrowData.source.type === 'junction' || arrowData.source.type === 'arrow_segment') && arrowData.source.id) {
-      const parentArrId = (arrowData.source as any).targetArrowId || arrowData.source.id;
-      const existingAtPoint = diag.junctions.find(
-        j => j.type === 'branch' &&
-             Math.abs(j.point.x - arrowData.source.point.x) <= 5 &&
-             Math.abs(j.point.y - arrowData.source.point.y) <= 5
-      );
-      const juncId = arrowData.source.type === 'junction'
-        ? arrowData.source.id
-        : existingAtPoint
-          ? existingAtPoint.id
-          : `junc-branch-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`;
+      const parentArrId = (arrowData.source as { targetArrowId?: string }).targetArrowId || arrowData.source.id;
+      const junc = JunctionOps.ensureJunction(diag, {
+        type: 'branch',
+        point: arrowData.source.point,
+        parentArrowId: parentArrId,
+        childArrowId: arrowId,
+        existingJunctionId: arrowData.source.type === 'junction' ? arrowData.source.id : undefined,
+        reuseWithinRadius: arrowData.source.type === 'junction' ? undefined : 5,
+      });
 
       newArrow.source = {
         type: 'junction',
-        id: juncId,
+        id: junc.id,
         point: arrowData.source.point,
       };
-      const exists = diag.junctions.find(j => j.id === juncId);
-      if (!exists) {
-        diag.junctions.push({
-          id: juncId,
-          type: 'branch',
-          point: arrowData.source.point,
-          parentArrowId: parentArrId,
-          childArrowIds: [arrowId],
-        });
-      } else if (!exists.childArrowIds.includes(arrowId)) {
-        exists.childArrowIds.push(arrowId);
-      }
     }
 
-    if ((arrowData.target.type === 'junction' || arrowData.target.type === 'arrow_segment') && (arrowData.target.id || (arrowData.target as any).targetArrowId)) {
-      const parentArrId = (arrowData.target as any).targetArrowId || arrowData.target.id || '';
-      const existingAtPoint = diag.junctions.find(
-        j => j.type === 'merge' &&
-             Math.abs(j.point.x - arrowData.target.point.x) <= 5 &&
-             Math.abs(j.point.y - arrowData.target.point.y) <= 5
-      );
-      const juncId: string = arrowData.target.type === 'junction'
-        ? (arrowData.target.id || `junc-merge-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`)
-        : existingAtPoint
-          ? existingAtPoint.id
-          : `junc-merge-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`;
+    if ((arrowData.target.type === 'junction' || arrowData.target.type === 'arrow_segment') && (arrowData.target.id || (arrowData.target as { targetArrowId?: string }).targetArrowId)) {
+      const parentArrId = (arrowData.target as { targetArrowId?: string }).targetArrowId || arrowData.target.id || '';
+      const junc = JunctionOps.ensureJunction(diag, {
+        type: 'merge',
+        point: arrowData.target.point,
+        parentArrowId: parentArrId,
+        childArrowId: arrowId,
+        existingJunctionId: arrowData.target.type === 'junction' ? arrowData.target.id : undefined,
+        reuseWithinRadius: arrowData.target.type === 'junction' ? undefined : 5,
+      });
 
       newArrow.target = {
         type: 'junction',
-        id: juncId,
+        id: junc.id,
         point: arrowData.target.point,
       };
-      const exists = diag.junctions.find(j => j.id === juncId);
-      if (!exists) {
-        diag.junctions.push({
-          id: juncId,
-          type: 'merge',
-          point: arrowData.target.point,
-          parentArrowId: parentArrId,
-          childArrowIds: [arrowId],
-        });
-      } else if (!exists.childArrowIds.includes(arrowId)) {
-        exists.childArrowIds.push(arrowId);
-      }
     }
 
     if (newArrow.labelPos) {
@@ -126,9 +87,9 @@ export class ArrowOps {
     state.selectedObjectType = 'arrow';
     
     return newArrow;
-  }
+  },
 
-  public static setArrowRole(state: EditorState, arrowId: string, newRole: ICOMRole, saveHistory = true): boolean {
+  setArrowRole(state: EditorState, arrowId: string, newRole: ICOMRole, saveHistory = true): boolean {
     const diag = getActiveDiagram(state);
     if (!diag) return false;
     const arrow = diag.arrows.find(a => a.id === arrowId);
@@ -200,9 +161,9 @@ export class ArrowOps {
     synchronizeJunctions(diag);
     
     return true;
-  }
+  },
 
-  public static updateArrow(state: EditorState, id: string, updates: Partial<Arrow>, saveHistory = true): void {
+  updateArrow(state: EditorState, id: string, updates: Partial<Arrow>, saveHistory = true): void {
     const diag = getActiveDiagram(state);
     if (!diag) return;
 
@@ -231,9 +192,9 @@ export class ArrowOps {
 
     synchronizeJunctions(diag);
     
-  }
+  },
 
-  public static toggleArrowTunnel(state: EditorState, arrowId: string, end: 'source' | 'target'): void {
+  toggleArrowTunnel(state: EditorState, arrowId: string, end: 'source' | 'target'): void {
     const diag = getActiveDiagram(state);
     if (!diag) return;
     const arrow = diag.arrows.find(a => a.id === arrowId);
@@ -245,10 +206,10 @@ export class ArrowOps {
     } else {
       arrow.tunnelTarget = !arrow.tunnelTarget;
     }
-  }
+  },
 
 
-  public static toggleLeader(state: EditorState, arrowId: string): void {
+  toggleLeader(state: EditorState, arrowId: string): void {
     const diag = getActiveDiagram(state);
     if (!diag) return;
     const arrow = diag.arrows.find(a => a.id === arrowId);
@@ -264,10 +225,10 @@ export class ArrowOps {
       arrow.leaderPoints = undefined;
     }
     
-  }
+  },
 
 
-  public static deleteArrow(state: EditorState, id: string): void {
+  deleteArrow(state: EditorState, id: string): void {
     const diag = getActiveDiagram(state);
     if (!diag) return;
 
@@ -286,17 +247,17 @@ export class ArrowOps {
     }
 
     
-  }
+  },
 
-  public static recomputeArrowRoute(state: EditorState, arrow: Arrow, diag?: Diagram): void {
+  recomputeArrowRoute(state: EditorState, arrow: Arrow, diag?: Diagram): void {
     const d = diag || getActiveDiagram(state);
     arrow.points = buildOrthogonalRoute(arrow.source, arrow.target, d ? d.blocks : []);
     if (arrow.showLeader && arrow.labelPos) {
       arrow.leaderPoints = generateLeaderPoints(arrow.labelPos, arrow.points);
     }
-  }
+  },
 
-  public static setArrowPinned(state: EditorState, arrowId: string, pinned: boolean): void {
+  setArrowPinned(state: EditorState, arrowId: string, pinned: boolean): void {
     const diag = getActiveDiagram(state);
     if (!diag) return;
     const arrow = diag.arrows.find(a => a.id === arrowId);
@@ -317,40 +278,13 @@ export class ArrowOps {
       arrow.points = buildOrthogonalRoute(arrow.source, arrow.target);
     }
     
-  }
+  },
 
-  public static setArrowPathMode(state: EditorState, arrowId: string, mode: 'auto' | 'pinned'): void {
+  setArrowPathMode(state: EditorState, arrowId: string, mode: 'auto' | 'pinned'): void {
     ArrowOps.setArrowPinned(state, arrowId, mode === 'pinned');
-  }
+  },
 
-  public static _legacySetArrowPathMode(state: EditorState, arrowId: string, mode: 'auto' | 'pinned'): void {
-    const diag = getActiveDiagram(state);
-    if (!diag) return;
-    const arrow = diag.arrows.find(a => a.id === arrowId);
-    if (!arrow) return;
-    HistoryOps.pushHistory(state);
-    arrow.pathMode = mode;
-    if (mode === 'auto') {
-      if (arrow.source.type === 'border' && (arrow.source.side === 'left' || arrow.source.side === 'right')) {
-        arrow.source.point.y = arrow.target.point.y;
-      } else if (arrow.source.type === 'border' && (arrow.source.side === 'top' || arrow.source.side === 'bottom')) {
-        arrow.source.point.x = arrow.target.point.x;
-      }
-      if (arrow.target.type === 'border' && (arrow.target.side === 'left' || arrow.target.side === 'right')) {
-        arrow.target.point.y = arrow.source.point.y;
-      } else if (arrow.target.type === 'border' && (arrow.target.side === 'top' || arrow.target.side === 'bottom')) {
-        arrow.target.point.x = arrow.source.point.x;
-      }
-      arrow.points = buildOrthogonalRoute(arrow.source, arrow.target, diag.blocks);
-      if (arrow.showLeader && arrow.labelPos) {
-        arrow.leaderPoints = generateLeaderPoints(arrow.labelPos, arrow.points);
-      }
-    }
-    synchronizeJunctions(diag);
-        
-  }
-
-  public static resetArrowRoute(state: EditorState, arrowId: string): void {
+  resetArrowRoute(state: EditorState, arrowId: string): void {
     const diag = getActiveDiagram(state);
     if (!diag) return;
     const arrow = diag.arrows.find(a => a.id === arrowId);
@@ -365,47 +299,5 @@ export class ArrowOps {
         
   }
 
-
-  public static setFlowFamilyColor(state: EditorState, arrowId: string, color: string): void {
-    const diag = getActiveDiagram(state);
-    if (!diag) return;
-    const arrow = diag.arrows.find(a => a.id === arrowId);
-    if (!arrow) return;
-
-    HistoryOps.pushHistory(state);
-
-    // Find all connected arrows in the same flow family tree
-    const connectedArrowIds = new Set<string>([arrowId]);
-    let added = true;
-    while (added) {
-      added = false;
-      for (const j of diag.junctions) {
-        const hasParent = connectedArrowIds.has(j.parentArrowId);
-        const hasChild = j.childArrowIds.some(cid => connectedArrowIds.has(cid));
-        if (hasParent || hasChild) {
-          if (!connectedArrowIds.has(j.parentArrowId)) {
-            connectedArrowIds.add(j.parentArrowId);
-            added = true;
-          }
-          for (const cid of j.childArrowIds) {
-            if (!connectedArrowIds.has(cid)) {
-              connectedArrowIds.add(cid);
-              added = true;
-            }
-          }
-        }
-      }
-    }
-
-    // Apply color to all arrows in the flow family
-    for (const a of diag.arrows) {
-      if (connectedArrowIds.has(a.id)) {
-        a.color = color;
-      }
-    }
-
-    
-  }
-
   // --- Project Snapshots & Version History ---
-}
+};

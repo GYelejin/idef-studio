@@ -15,7 +15,7 @@ import { arrowLabelRule } from './rules/arrowLabel';
  * Реестр правил линтера IDEF0 (Linter Registry)
  * Позволяет регистрировать, включать/выключать правила и гибко расширять проверки.
  */
-export class LinterRegistry {
+class LinterRegistry {
   private rules = new Map<string, LinterRule>();
   private config: LinterConfig = {};
 

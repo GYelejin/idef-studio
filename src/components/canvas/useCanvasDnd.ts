@@ -20,12 +20,15 @@ interface UseCanvasDndProps {
   onCursorChange: (pos: Point) => void;
 }
 
-export function useCanvasDnd({ diag, activeTool, zoom, svgRef, onCursorChange }: UseCanvasDndProps) {
+export function useCanvasDnd({ diag, activeTool, zoom: _zoom, svgRef, onCursorChange }: UseCanvasDndProps) {
   const [dragState, setDragState] = useState<DragState | null>(null);
   const dragStateRef = useRef(dragState);
-  dragStateRef.current = dragState;
   const diagRef = useRef(diag);
-  diagRef.current = diag;
+
+  useEffect(() => {
+    dragStateRef.current = dragState;
+    diagRef.current = diag;
+  }, [dragState, diag]);
 
   const [editingBlockId, setEditingBlockId] = useState<string | null>(null);
   const [editingArrowId, setEditingArrowId] = useState<string | null>(null);

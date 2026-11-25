@@ -132,8 +132,8 @@ export function validateArrowConnection(
     else if (target.side === 'bottom') role = 'mechanism';
   } else if (source.type === 'block' && target.type === 'border') {
     role = 'output';
-  } else if (source.type === 'arrow_segment' && (source as any).role) {
-    role = (source as any).role;
+  } else if (source.type === 'arrow_segment' && source.role) {
+    role = source.role;
   }
 
   return {

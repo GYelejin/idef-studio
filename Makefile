@@ -29,7 +29,7 @@ build:
 	bun run build
 
 test:
-	bun test
+	bun test tests/unit
 
 test-e2e:
 	bun run test:e2e

@@ -5,7 +5,7 @@ import './index.css';
 
 import { store } from './core/store';
 
-(window as any).store = store;
+(window as Window & { store?: typeof store }).store = store;
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

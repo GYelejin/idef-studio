@@ -6,10 +6,9 @@ import {
   Point,
   ICOMRole,
   SnapTarget,
-  ArrowEndpoint,
 } from '../../types/idef0';
 import { EditorState, Listener, ToolMode, ProjectSnapshot } from './types';
-import { createDefaultProject } from './projectFactory';
+import { createInitialProject } from './projectFactory';
 import { HistoryOps } from './historyOps';
 import { BlockOps } from './blockOps';
 import { ArrowOps } from './arrowOps';
@@ -21,10 +20,10 @@ import { ProjectOps } from './projectOps';
 
 export class EditorStore {
   private state: EditorState;
-  private listeners: Set<Listener> = new Set();
+  private listeners = new Set<Listener>();
 
   constructor() {
-    const defaultProject = createDefaultProject();
+    const defaultProject = createInitialProject();
     this.state = {
       project: defaultProject,
       activeDiagramId: defaultProject.activeDiagramId,
@@ -75,10 +74,6 @@ export class EditorStore {
     this.state.selectedObjectId = id;
     this.state.selectedObjectType = type;
     this.notify();
-  }
-
-  public clearSelection(): void {
-    this.selectObject(null, null);
   }
 
   public setZoom(zoom: number): void {
@@ -136,16 +131,6 @@ export class EditorStore {
     this.notify();
   }
 
-  public setBlockColor(blockId: string, color: string): void {
-    const diag = this.getActiveDiagram();
-    if (!diag) return;
-    const block = diag.blocks.find((b) => b.id === blockId);
-    if (!block) return;
-    this.pushHistory();
-    block.color = color;
-    this.notify();
-  }
-
   // --- Arrow Operations ---
   public createArrow(arrowData: Omit<Arrow, 'id'> & { id?: string }): Arrow | null {
     const arrow = ArrowOps.createArrow(this.state, arrowData);
@@ -188,17 +173,8 @@ export class EditorStore {
     this.notify();
   }
 
-  public _legacySetArrowPathMode(arrowId: string, mode: 'auto' | 'pinned'): void {
-    ArrowOps._legacySetArrowPathMode(this.state, arrowId, mode);
-  }
-
   public resetArrowRoute(arrowId: string): void {
     ArrowOps.resetArrowRoute(this.state, arrowId);
-    this.notify();
-  }
-
-  public setFlowFamilyColor(arrowId: string, color: string): void {
-    ArrowOps.setFlowFamilyColor(this.state, arrowId, color);
     this.notify();
   }
 
@@ -261,18 +237,9 @@ export class EditorStore {
   }
 
   // --- Junction Operations ---
-  public createJunction(type: 'branch' | 'merge', point: Point, parentArrowId?: string): { id: string; type: 'branch' | 'merge'; point: Point; parentArrowId?: string; childArrowIds: string[] } {
+  public createJunction(type: 'branch' | 'merge', point: Point, parentArrowId?: string): { id: string; type: 'branch' | 'merge'; point: Point; parentArrowId: string; childArrowIds: string[] } {
     const diag = this.getActiveDiagram();
-    const junc = {
-      id: `junc-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
-      type,
-      point: { ...point },
-      parentArrowId,
-      childArrowIds: [] as string[],
-    };
-    if (diag) {
-      diag.junctions.push(junc);
-    }
+    const junc = JunctionOps.createJunction(diag, type, point, parentArrowId ?? '');
     this.notify();
     return junc;
   }
@@ -332,10 +299,6 @@ export class EditorStore {
     const snap = HistoryOps.saveProjectSnapshot(this.state, name);
     this.notify();
     return snap;
-  }
-
-  public createSnapshot(name: string): ProjectSnapshot {
-    return this.saveProjectSnapshot(name);
   }
 
   public restoreSnapshot(snapshotId: string): boolean {

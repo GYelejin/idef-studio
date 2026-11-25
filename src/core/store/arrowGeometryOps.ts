@@ -1,9 +1,8 @@
-import { Arrow, Point, Diagram } from "../../types/idef0";
+import { Point, Diagram } from "../../types/idef0";
 import { EditorState } from "./types";
 import { HistoryOps } from "./historyOps";
 import {
   getSegmentsFromPoints,
-  distanceToSegment,
   generateLeaderPoints,
   buildOrthogonalRoute,
   CANVAS_WIDTH,
@@ -16,8 +15,8 @@ function getActiveDiagram(state: EditorState): Diagram | undefined {
   return state.project.diagrams.find((d) => d.id === state.activeDiagramId);
 }
 
-export class ArrowGeometryOps {
-  public static shiftArrowSegment(state: EditorState, 
+export const ArrowGeometryOps = {
+  shiftArrowSegment(state: EditorState, 
     arrowId: string,
     segIdx: number,
     newCoord: number,
@@ -201,10 +200,10 @@ export class ArrowGeometryOps {
 
     
     
-  }
+  },
 
 
-  public static removeArrowPoint(state: EditorState, arrowId: string, pointIndex: number): void {
+  removeArrowPoint(state: EditorState, arrowId: string, pointIndex: number): void {
     const diag = getActiveDiagram(state);
     if (!diag) return;
     const arrow = diag.arrows.find(a => a.id === arrowId);
@@ -228,9 +227,9 @@ export class ArrowGeometryOps {
     if (arrow.points.length === beforeLen && pointIndex > 1) {
       ArrowGeometryOps.removeArrowSegment(state, arrowId, pointIndex - 1);
     }
-  }
+  },
 
-  public static removeArrowSegment(state: EditorState, arrowId: string, segmentIndex: number): void {
+  removeArrowSegment(state: EditorState, arrowId: string, segmentIndex: number): void {
     const diag = getActiveDiagram(state);
     if (!diag) return;
     const arrow = diag.arrows.find(a => a.id === arrowId);
@@ -272,7 +271,7 @@ export class ArrowGeometryOps {
     const srcSide = arrow.source.side;
     const tgtSide = arrow.target.side;
 
-    let canMerge = false;
+    let canMerge: boolean;
     let newPts = [...arrow.points];
 
     if (prevIsHoriz) {
@@ -345,9 +344,9 @@ export class ArrowGeometryOps {
       arrow.leaderPoints = generateLeaderPoints(arrow.labelPos, arrow.points);
     }
     synchronizeJunctions(diag);
-  }
+  },
 
-  public static straightenArrow(state: EditorState, arrowId: string): void {
+  straightenArrow(state: EditorState, arrowId: string): void {
     const diag = getActiveDiagram(state);
     if (!diag) return;
     const arrow = diag.arrows.find(a => a.id === arrowId);
@@ -417,9 +416,9 @@ export class ArrowGeometryOps {
     }
     synchronizeJunctions(diag);
     
-  }
+  },
 
-  public static updateArrowPointCoord(state: EditorState, arrowId: string, pointIndex: number, coord: 'x' | 'y', value: number): void {
+  updateArrowPointCoord(state: EditorState, arrowId: string, pointIndex: number, coord: 'x' | 'y', value: number): void {
     const diag = getActiveDiagram(state);
     if (!diag) return;
     const arrow = diag.arrows.find(a => a.id === arrowId);
@@ -449,4 +448,4 @@ export class ArrowGeometryOps {
   }
 
   // --- Decomposition ---
-}
+};

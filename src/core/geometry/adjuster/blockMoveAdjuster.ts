@@ -1,4 +1,4 @@
-import { Arrow, Block, Junction } from "../../types/idef0";
+import { Arrow, Block, Junction } from "../../../types/idef0";
 import { getSegmentsFromPoints, distanceToSegment, generateLeaderPoints, clampLabelToCanvas } from "../math";
 import { buildOrthogonalRoute } from "../router";
 
@@ -125,7 +125,7 @@ export function adjustArrowOnBlockMove(
       }
     }
     // Subcase B2: Block(Right) -> Block(Top/Control)
-    else if (arrow.source.side === 'right' && (arrow.target.side === 'top' || (arrow.target as any).role === 'control')) {
+    else if (arrow.source.side === 'right' && (arrow.target.side === 'top' || arrow.target.role === 'control')) {
       if (pSrc.x + 20 < pTgt.x && pSrc.y < pTgt.y - 10) {
         arrow.points = [
           pSrc,

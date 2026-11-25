@@ -24,7 +24,7 @@ interface CanvasArrowProps {
   onStartLabelDrag: (arrow: Arrow, pt: Point) => void;
 }
 
-export const CanvasArrow: React.FC<CanvasArrowProps> = ({
+const CanvasArrow: React.FC<CanvasArrowProps> = ({
   arrow,
   diag,
   isSelected,
@@ -101,7 +101,7 @@ export const CanvasArrow: React.FC<CanvasArrowProps> = ({
         markerEnd={arrow.target.type !== 'junction' ? `url(#marker-arrow-${arrow.id})` : undefined}
         id={`path-${arrow.id}`}
         style={{
-          stroke: isSelected ? 'var(--accent-primary, #2563eb)' : (arrow.color || '#000000'),
+          stroke: isSelected ? 'var(--accent-primary, #2563eb)' : '#000000',
           cursor: 'pointer',
           pointerEvents: 'stroke',
         }}
@@ -116,7 +116,7 @@ export const CanvasArrow: React.FC<CanvasArrowProps> = ({
         <path
           d={getTunnelParenthesisPath(renderPoints[0], renderPoints[1], false)}
           fill="none"
-          stroke={isSelected ? 'var(--accent-primary, #2563eb)' : (arrow.color || '#000000')}
+          stroke={isSelected ? 'var(--accent-primary, #2563eb)' : '#000000'}
           strokeWidth="1.8"
           strokeLinecap="round"
           id={`tunnel-src-${arrow.id}`}
@@ -128,7 +128,7 @@ export const CanvasArrow: React.FC<CanvasArrowProps> = ({
         <path
           d={getTunnelParenthesisPath(renderPoints[renderPoints.length - 2], renderPoints[renderPoints.length - 1], true)}
           fill="none"
-          stroke={isSelected ? 'var(--accent-primary, #2563eb)' : (arrow.color || '#000000')}
+          stroke={isSelected ? 'var(--accent-primary, #2563eb)' : '#000000'}
           strokeWidth="1.8"
           strokeLinecap="round"
           id={`tunnel-tgt-${arrow.id}`}

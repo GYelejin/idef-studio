@@ -12,7 +12,7 @@ interface CanvasBlockProps {
   onResizeHandleMouseDown: (e: React.MouseEvent, block: Block, handle: 'nw' | 'ne' | 'se' | 'sw') => void;
 }
 
-export const CanvasBlock: React.FC<CanvasBlockProps> = ({
+const CanvasBlock: React.FC<CanvasBlockProps> = ({
   block,
   diag,
   isSelected,
@@ -39,7 +39,7 @@ export const CanvasBlock: React.FC<CanvasBlockProps> = ({
         y={block.y}
         width={block.width}
         height={block.height}
-        style={{ fill: block.color || '#ffffff' }}
+        style={{ fill: '#ffffff' }}
         id={`rect-${block.id}`}
       />
 

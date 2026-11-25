@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowRight, ArrowDown, ArrowUp, Square, ChevronDown, ChevronRight, GitFork, GitMerge, Trash2 } from "lucide-react";
+import { ArrowRight, ChevronDown, ChevronRight, GitFork, GitMerge, Trash2 } from "lucide-react";
 import { store, EditorState } from "../../core/store";
 import { Block, ICOMRole, Side } from "../../types/idef0";
 import { getArrowParent } from "../../core/geometry";
@@ -12,7 +12,7 @@ interface BlockInspectorProps {
   toggleSection: (role: string) => void;
 }
 
-export const BlockInspector: React.FC<BlockInspectorProps> = ({
+const BlockInspector: React.FC<BlockInspectorProps> = ({
   block,
   state,
   collapsedSections,
@@ -87,7 +87,7 @@ export const BlockInspector: React.FC<BlockInspectorProps> = ({
                             width: '8px',
                             height: '8px',
                             borderRadius: '50%',
-                            background: arrow.color || '#2563eb',
+                            background: '#2563eb',
                             flexShrink: 0,
                           }}
                         />

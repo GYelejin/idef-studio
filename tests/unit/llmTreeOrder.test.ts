@@ -6,7 +6,7 @@ import { Project } from '../../src/types/idef0';
 
 describe('LLM Tree Order & Bottom-Up Traversal', () => {
   it('correctly traverses Fibonacci Matrix model bottom-up (leaves first -> A0 last)', () => {
-    const jsonPath = path.resolve(__dirname, '../../fibonacci-matrix-model.json');
+    const jsonPath = path.resolve(__dirname, '../../src/assets/fibonacci-matrix-model.json');
     const project: Project = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
 
     const tasks = buildBottomUpBlockTasks(project);
@@ -44,7 +44,7 @@ describe('LLM Tree Order & Bottom-Up Traversal', () => {
   });
 
   it('correctly extracts ICOM roles for activity blocks', () => {
-    const jsonPath = path.resolve(__dirname, '../../fibonacci-matrix-model.json');
+    const jsonPath = path.resolve(__dirname, '../../src/assets/fibonacci-matrix-model.json');
     const project: Project = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
 
     const diagA0 = project.diagrams.find(d => d.code === 'A0' && !d.parentBlockId)!;

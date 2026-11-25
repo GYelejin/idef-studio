@@ -24,6 +24,12 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
+      - name: Typecheck
+        run: bun run typecheck
+
+      - name: Lint
+        run: bun run lint
+
       - name: Run Unit Tests (482 tests)
         run: bun test tests/unit
 

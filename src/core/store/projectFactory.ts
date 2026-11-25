@@ -1,11 +1,7 @@
 import { Project } from '../../types/idef0';
 import { STORAGE_KEY } from './types';
 
-export function cloneProject(p: Project): Project {
-  return JSON.parse(JSON.stringify(p));
-}
-
-export function createCleanProject(): Project {
+function createCleanProject(): Project {
   return {
     id: `proj-${Date.now()}`,
     name: 'Закупочная деятельность предприятия',
@@ -52,5 +48,3 @@ export function createInitialProject(): Project {
   }
   return createCleanProject();
 }
-
-export const createDefaultProject = createInitialProject;

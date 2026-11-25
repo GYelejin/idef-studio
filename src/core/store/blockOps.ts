@@ -1,10 +1,10 @@
-import { Block, Diagram } from '../../types/idef0';
+import { Block } from '../../types/idef0';
 import { CANVAS_WIDTH, CANVAS_HEIGHT, adjustArrowOnBlockMove, adjustArrowOnBlockResize, synchronizeJunctions } from '../geometry';
 import { EditorState } from './types';
 import { HistoryOps } from './historyOps';
 
-export class BlockOps {
-  public static createBlock(state: EditorState, x: number, y: number, name = 'Новая функция'): Block | null {
+export const BlockOps = {
+  createBlock(state: EditorState, x: number, y: number, name = 'Новая функция'): Block | null {
     const diag = state.project.diagrams.find((d) => d.id === state.activeDiagramId);
     if (!diag) return null;
 
@@ -40,9 +40,9 @@ export class BlockOps {
     state.selectedObjectId = block.id;
     state.selectedObjectType = 'block';
     return block;
-  }
+  },
 
-  public static updateBlock(state: EditorState, id: string, updates: Partial<Block>, saveHistory = true): void {
+  updateBlock(state: EditorState, id: string, updates: Partial<Block>, saveHistory = true): void {
     const diag = state.project.diagrams.find((d) => d.id === state.activeDiagramId);
     if (!diag) return;
 
@@ -67,9 +67,9 @@ export class BlockOps {
       }
       synchronizeJunctions(diag);
     }
-  }
+  },
 
-  public static resizeBlock(
+  resizeBlock(
     state: EditorState,
     id: string,
     bounds: { x: number; y: number; width: number; height: number },
@@ -96,9 +96,9 @@ export class BlockOps {
       adjustArrowOnBlockResize(arrow, block, oldBounds, bounds, diag.junctions, diag.blocks);
     }
     synchronizeJunctions(diag);
-  }
+  },
 
-  public static deleteBlock(state: EditorState, id: string): void {
+  deleteBlock(state: EditorState, id: string): void {
     const diag = state.project.diagrams.find((d) => d.id === state.activeDiagramId);
     if (!diag) return;
 
@@ -119,4 +119,4 @@ export class BlockOps {
       state.selectedObjectType = null;
     }
   }
-}
+};

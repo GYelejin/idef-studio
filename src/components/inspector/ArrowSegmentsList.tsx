@@ -8,7 +8,7 @@ interface ArrowSegmentsListProps {
   arrow: Arrow;
 }
 
-export const ArrowSegmentsList: React.FC<ArrowSegmentsListProps> = ({ arrow }) => {
+const ArrowSegmentsList: React.FC<ArrowSegmentsListProps> = ({ arrow }) => {
   const segs = getSegmentsFromPoints(arrow.points || [], arrow.id, arrow.source.side, arrow.target.side);
 
   return (

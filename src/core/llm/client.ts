@@ -97,12 +97,12 @@ export async function generateFunctionInChat(
       body: JSON.stringify(payload),
       signal: timeoutController.signal,
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     if (signal?.aborted) {
-      throw new Error('Генерация отменена пользователем');
+      throw new Error('Генерация отменена пользователем', { cause: err });
     }
     if (timeoutController.signal.aborted) {
-      throw new Error(`Превышено время ожидания ответа (${timeoutSec} сек). Сервер или прокси не ответил вовремя.`);
+      throw new Error(`Превышено время ожидания ответа (${timeoutSec} сек). Сервер или прокси не ответил вовремя.`, { cause: err });
     }
     throw err;
   } finally {
@@ -113,7 +113,7 @@ export async function generateFunctionInChat(
   }
 
   if (!response.ok) {
-    let errDetail = '';
+    let errDetail: string;
     try {
       const errJson = await response.json();
       errDetail = errJson.error?.message || JSON.stringify(errJson);

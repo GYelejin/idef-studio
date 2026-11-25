@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import {
   X,
   Wand2,
@@ -10,8 +10,6 @@ import {
   Check,
   AlertCircle,
   Code2,
-  ChevronDown,
-  ChevronRight,
   Eye,
   EyeOff,
   Sparkles,
@@ -23,19 +21,9 @@ import {
   CornerDownRight,
 } from 'lucide-react';
 import { Project } from '../../types/idef0';
-import {
-  LlmConfig,
-  DEFAULT_LLM_CONFIG,
-  LLM_STORAGE_KEY,
-  BlockGenerationTask,
-} from '../../core/llm/types';
-import { buildBottomUpBlockTasks } from '../../core/llm/treeOrder';
-import {
-  initConversationHistory,
-  generateFunctionInChat,
-  assembleMainPy,
-} from '../../core/llm/client';
+import { assembleMainPy } from '../../core/llm/client';
 import { buildPipelineTree, PipelineTreeNode } from './pipelineTree';
+import { useLlmGeneration } from './useLlmGeneration';
 
 interface LlmGeneratorModalProps {
   project: Project;
@@ -43,148 +31,28 @@ interface LlmGeneratorModalProps {
   onClose: () => void;
 }
 
-export const LlmGeneratorModal: React.FC<LlmGeneratorModalProps> = ({
+const LlmGeneratorModal: React.FC<LlmGeneratorModalProps> = ({
   project,
   isOpen,
   onClose,
 }) => {
-  const [config, setConfig] = useState<LlmConfig>(() => {
-    if (typeof localStorage !== 'undefined') {
-      try {
-        const saved = localStorage.getItem(LLM_STORAGE_KEY);
-        if (saved) {
-          const parsed = JSON.parse(saved);
-          // If stored config still points to openai default, update to new default
-          if (parsed.apiUrl === 'https://api.openai.com/v1') {
-            return DEFAULT_LLM_CONFIG;
-          }
-          return { ...DEFAULT_LLM_CONFIG, ...parsed };
-        }
-      } catch {
-        // ignore
-      }
-    }
-    return DEFAULT_LLM_CONFIG;
-  });
-
   const [showApiKey, setShowApiKey] = useState(false);
   const [activeTab, setActiveTab] = useState<'pipeline' | 'settings' | 'mainpy'>('pipeline');
-  const [tasks, setTasks] = useState<BlockGenerationTask[]>([]);
-  const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null);
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [currentTaskIndex, setCurrentTaskIndex] = useState<number | null>(null);
-  const [copied, setCopied] = useState(false);
-  const [mainPyCode, setMainPyCode] = useState<string>('');
-
-  const abortControllerRef = useRef<AbortController | null>(null);
-
-  useEffect(() => {
-    if (isOpen && project) {
-      const generatedTasks = buildBottomUpBlockTasks(project);
-      setTasks(generatedTasks);
-      setMainPyCode('');
-      setCurrentTaskIndex(null);
-      setIsGenerating(false);
-      if (generatedTasks.length > 0) {
-        setSelectedTaskId(generatedTasks[0].id);
-      }
-    }
-  }, [isOpen, project]);
-
-  const handleConfigChange = (field: keyof LlmConfig, value: string | number) => {
-    const updated = { ...config, [field]: value };
-    setConfig(updated);
-    if (typeof localStorage !== 'undefined') {
-      localStorage.setItem(LLM_STORAGE_KEY, JSON.stringify(updated));
-    }
-  };
-
-  const handleStartGeneration = async () => {
-    if (!config.apiKey && !config.apiUrl.includes('localhost') && !config.apiUrl.includes('127.0.0.1')) {
-      alert('Укажите ключ API в настройках для вызова LLM.');
-      setActiveTab('settings');
-      return;
-    }
-
-    setIsGenerating(true);
-    const controller = new AbortController();
-    abortControllerRef.current = controller;
-
-    const updatedTasks = [...tasks];
-    for (const t of updatedTasks) {
-      t.status = 'pending';
-      t.generatedCode = undefined;
-      t.error = undefined;
-    }
-    setTasks([...updatedTasks]);
-
-    try {
-      const chatHistory = initConversationHistory(config, updatedTasks, project.name);
-
-      for (let i = 0; i < updatedTasks.length; i++) {
-        if (controller.signal.aborted) break;
-
-        setCurrentTaskIndex(i);
-        const task = updatedTasks[i];
-        setSelectedTaskId(task.id);
-        task.status = 'generating';
-        setTasks([...updatedTasks]);
-
-        try {
-          const code = await generateFunctionInChat(
-            config,
-            task,
-            i,
-            updatedTasks.length,
-            chatHistory,
-            controller.signal
-          );
-          task.status = 'completed';
-          task.generatedCode = code;
-        } catch (err: any) {
-          if (controller.signal.aborted) {
-            task.status = 'pending';
-            break;
-          }
-          task.status = 'error';
-          task.error = err?.message || 'Ошибка генерации';
-        }
-
-        setTasks([...updatedTasks]);
-      }
-
-      const fullPy = assembleMainPy(updatedTasks, project.name);
-      setMainPyCode(fullPy);
-    } finally {
-      setIsGenerating(false);
-      setCurrentTaskIndex(null);
-      abortControllerRef.current = null;
-    }
-  };
-
-  const handleStopGeneration = () => {
-    if (abortControllerRef.current) {
-      abortControllerRef.current.abort();
-    }
-    setIsGenerating(false);
-  };
-
-  const handleDownloadMainPy = () => {
-    const content = mainPyCode || assembleMainPy(tasks, project.name);
-    const blob = new Blob([content], { type: 'text/x-python;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'main.py';
-    a.click();
-    URL.revokeObjectURL(url);
-  };
-
-  const handleCopyCode = (code: string) => {
-    navigator.clipboard.writeText(code);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+  const {
+    config,
+    tasks,
+    selectedTaskId,
+    setSelectedTaskId,
+    isGenerating,
+    copied,
+    mainPyCode,
+    handleConfigChange,
+    resetConfig,
+    handleStartGeneration,
+    handleStopGeneration,
+    handleDownloadMainPy,
+    handleCopyCode,
+  } = useLlmGeneration(project);
 
   if (!isOpen) return null;
 
@@ -485,7 +353,7 @@ export const LlmGeneratorModal: React.FC<LlmGeneratorModalProps> = ({
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   {!isGenerating ? (
                     <button
-                      onClick={handleStartGeneration}
+                      onClick={() => handleStartGeneration(() => setActiveTab('settings'))}
                       data-testid="btn-start-generation"
                       style={{
                         padding: '6px 14px',
@@ -618,7 +486,7 @@ export const LlmGeneratorModal: React.FC<LlmGeneratorModalProps> = ({
 
                         {selectedTask.generatedCode && (
                           <button
-                            onClick={() => handleCopyCode(selectedTask.generatedCode!)}
+                            onClick={() => handleCopyCode(selectedTask.generatedCode ?? '')}
                             style={{
                               border: '1px solid #cbd5e1',
                               background: '#ffffff',
@@ -963,12 +831,7 @@ export const LlmGeneratorModal: React.FC<LlmGeneratorModalProps> = ({
 
               <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '4px' }}>
                 <button
-                  onClick={() => {
-                    setConfig(DEFAULT_LLM_CONFIG);
-                    if (typeof localStorage !== 'undefined') {
-                      localStorage.setItem(LLM_STORAGE_KEY, JSON.stringify(DEFAULT_LLM_CONFIG));
-                    }
-                  }}
+                  onClick={resetConfig}
                   style={{
                     border: '1px solid #cbd5e1',
                     background: '#ffffff',

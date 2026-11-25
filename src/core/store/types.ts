@@ -1,15 +1,6 @@
-import { Project, Point } from '../../types/idef0';
+import { Diagram, Project, Point, ProjectSnapshot, ToolMode } from '../../types/idef0';
 
-export type ToolMode = 'select' | 'block' | 'arrow';
-
-export interface ProjectSnapshot {
-  id: string;
-  name: string;
-  createdAt: string;
-  diagramsCount?: number;
-  blocksCount?: number;
-  project: Project;
-}
+export type { ProjectSnapshot, ToolMode };
 
 export interface EditorState {
   project: Project;
@@ -32,3 +23,7 @@ export interface EditorState {
 export type Listener = (state: EditorState) => void;
 
 export const STORAGE_KEY = 'idef0_project_v18';
+
+export function getActiveDiagram(state: EditorState): Diagram | undefined {
+  return state.project.diagrams.find((d) => d.id === state.activeDiagramId);
+}

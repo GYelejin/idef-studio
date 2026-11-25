@@ -9,7 +9,7 @@ interface CanvasDraftOverlayProps {
   activeTool: string;
 }
 
-export const CanvasDraftOverlay: React.FC<CanvasDraftOverlayProps> = ({
+const CanvasDraftOverlay: React.FC<CanvasDraftOverlayProps> = ({
   dragState,
   diag,
   activeTool,

@@ -1,10 +1,72 @@
-import { Point } from '../../types/idef0';
+import { Diagram, Junction, Point } from '../../types/idef0';
 import { getSegmentsFromPoints, distanceToSegment, distance, buildOrthogonalRoute, generateLeaderPoints } from '../geometry';
 import { EditorState } from './types';
 import { HistoryOps } from './historyOps';
 
-export class JunctionOps {
-  public static moveJunction(state: EditorState, juncId: string, targetPt: Point, saveHistory = true): void {
+export interface EnsureJunctionOptions {
+  type: 'branch' | 'merge';
+  point: Point;
+  parentArrowId: string;
+  childArrowId?: string;
+  existingJunctionId?: string;
+  reuseWithinRadius?: number;
+}
+
+export const JunctionOps = {
+  createJunction(
+    diag: Diagram | undefined,
+    type: 'branch' | 'merge',
+    point: Point,
+    parentArrowId = '',
+    childArrowIds: string[] = [],
+    id?: string
+  ): Junction {
+    const junc: Junction = {
+      id: id ?? `junc-${type}-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
+      type,
+      point: { ...point },
+      parentArrowId,
+      childArrowIds: [...childArrowIds],
+    };
+    if (diag) {
+      diag.junctions.push(junc);
+    }
+    return junc;
+  },
+
+  ensureJunction(diag: Diagram, opts: EnsureJunctionOptions): Junction {
+    const { type, point, parentArrowId, childArrowId, existingJunctionId, reuseWithinRadius } = opts;
+
+    let junc: Junction | undefined;
+    if (existingJunctionId) {
+      junc = diag.junctions.find((j) => j.id === existingJunctionId);
+    }
+    if (!junc && reuseWithinRadius !== undefined) {
+      junc = diag.junctions.find(
+        (j) =>
+          j.type === type &&
+          Math.abs(j.point.x - point.x) <= reuseWithinRadius &&
+          Math.abs(j.point.y - point.y) <= reuseWithinRadius
+      );
+    }
+
+    if (junc) {
+      if (childArrowId && !junc.childArrowIds.includes(childArrowId)) {
+        junc.childArrowIds.push(childArrowId);
+      }
+      return junc;
+    }
+
+    return JunctionOps.createJunction(
+      diag,
+      type,
+      point,
+      parentArrowId,
+      childArrowId ? [childArrowId] : [],
+      existingJunctionId
+    );
+  },
+  moveJunction(state: EditorState, juncId: string, targetPt: Point, saveHistory = true): void {
     const diag = state.project.diagrams.find((d) => d.id === state.activeDiagramId);
     if (!diag) return;
 
@@ -71,7 +133,7 @@ export class JunctionOps {
             child.points = buildOrthogonalRoute(child.source, child.target);
           }
         } else if (child.points.length === 3) {
-          if (child.target.side === 'top' || (child.target as any).role === 'control' || child.target.side === 'bottom' || (child.target as any).role === 'mechanism') {
+          if (child.target.side === 'top' || child.target.role === 'control' || child.target.side === 'bottom' || child.target.role === 'mechanism') {
             child.points[1].x = child.target.point.x;
             child.points[1].y = junc.point.y;
           } else {
@@ -113,4 +175,4 @@ export class JunctionOps {
       }
     }
   }
-}
+};

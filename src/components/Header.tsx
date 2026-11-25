@@ -21,11 +21,12 @@ import {
   PanelBottomClose,
   PanelBottomOpen,
   HelpCircle,
-  X,
   Wand2,
 } from 'lucide-react';
 import { store } from '../core/store';
 import { exportProjectToJson, importProjectFromJson } from '../core/exporter';
+import { isTauriRuntime, openTextFileNative, saveFileNativeOrBrowser } from '../core/filePlatform';
+import CreateProjectModal from './CreateProjectModal';
 import { runIDEF0Linter } from '../core/linter';
 import { EditorState } from '../core/store/types';
 import { Diagram } from '../types/idef0';
@@ -77,7 +78,7 @@ export const Header: React.FC<HeaderProps> = ({
     setCreateModalOpen(true);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!project) return;
     const issues = activeDiag ? runIDEF0Linter(project, activeDiag.id) : [];
     const critical = issues.filter((i) => i.severity === 'error');
@@ -96,13 +97,11 @@ export const Header: React.FC<HeaderProps> = ({
     }
 
     const json = exportProjectToJson(project);
-    const blob = new Blob([json], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${project.name || 'idef0-project'}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
+    await saveFileNativeOrBrowser(
+      `${project.name || 'idef0-project'}.json`,
+      new Blob([json], { type: 'application/json' }),
+      [{ name: 'JSON Project', extensions: ['json'] }]
+    );
   };
 
   const handleOpenFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -156,7 +155,21 @@ export const Header: React.FC<HeaderProps> = ({
         </button>
         <button
           className="btn-icon"
-          onClick={() => fileInputRef.current?.click()}
+          onClick={async () => {
+            if (isTauriRuntime()) {
+              const content = await openTextFileNative([{ name: 'JSON Project', extensions: ['json'] }]);
+              if (content !== null) {
+                const res = importProjectFromJson(content);
+                if (res.success && res.project) {
+                  store.importProject(res.project);
+                } else {
+                  alert(`Ошибка при открытии проекта: ${res.error}`);
+                }
+              }
+              return;
+            }
+            fileInputRef.current?.click();
+          }}
           title="Открыть проект JSON"
           data-testid="btn-open"
         >
@@ -354,126 +367,13 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Custom Modal Dialog: Create New Project */}
       {createModalOpen && (
-        <div
-          className="modal-backdrop"
-          data-testid="new-project-modal"
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: 'rgba(0, 0, 0, 0.55)',
-            zIndex: 9999,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backdropFilter: 'blur(2px)',
+        <CreateProjectModal
+          onClose={() => setCreateModalOpen(false)}
+          onConfirm={() => {
+            setCreateModalOpen(false);
+            store.resetProject();
           }}
-        >
-          <div
-            className="modal-dialog"
-            style={{
-              width: '100%',
-              maxWidth: '480px',
-              background: 'var(--bg-panel)',
-              border: '1px solid var(--border-color)',
-              borderRadius: '8px',
-              boxShadow: '0 16px 36px rgba(0,0,0,0.3)',
-              overflow: 'hidden',
-            }}
-          >
-            <div
-              className="modal-header"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: '16px 20px',
-                borderBottom: '1px solid var(--border-color)',
-                background: 'var(--bg-panel-header)',
-              }}
-            >
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '10px',
-                  fontWeight: 600,
-                  fontSize: '15px',
-                  color: 'var(--text-primary)',
-                }}
-              >
-                <FilePlus size={18} color="var(--accent-primary)" />
-                <span>Создать новый проект</span>
-              </div>
-              <button
-                className="btn-icon"
-                onClick={() => setCreateModalOpen(false)}
-                data-testid="btn-close-new-project-modal"
-                title="Закрыть"
-              >
-                <X size={16} />
-              </button>
-            </div>
-            <div
-              className="modal-body"
-              style={{
-                padding: '20px',
-                fontSize: '13px',
-                lineHeight: '1.6',
-                color: 'var(--text-secondary)',
-              }}
-            >
-              <p
-                style={{
-                  margin: '0 0 8px 0',
-                  fontSize: '14px',
-                  color: 'var(--text-primary)',
-                  fontWeight: 500,
-                }}
-              >
-                Вы действительно хотите создать новый проект?
-              </p>
-              <p style={{ margin: 0, fontSize: '12px', color: 'var(--text-muted)' }}>
-                Все несохраненные изменения текущей модели будут удалены. Будет инициализирован
-                чистый проект с контекстной диаграммой.
-              </p>
-            </div>
-            <div
-              className="modal-footer"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'flex-end',
-                gap: '10px',
-                padding: '14px 20px',
-                borderTop: '1px solid var(--border-color)',
-                background: 'var(--bg-panel-header)',
-              }}
-            >
-              <button
-                className="btn"
-                onClick={() => setCreateModalOpen(false)}
-                data-testid="btn-cancel-new-project"
-                style={{ padding: '7px 16px', fontSize: '13px' }}
-              >
-                Отмена
-              </button>
-              <button
-                className="btn btn-primary"
-                onClick={() => {
-                  setCreateModalOpen(false);
-                  store.resetProject();
-                }}
-                data-testid="btn-confirm-new-project"
-                style={{ padding: '7px 18px', fontSize: '13px', fontWeight: 500 }}
-              >
-                Создать проект
-              </button>
-            </div>
-          </div>
-        </div>
+        />
       )}
     </header>
   );

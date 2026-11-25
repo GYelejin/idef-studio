@@ -186,7 +186,7 @@ export async function exportSvgToPngBlob(svgString: string, scale = 2): Promise<
       }
     };
 
-    img.onerror = (e) => {
+    img.onerror = () => {
       URL.revokeObjectURL(url);
       reject(new Error('Ошибка загрузки SVG в растровый конвертер'));
     };
@@ -266,7 +266,7 @@ export function importProjectFromJson(jsonString: string): { success: boolean; p
     }
 
     return { success: true, project: data as Project };
-  } catch (err: any) {
-    return { success: false, error: `Ошибка синтаксического анализа JSON: ${err?.message || err}` };
+  } catch (err: unknown) {
+    return { success: false, error: `Ошибка синтаксического анализа JSON: ${err instanceof Error ? err.message : String(err)}` };
   }
 }

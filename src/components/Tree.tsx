@@ -47,25 +47,6 @@ export const Tree: React.FC<TreeProps> = ({ state }) => {
     store.selectObject(blockId, 'block');
   };
 
-  // Auto-expand active diagram chain
-  useEffect(() => {
-    if (project) {
-      const toExpand: Record<string, boolean> = {};
-      let cur = diagrams.find((d: Diagram) => d.id === activeDiagramId);
-      while (cur) {
-        toExpand[cur.id] = true;
-        if (cur.parentBlockId) {
-          toExpand[cur.parentBlockId] = true;
-          const pId: string = cur.parentBlockId;
-          cur = diagrams.find((d: Diagram) => d.blocks.some((b: Block) => b.id === pId));
-        } else {
-          break;
-        }
-      }
-      setExpandedNodes((prev) => ({ ...prev, ...toExpand }));
-    }
-  }, [activeDiagramId, project]);
-
   // Panel resize handler
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {

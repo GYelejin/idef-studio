@@ -6,7 +6,7 @@ interface ProjectInspectorProps {
   state: EditorState;
 }
 
-export const ProjectInspector: React.FC<ProjectInspectorProps> = ({ state }) => {
+const ProjectInspector: React.FC<ProjectInspectorProps> = ({ state }) => {
   const { project, activeDiagramId } = state;
   const diag = project.diagrams.find((d) => d.id === activeDiagramId);
   return (
@@ -45,9 +45,9 @@ export const ProjectInspector: React.FC<ProjectInspectorProps> = ({ state }) => 
                 borderRadius: '4px',
               }}
             >
-              {diag.code}
+              {diag?.code}
             </span>
-            <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>{diag.title}</span>
+            <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>{diag?.title}</span>
           </div>
         </div>
       </div>

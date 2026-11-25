@@ -34,10 +34,10 @@ export const boundaryBalanceRule: LinterRule = {
     // If target has tunnelTarget: true, flow enters a tunnel at the block and does NOT appear on child decomposition diagram
     // If source has tunnelSource: true, flow leaves a tunnel from the block and does NOT appear on child decomposition diagram
     const parentInflows = parentDiag.arrows.filter(
-      a => a.target.type === 'block' && a.target.id === parentBlock!.id && !a.tunnelTarget
+      a => a.target.type === 'block' && a.target.id === parentBlock.id && !a.tunnelTarget
     );
     const parentOutflows = parentDiag.arrows.filter(
-      a => a.source.type === 'block' && a.source.id === parentBlock!.id && !a.tunnelSource
+      a => a.source.type === 'block' && a.source.id === parentBlock.id && !a.tunnelSource
     );
 
     // Boundary flows in child diagram (excluding tunneled borders)

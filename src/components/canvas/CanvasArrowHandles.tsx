@@ -1,6 +1,5 @@
 import React from 'react';
 import { Arrow, Point } from '../../types/idef0';
-import { store } from '../../core/store';
 
 interface CanvasArrowHandlesProps {
   arrow: Arrow;
@@ -9,7 +8,7 @@ interface CanvasArrowHandlesProps {
   onStartEndpointDrag: (arrow: Arrow, endType: 'source' | 'target', pt: Point) => void;
 }
 
-export const CanvasArrowHandles: React.FC<CanvasArrowHandlesProps> = ({
+const CanvasArrowHandles: React.FC<CanvasArrowHandlesProps> = ({
   arrow,
   activeTool,
   getSvgCoordinates,

@@ -3,8 +3,8 @@ import { getArrowParent, clampLabelToCanvas } from '../geometry';
 import { EditorState } from './types';
 import { HistoryOps } from './historyOps';
 
-export class DecompositionOps {
-  public static decomposeBlock(state: EditorState, blockId: string): string {
+export const DecompositionOps = {
+  decomposeBlock(state: EditorState, blockId: string): string {
     const diag = state.project.diagrams.find((d) => d.id === state.activeDiagramId);
     if (!diag) return '';
 
@@ -124,9 +124,9 @@ export class DecompositionOps {
     state.selectedObjectId = null;
     state.selectedObjectType = null;
     return newDiagramId;
-  }
+  },
 
-  public static createDiagram(state: EditorState, code: string, title: string, parentBlockId: string | null = null): Diagram {
+  createDiagram(state: EditorState, code: string, title: string, parentBlockId: string | null = null): Diagram {
     HistoryOps.pushHistory(state);
     const newDiag: Diagram = {
       id: `diag-${code.toLowerCase()}-${Date.now()}`,
@@ -140,9 +140,9 @@ export class DecompositionOps {
     state.project.diagrams.push(newDiag);
     state.activeDiagramId = newDiag.id;
     return newDiag;
-  }
+  },
 
-  public static switchDiagram(state: EditorState, diagramId: string): void {
+  switchDiagram(state: EditorState, diagramId: string): void {
     const exists = state.project.diagrams.some((d) => d.id === diagramId);
     if (!exists) return;
 
@@ -151,4 +151,4 @@ export class DecompositionOps {
     state.selectedObjectType = null;
     state.project.activeDiagramId = diagramId;
   }
-}
+};
