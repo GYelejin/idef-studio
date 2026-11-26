@@ -1,0 +1,160 @@
+{
+  "generatorModel": "korolev-k5",
+  "verifierModel": "korolev-k5",
+  "models": [
+    {
+      "model": "example-model.json",
+      "diagrams": 2,
+      "blocks": 5,
+      "verified": 5,
+      "firstPassOk": 2,
+      "repairedBlocks": 3,
+      "totalRepairs": 5,
+      "avgRepairs": "1.00",
+      "astValid": true
+    },
+    {
+      "model": "fibonacci-matrix-model.json",
+      "diagrams": 3,
+      "blocks": 7,
+      "verified": 7,
+      "firstPassOk": 5,
+      "repairedBlocks": 2,
+      "totalRepairs": 4,
+      "avgRepairs": "0.57",
+      "astValid": true
+    },
+    {
+      "model": "automated-bug-fix-pipeline.json",
+      "diagrams": 2,
+      "blocks": 7,
+      "verified": 7,
+      "firstPassOk": 7,
+      "repairedBlocks": 0,
+      "totalRepairs": 0,
+      "avgRepairs": "0.00",
+      "astValid": true
+    },
+    {
+      "model": "cinema-trip-planner.json",
+      "diagrams": 4,
+      "blocks": 13,
+      "verified": 11,
+      "firstPassOk": 6,
+      "repairedBlocks": 5,
+      "totalRepairs": 15,
+      "avgRepairs": "1.15",
+      "astValid": true
+    },
+    {
+      "model": "classroom-schedule-optimizer.json",
+      "diagrams": 2,
+      "blocks": 6,
+      "verified": 6,
+      "firstPassOk": 4,
+      "repairedBlocks": 2,
+      "totalRepairs": 3,
+      "avgRepairs": "0.50",
+      "astValid": true
+    },
+    {
+      "model": "exam-proctoring-monitor.json",
+      "diagrams": 2,
+      "blocks": 5,
+      "verified": 5,
+      "firstPassOk": 5,
+      "repairedBlocks": 0,
+      "totalRepairs": 0,
+      "avgRepairs": "0.00",
+      "astValid": true
+    },
+    {
+      "model": "fibonacci-matrix-variant-a.json",
+      "diagrams": 6,
+      "blocks": 17,
+      "verified": 16,
+      "firstPassOk": 12,
+      "repairedBlocks": 4,
+      "totalRepairs": 9,
+      "avgRepairs": "0.53",
+      "astValid": true
+    },
+    {
+      "model": "fibonacci-matrix-variant-b.json",
+      "diagrams": 3,
+      "blocks": 7,
+      "verified": 4,
+      "firstPassOk": 2,
+      "repairedBlocks": 2,
+      "totalRepairs": 14,
+      "avgRepairs": "2.00",
+      "astValid": true
+    },
+    {
+      "model": "handwritten-solution-ocr.json",
+      "diagrams": 2,
+      "blocks": 6,
+      "verified": 6,
+      "firstPassOk": 3,
+      "repairedBlocks": 3,
+      "totalRepairs": 3,
+      "avgRepairs": "0.50",
+      "astValid": true
+    },
+    {
+      "model": "learning-recommender.json",
+      "diagrams": 2,
+      "blocks": 5,
+      "verified": 5,
+      "firstPassOk": 4,
+      "repairedBlocks": 1,
+      "totalRepairs": 1,
+      "avgRepairs": "0.20",
+      "astValid": true
+    },
+    {
+      "model": "ml-production-analytics.json",
+      "diagrams": 3,
+      "blocks": 10,
+      "verified": 10,
+      "firstPassOk": 8,
+      "repairedBlocks": 2,
+      "totalRepairs": 3,
+      "avgRepairs": "0.30",
+      "astValid": true
+    },
+    {
+      "model": "plane-points-bisector.json",
+      "diagrams": 3,
+      "blocks": 8,
+      "verified": 5,
+      "firstPassOk": 2,
+      "repairedBlocks": 3,
+      "totalRepairs": 13,
+      "avgRepairs": "1.63",
+      "astValid": true
+    },
+    {
+      "model": "program-error-fixer.json",
+      "diagrams": 6,
+      "blocks": 16,
+      "verified": 16,
+      "firstPassOk": 14,
+      "repairedBlocks": 2,
+      "totalRepairs": 2,
+      "avgRepairs": "0.13",
+      "astValid": true
+    },
+    {
+      "model": "schedule-management-system.json",
+      "diagrams": 10,
+      "blocks": 32,
+      "verified": 32,
+      "firstPassOk": 20,
+      "repairedBlocks": 12,
+      "totalRepairs": 17,
+      "avgRepairs": "0.53",
+      "astValid": true
+    }
+  ]
+}

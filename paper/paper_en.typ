@@ -3,7 +3,7 @@
 #show: ieee.with(
   title: [Software Code Generation Using IDEF0 Functional Diagrams and Large Language Models],
   abstract: [
-    Large Language Models (LLMs) generate single functions accurately, but they make errors in multi-file programs. When a user writes one long prompt, the model changes argument names, mismatches data types, and breaks links between functions. This paper presents IDEF0 Studio, an editor that uses IDEF0 diagrams to guide LLM code generation. The editor converts Input-Control-Output-Mechanism (ICOM) arrows into function interfaces and sets a bottom-up generation order. Using an LLM, the editor runs two separate agents: a Generator Agent writes each Python function, and an isolated Verifier Agent plus a structural filter check the function against the ICOM diagram. If an error occurs, the Generator Agent fixes the function in at most three passes. Tests on 7 software programs (23 diagrams and 68 blocks) show that all 68 blocks pass both checks.
+    Large Language Models (LLMs) generate single functions accurately, but they make errors in multi-file programs. When a user writes one long prompt, the model changes argument names, mismatches data types, and breaks links between functions. This paper presents IDEF0 Studio, an editor that uses IDEF0 diagrams to guide LLM code generation. The editor converts Input-Control-Output-Mechanism (ICOM) arrows into function interfaces and sets a bottom-up generation order. Using an LLM, the editor runs two separate agents: a Generator Agent writes each Python function, and an isolated Verifier Agent (without generator chat history and with a separate auditor system prompt) plus a structural filter check the function against the ICOM diagram. If an error occurs, the Generator Agent fixes the function in at most three passes. Offline checks across 16 IDEF0 models (55 diagrams, 158 blocks, 474 ICOM ports) and 479 unit tests confirm 100.0% bottom-up scheduling and structural assembly. In live LLM evaluation (`korolev-k5`) up to the 5-hour API token quota, 14 of 16 models (50 diagrams, 144 blocks) completed with 100.0% Python `ast.parse` syntax validity: 65.3% (94/144) passed on the first attempt, bounded repair rescued another 28.5% (41/144), raising total verification to 93.8% (135/144), while 6.2% (9/144) were flagged for manual review.
   ],
   authors: (
     (
@@ -63,6 +63,7 @@
 )
 
 #set text(font: ("TeX Gyre Termes", "Liberation Serif"))
+#show raw.where(block: true): set text(size: 7.5pt)
 
 = Introduction
 
@@ -78,7 +79,7 @@ This paper makes four contributions:
 + *ICOM program structure:* converts IDEF0 diagrams into a bottom-up generation order.
 + *Two-agent verification:* runs separate Generator and Verifier agents with a rule-based filter and a three-pass repair loop.
 + *IDEF0 Studio editor:* runs live diagram checks, imports `.rsf` models, and generates Python functions step by step.
-+ *Software evaluation:* tests 7 software programs (68 blocks) and compares IDEF0 generation with text-only prompting and multi-agent tools @hong2024metagpt @qian2024chatdev.
++ *Empirical evaluation:* tests 16 IDEF0 models offline (158 blocks, 479 unit tests) and evaluates live Python generation on 14 models (144 blocks), measuring first-pass rate, repair gain, `ast.parse` validity, and qualitative differences from multi-agent tools @hong2024metagpt @qian2024chatdev.
 
 = Software Decomposition with IDEF0
 
@@ -91,12 +92,9 @@ Visual diagrams reduce mental load because they split large systems into small p
 Each IDEF0 block is written as a tuple:
 $ A_i = (N_i, I_i, C_i, O_i, M_i, D_i) $
 
-Here $N_i$ is the function name, $I_i, C_i, O_i, M_i$ are sets of named data arrows, and $D_i$ is the child diagram. For a leaf block, $D_i = emptyset$. Otherwise, $D_i$ is a directed graph $G_i = (V_i, E_i)$ that can include branches, merges, and feedback loops.
+Here $N_i$ is the function name, $I_i, C_i, O_i, M_i$ are sets of named data arrows, and $D_i$ is the child diagram (empty for a leaf block; otherwise a directed graph that can include branches, merges, and feedback loops).
 
-Parent and child diagrams must match at the borders @ieee1998idef0:
-$ union.big_(v in V_i) "Ports"_("ext")(v) equiv I_i union C_i union O_i union M_i $
-
-This rule ensures that every child function clearly lists its inputs, settings, outputs, and libraries. It prevents hidden global variables and missing arguments across levels @parnas1972criteria.
+Parent and child diagrams must match at the borders @ieee1998idef0: every arrow entering or leaving a child diagram $D_i$ must correspond to an arrow in $I_i union C_i union O_i union M_i$ on its parent block $A_i$. This rule ensures that every child function clearly lists its inputs, settings, outputs, and libraries, preventing hidden global variables and missing arguments across levels @parnas1972criteria.
 
 = Editor Design and Code Generation
 
@@ -132,7 +130,25 @@ $ "Params"(A_i) = I_i union C_i union M_i $
 + The expected return values from $O_i$.
 + The exact names of child functions that the block must call.
 
-To keep functions clean and self-contained, library imports stay inside each function body.
+To keep functions clean and self-contained, library imports stay inside each function body. The Generator Agent is initialized with a fixed system prompt and receives a structured user prompt for each block (translated to English from the codebase):
+
+```text
+[Generator System Prompt]
+You are a lead Python functional programming engineer.
+We build a complete working application in one continuous dialog.
+Implement exactly one pure function per step:
+1. Use snake_case names; place all imports INSIDE the function body.
+2. Start with `def <fn_name>(...):` and end with `return ...`.
+3. Use standard Python types; provide safe defaults for controls.
+4. No classes, global variables, side effects, or IDEF0/ICOM terms.
+5. Call previously defined child functions with matching types.
+6. Return ONLY valid Python code with no extra prose.
+
+[Block User Prompt]
+Step <i> of <N>: Implement `def <fn_name>(...):`. Purpose: <name>.
+Inputs: <I_i, C_i, M_i> | Expected return: <O_i>
+Child functions to call and pipe: <child_1, child_2, ...>
+```
 
 = Two-Agent Verification
 
@@ -147,7 +163,24 @@ A single LLM often ignores a control input $C_i$, returns the wrong tuple $O_i$,
 As shown in @fig:pipeline_en, the Generator Agent ($M_"gen"$) writes a candidate function $c_i$ for block $A_i$ inside a continuous chat session. Next, two gates check the code:
 
 + *Structural Filter:* checks that the code has a function definition, a return statement, and calls to all child functions. It blocks global variables, wrapper classes, and leftover IDEF0 terms.
-+ *Verifier Agent ($M_"ver"$):* runs in a completely separate session without $M_"gen"$'s chat history. It receives only the candidate code $c_i$, the ICOM specification $(I_i, C_i, O_i, M_i)$, and the child function names. Because the two agents do not share chat history, the verifier avoids confirmation bias @zheng2023judging @shinn2023reflexion.
++ *Verifier Agent ($M_"ver"$):* after generation, a separate agent is invoked *without any chat history* and with a *different system prompt* (`temperature = 0.0`). It receives only the candidate code $c_i$, the ICOM specification $(I_i, C_i, O_i, M_i)$, and the child function names. Because the two agents do not share chat history, the verifier avoids confirmation bias @zheng2023judging @shinn2023reflexion:
+
+```text
+[Verifier System Prompt]
+You are an independent Python code auditor. You have NOT seen the
+generation history. Check the function strictly against the spec:
+1) all input, control, and mechanism args are used (or have defaults);
+2) the return value matches expected outputs;
+3) all listed child functions are called in the body;
+4) no global variables or hidden side effects.
+Reply STRICTLY in JSON: {"verdict": "PASS" | "FAIL", "issues": [...]}.
+
+[Verifier User Prompt]
+Function: <fn_name> (task: "<name>")
+Inputs: <I_i> | Controls: <C_i> | Mechanisms: <M_i>
+Expected outputs: <O_i> | Child functions: <children>
+Code to verify: ```python <c_i> ```
+```
 
 == Verification Rules
 The verifier checks four rules and returns `passed` (`true` or `false`) along with a list of errors $R_i$:
@@ -186,44 +219,39 @@ The editor generates leaf functions `A1`--`A5` first, and then creates the paren
 == Experimental Setup
 We ran our tests using the `korolev-k5` model hosted on the BMSTU AI assistant platform @korolev2025bmstu. The Generator Agent ran in a continuous chat with diagram context, and the Verifier Agent ran in an isolated session with no generator history.
 
-== Software Program Generation Results
-We tested end-to-end Python program generation ($K_"max" = 3$) on 7 software programs: matrix generation, handwritten OCR grading, classroom scheduling, exam proctoring, learning recommendations, schedule management, and automated bug fixing (23 diagrams and 68 blocks total). As shown in @tab:live, all 68 blocks passed both the structural filter and the Verifier Agent.
+== Corpus and Live Generation Results
+The full repository corpus contains 16 IDEF0 models (2 native studio models and 14 models imported from `.rsf` archives), totaling 55 diagrams, 158 functional blocks (119 leaf, 39 composite), and 474 bound ICOM ports (mean 3.00 per block). Offline structural harness checks (`--dry-run`) and the 479-test unit suite pass 100.0% across all 16 models.
+
+In the live benchmark (`K_max = 3`), 14 of 16 models (50 diagrams, 144 blocks) completed before reaching the API gateway's 5-hour token quota (`tokens_5h`) on the 15th model. As detailed in @tab:live, all 14 assembled `main.py` modules (100.0%) passed Python `ast.parse` syntax validation. Across 144 blocks, 94 (65.3%) passed both checks on the first attempt, while the bounded repair loop fixed another 41 blocks (28.5%) using 89 total repair iterations (mean 0.62 repairs/block), reaching 93.8% (135/144) verified blocks. The remaining 9 blocks (6.2%) across 4 models exceeded $K_"max" = 3$ and were flagged with a `warning` for manual inspection.
 
 #figure(
   table(
-    columns: (1.65fr, 0.45fr, 0.7fr, 0.7fr, 0.55fr),
-    inset: 4pt,
-    stroke: (x, y) => if y == 0 { (top: 0.8pt, bottom: 0.8pt) } else if y == 8 { (bottom: 0.8pt) } else { none },
-    align: (left, center, center, center, center),
-    [*Software Program*], [*Diagr.*], [*Leaf / Comp.*], [*ICOM Ports*], [*Verified*],
-    [Fibonacci Matrix Generator], [3], [5 / 2], [25], [7 / 7],
-    [Handwritten Solution OCR], [2], [5 / 1], [17], [6 / 6],
-    [Classroom Schedule Optimization], [2], [5 / 1], [18], [6 / 6],
-    [Exam Proctoring System], [2], [4 / 1], [14], [5 / 5],
-    [Learning Recommender], [2], [4 / 1], [16], [5 / 5],
-    [Schedule Management System], [10], [23 / 9], [103], [32 / 32],
-    [Automated Bug-Fix Pipeline], [2], [6 / 1], [31], [7 / 7],
-    [*Total (7 Software Programs)*], [*23*], [*52 / 16*], [*224*], [*68 / 68*],
+    columns: (1.55fr, 0.4fr, 0.55fr, 0.65fr, 0.5fr, 0.4fr),
+    inset: 3.5pt,
+    stroke: (x, y) => if y == 0 { (top: 0.8pt, bottom: 0.8pt) } else if y == 15 { (bottom: 0.8pt) } else { none },
+    align: (left, center, center, center, center, center),
+    [*Model File*], [*Diag.*], [*1st-Pass*], [*Verified*], [*Rep./Blk*], [*AST*],
+    [`example-model.json`], [2], [2 / 5], [5 / 5 (100%)], [1.00], [OK],
+    [`fibonacci-matrix-model.json`], [3], [5 / 7], [7 / 7 (100%)], [0.57], [OK],
+    [`automated-bug-fix-pipeline.json`], [2], [7 / 7], [7 / 7 (100%)], [0.00], [OK],
+    [`cinema-trip-planner.json`], [4], [6 / 13], [11 / 13 (85%)], [1.15], [OK],
+    [`classroom-schedule-optimizer.json`], [2], [4 / 6], [6 / 6 (100%)], [0.50], [OK],
+    [`exam-proctoring-monitor.json`], [2], [5 / 5], [5 / 5 (100%)], [0.00], [OK],
+    [`fibonacci-matrix-variant-a.json`], [6], [12 / 17], [16 / 17 (94%)], [0.53], [OK],
+    [`fibonacci-matrix-variant-b.json`], [3], [2 / 7], [4 / 7 (57%)], [2.00], [OK],
+    [`handwritten-solution-ocr.json`], [2], [3 / 6], [6 / 6 (100%)], [0.50], [OK],
+    [`learning-recommender.json`], [2], [4 / 5], [5 / 5 (100%)], [0.20], [OK],
+    [`ml-production-analytics.json`], [3], [8 / 10], [10 / 10 (100%)], [0.30], [OK],
+    [`plane-points-bisector.json`], [3], [2 / 8], [5 / 8 (63%)], [1.63], [OK],
+    [`program-error-fixer.json`], [6], [14 / 16], [16 / 16 (100%)], [0.13], [OK],
+    [`schedule-management-system.json`], [10], [20 / 32], [32 / 32 (100%)], [0.53], [OK],
+    [*Total Live (14 / 16)*], [*50*], [*94 / 144*], [*135 / 144 (93.8%)*], [*0.62*], [*14/14*],
   ),
-  caption: [Structural Complexity and Verification Results Across 7 Software Programs],
+  caption: [Live Python Generation, Independent Verification, and `ast.parse` Results (`korolev-k5`)],
 ) <tab:live>
 
-== Comparison with Prompting Baselines
-We compare our IDEF0-guided workflow against monolithic Zero-Shot @brown2020language and Few-Shot Chain-of-Thought (CoT) @wei2022chain prompting on the same 7 software programs (@tab:compare). Because IDEF0 splits each program into small ICOM-bound functions, the model avoids missing parameters and stub implementations that occur in long single-prompt outputs.
-
-#figure(
-  table(
-    columns: (1.7fr, 0.7fr, 0.75fr, 0.75fr),
-    inset: 4pt,
-    stroke: (x, y) => if y == 0 { (top: 0.8pt, bottom: 0.8pt) } else if y == 3 { (bottom: 0.8pt) } else { none },
-    align: (left, center, center, center),
-    [*Method*], [*Syntax Valid (%)*], [*Full Functions (%)*], [*No Stubs (%)*],
-    [Monolithic Zero-Shot], [57.1], [41.2], [62.0],
-    [Monolithic Few-Shot CoT], [71.4], [58.8], [76.5],
-    [*IDEF0-Guided Two-Agent*], [*100.0*], [*100.0*], [*100.0*],
-  ),
-  caption: [Comparison Across Prompting Methods on 7 Software Programs],
-) <tab:compare>
+== Effect of Independent Verification and Repair
+The live results directly show the value of separating generation and checking: without the Verifier Agent and repair loop, only 65.3% (94/144) of functions satisfied all ICOM and structural rules on the first pass. Bounded iterative repair recovered +28.5% (41/144) of blocks, while cleanly isolating the 9 hardest blocks (6.2%) for human review rather than silently shipping broken interfaces.
 
 == Comparison with Related Tools
 Multi-agent tools like MetaGPT @hong2024metagpt and ChatDev @qian2024chatdev rely on free-form chat between AI roles. In contrast, IDEF0 Studio binds every prompt to clear ICOM diagram interfaces, which prevents interface drift across deep trees. Also, unlike single-chat self-repair @olausson2024selfrepair @madaan2023selfrefine, an isolated verifier avoids blind spots and gives engineers clear diagnostic notes @vaithilingam2022expectation @barke2023grounded.
@@ -233,11 +261,12 @@ Multi-agent tools like MetaGPT @hong2024metagpt and ChatDev @qian2024chatdev rel
 In standard AI coding tools, developers must read long code diffs to spot design errors @vaithilingam2022expectation @barke2023grounded. In IDEF0 Studio, the visual diagram connects the engineer and the AI. Live diagram checks catch missing labels, unattached arrows, and border mismatches before code generation starts. The engineer controls the high-level design, the generator writes small functions, and the verifier checks each contract.
 
 == Limitations
-The approach has three practical limits:
+The approach has four practical limits:
+- *Partial Live Coverage and Baselines:* due to the 5-hour token quota, 14 of 16 models completed live evaluation; quantitative comparisons against monolithic Zero-Shot @brown2020language and Chain-of-Thought @wei2022chain baselines remain future work.
 - *Diagram Label Quality:* unclear arrow names reduce generation and verification accuracy.
 - *Extra Time and Tokens:* running a separate verifier (and up to three repair passes) takes more time and tokens than single-pass generation.
-- *Basic Static Rules:* the structural filter checks text patterns and arrow names rather than full static type proofs.
+- *Basic Static Rules:* the structural filter checks text patterns and `ast.parse` syntax rather than full static type proofs or runtime unit tests.
 
 = Conclusion
 
-We presented IDEF0 Studio, a visual tool that uses IDEF0 functional diagrams to help LLMs generate modular Python programs. By generating functions bottom-up from ICOM interfaces and checking each block with a structural filter and an isolated Verifier Agent, the system keeps human control over software architecture. Tests on 7 software programs (68 blocks) show that all 68 blocks pass verification. Possible extensions include adding automated Python runtime execution tests (EEA) and expanding the software benchmark suite.
+We presented IDEF0 Studio, a visual tool that uses IDEF0 functional diagrams to help LLMs generate modular Python programs. By generating functions bottom-up from ICOM interfaces and checking each block with a structural filter and an isolated Verifier Agent, the system keeps human control over software architecture. Offline checks confirm 100.0% assembly across 16 models (158 blocks, 479 unit tests), and live evaluation on 14 models (144 blocks) achieves 100.0% `ast.parse` validity and 93.8% contract verification (improving first-pass 65.3% by +28.5% through bounded repair). Future work includes completing the remaining 2 models, running runtime execution tests (EEA), and benchmarking against monolithic baselines.

@@ -38,7 +38,7 @@ export function initConversationHistory(
   return history;
 }
 
-async function callChatCompletions(
+export async function callChatCompletions(
   config: LlmConfig,
   messages: ChatMessage[],
   signal?: AbortSignal,
