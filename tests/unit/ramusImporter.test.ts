@@ -4,10 +4,10 @@ import * as path from 'path';
 import { importProjectFromRsf } from '../../src/core/ramusImporter';
 
 describe('Ramus .rsf Importer', () => {
-  it('imports 2.rsf with context diagram, decomposition, blocks, and arrows', async () => {
-    const rsfPath = path.resolve(__dirname, '../../export-from-ramus/2.rsf');
+  it('imports sample.rsf with context diagram, decomposition, blocks, and arrows in CI and locally', async () => {
+    const rsfPath = path.resolve(__dirname, '../fixtures/sample.rsf');
     const buf = fs.readFileSync(rsfPath);
-    const res = await importProjectFromRsf(buf, '2.rsf');
+    const res = await importProjectFromRsf(buf, 'sample.rsf');
 
     expect(res.success).toBe(true);
     expect(res.project).toBeDefined();
@@ -25,9 +25,10 @@ describe('Ramus .rsf Importer', () => {
     expect(decomp.arrows.length).toBeGreaterThan(0);
   });
 
-  it('imports IDZ.rsf and Lab_03.rsf without errors', async () => {
+  it('imports IDZ.rsf and Lab_03.rsf without errors when present', async () => {
     for (const file of ['IDZ.rsf', 'Lab_03.rsf']) {
       const rsfPath = path.resolve(__dirname, `../../export-from-ramus/${file}`);
+      if (!fs.existsSync(rsfPath)) continue;
       const buf = fs.readFileSync(rsfPath);
       const res = await importProjectFromRsf(buf, file);
 

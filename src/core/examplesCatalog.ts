@@ -1,20 +1,20 @@
 import { Project } from '../types/idef0';
 import canonicalExample from '../assets/example-model.json';
 import fibonacciExample from '../assets/fibonacci-matrix-model.json';
-import ramus2 from '../assets/examples/2.json';
-import ramus3 from '../assets/examples/3.json';
-import ramus4 from '../assets/examples/4.json';
-import ramus5 from '../assets/examples/5.json';
-import ramusIdz from '../assets/examples/IDZ.json';
-import ramusLab03 from '../assets/examples/Lab_03.json';
-import ramusLab04 from '../assets/examples/Lab_04.json';
-import ramusRk21 from '../assets/examples/RK_2_1.json';
-import ramusRk22 from '../assets/examples/RK_2_2.json';
-import ramusPraktika from '../assets/examples/praktika.json';
-import ramusTask03 from '../assets/examples/task_03.json';
-import ramusTask4 from '../assets/examples/task_4.json';
-import ramusRk1 from '../assets/examples/рк__1.json';
-import ramusRk2 from '../assets/examples/рк__2.json';
+import ramus2 from '../assets/examples/handwritten-solution-ocr.json';
+import ramus3 from '../assets/examples/classroom-schedule-optimizer.json';
+import ramus4 from '../assets/examples/exam-proctoring-monitor.json';
+import ramus5 from '../assets/examples/learning-recommender.json';
+import ramusIdz from '../assets/examples/schedule-management-system.json';
+import ramusLab03 from '../assets/examples/automated-bug-fix-pipeline.json';
+import ramusLab04 from '../assets/examples/fibonacci-matrix-variant-a.json';
+import ramusRk21 from '../assets/examples/weekly-grocery-planner.json';
+import ramusRk22 from '../assets/examples/triangle-radii-optimizer.json';
+import ramusPraktika from '../assets/examples/ml-production-analytics.json';
+import ramusTask03 from '../assets/examples/program-error-fixer.json';
+import ramusTask4 from '../assets/examples/fibonacci-matrix-variant-b.json';
+import ramusRk1 from '../assets/examples/cinema-trip-planner.json';
+import ramusRk2 from '../assets/examples/plane-points-bisector.json';
 
 export interface ExampleCatalogItem {
   id: string;

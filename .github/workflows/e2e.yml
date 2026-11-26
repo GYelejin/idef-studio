@@ -3,8 +3,13 @@ name: CI & E2E Pipeline
 on:
   push:
     branches: [ master, main ]
+    tags: [ 'v*' ]
   pull_request:
     branches: [ master, main ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   test-and-e2e:
@@ -30,7 +35,7 @@ jobs:
       - name: Lint
         run: bun run lint
 
-      - name: Run Unit Tests (482 tests)
+      - name: Run Unit Tests
         run: bun test tests/unit
 
       - name: Build Application
@@ -120,3 +125,57 @@ jobs:
             src-tauri/target/release/bundle/dmg/*.dmg
           if-no-files-found: warn
           retention-days: 14
+
+  build-papers:
+    name: Build Research Papers (Typst PDF)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Typst
+        uses: typst-community/setup-typst@v3
+        with:
+          typst-version: latest
+
+      - name: Compile EN and RU PDFs
+        run: |
+          typst compile paper/paper_en.typ paper/paper_en.pdf
+          typst compile paper/paper_ru.typ paper/paper_ru.pdf
+
+      - name: Upload Paper PDFs
+        uses: actions/upload-artifact@v4
+        with:
+          name: research-papers
+          path: |
+            paper/paper_en.pdf
+            paper/paper_ru.pdf
+          retention-days: 30
+
+  release:
+    name: Publish GitHub Release
+    needs: [test-and-e2e, build-tauri, build-papers]
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Prepare release assets
+        run: |
+          mkdir -p release-assets
+          find artifacts -type f \( -name "*.deb" -o -name "*.AppImage" -o -name "*.msi" -o -name "*.exe" -o -name "*.dmg" -o -name "*.pdf" \) -exec cp {} release-assets/ \;
+          ls -la release-assets/
+
+      - name: Create or Update GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || 'latest' }}
+          name: ${{ startsWith(github.ref, 'refs/tags/') && format('IDEF0 Studio {0}', github.ref_name) || 'IDEF0 Studio (Latest Build & Papers)' }}
+          generate_release_notes: true
+          prerelease: ${{ !startsWith(github.ref, 'refs/tags/') }}
+          files: release-assets/*

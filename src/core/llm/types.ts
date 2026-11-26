@@ -6,6 +6,9 @@ export interface LlmConfig {
   model: string;
   timeoutSeconds: number;
   systemPrompt: string;
+  verifierApiUrl?: string;
+  verifierApiKey?: string;
+  verifierModel?: string;
 }
 
 type TaskStatus = 'pending' | 'generating' | 'completed' | 'error';

@@ -65,48 +65,74 @@ async function callChatCompletions(
 
   const timeoutSec = config.timeoutSeconds && config.timeoutSeconds > 0 ? config.timeoutSeconds : 120;
   const timeoutMs = timeoutSec * 1000;
-  const timeoutController = new AbortController();
-  const timeoutTimer = setTimeout(() => {
-    timeoutController.abort(new Error(`Timeout after ${timeoutSec}s waiting for LLM response.`));
-  }, timeoutMs);
+  let response: Response | undefined;
+  let lastText = '';
+  for (let rateAttempt = 0; rateAttempt <= 3; rateAttempt++) {
+    const timeoutController = new AbortController();
+    const timeoutTimer = setTimeout(() => {
+      timeoutController.abort(new Error(`Timeout after ${timeoutSec}s waiting for LLM response.`));
+    }, timeoutMs);
 
-  const onParentAbort = () => {
-    timeoutController.abort();
-  };
-  if (signal) {
-    signal.addEventListener('abort', onParentAbort);
+    const onParentAbort = () => {
+      timeoutController.abort();
+    };
+    if (signal) {
+      signal.addEventListener('abort', onParentAbort);
+    }
+
+    try {
+      response = await fetch(endpoint, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(payload),
+        signal: timeoutController.signal,
+      });
+    } catch (err: unknown) {
+      if (signal?.aborted) {
+        throw new Error('Генерация отменена пользователем', { cause: err });
+      }
+      if (timeoutController.signal.aborted) {
+        throw new Error(`Превышено время ожидания ответа (${timeoutSec} сек). Сервер или прокси не ответил вовремя.`, { cause: err });
+      }
+      throw err;
+    } finally {
+      clearTimeout(timeoutTimer);
+      if (signal) {
+        signal.removeEventListener('abort', onParentAbort);
+      }
+    }
+
+    if (response.status === 429 && rateAttempt < 3) {
+      lastText = await response.text().catch(() => '');
+      let waitMs = 10_000;
+      const retryMatch = lastText.match(/"retry_at"\s*:\s*"([^"]+)"/);
+      if (retryMatch) {
+        const targetTime = Date.parse(retryMatch[1]);
+        if (!Number.isNaN(targetTime)) {
+          waitMs = Math.max(2000, Math.min(60_000, targetTime - Date.now() + 1000));
+        }
+      }
+      await new Promise((r) => setTimeout(r, waitMs));
+      continue;
+    }
+    break;
   }
 
-  let response: Response;
-  try {
-    response = await fetch(endpoint, {
-      method: 'POST',
-      headers,
-      body: JSON.stringify(payload),
-      signal: timeoutController.signal,
-    });
-  } catch (err: unknown) {
-    if (signal?.aborted) {
-      throw new Error('Генерация отменена пользователем', { cause: err });
-    }
-    if (timeoutController.signal.aborted) {
-      throw new Error(`Превышено время ожидания ответа (${timeoutSec} сек). Сервер или прокси не ответил вовремя.`, { cause: err });
-    }
-    throw err;
-  } finally {
-    clearTimeout(timeoutTimer);
-    if (signal) {
-      signal.removeEventListener('abort', onParentAbort);
-    }
+  if (!response) {
+    throw new Error('Не удалось получить ответ от LLM');
   }
 
   if (!response.ok) {
     let errDetail: string;
-    try {
-      const errJson = await response.json();
-      errDetail = errJson.error?.message || JSON.stringify(errJson);
-    } catch {
-      errDetail = await response.text();
+    if (lastText && response.status === 429) {
+      errDetail = lastText;
+    } else {
+      try {
+        const errJson = await response.json();
+        errDetail = errJson.error?.message || JSON.stringify(errJson);
+      } catch {
+        errDetail = await response.text();
+      }
     }
 
     if (response.status === 504) {
@@ -181,7 +207,8 @@ export function validatePythonStructure(code: string, task: BlockGenerationTask)
 }
 
 /**
- * Stateless independent verification using the same LLM without generator conversation history.
+ * Stateless independent verification using either a dedicated verifier model (if configured)
+ * or the same LLM in an isolated critic context without generator conversation history.
  */
 export async function verifyFunctionStateless(
   config: LlmConfig,
@@ -189,6 +216,12 @@ export async function verifyFunctionStateless(
   code: string,
   signal?: AbortSignal
 ): Promise<VerificationResult> {
+  const verifierConfig: LlmConfig = {
+    ...config,
+    apiUrl: config.verifierApiUrl?.trim() || config.apiUrl,
+    apiKey: config.verifierApiKey?.trim() || config.apiKey,
+    model: config.verifierModel?.trim() || config.model,
+  };
   const { inputs, controls, mechanisms, outputs } = task.icom;
   const childList = task.childFunctionNames?.length ? task.childFunctionNames.join(', ') : 'нет (листовой блок)';
 
@@ -216,7 +249,7 @@ export async function verifyFunctionStateless(
     },
   ];
 
-  const raw = await callChatCompletions(config, verifierMessages, signal, 0.0);
+  const raw = await callChatCompletions(verifierConfig, verifierMessages, signal, 0.0);
   const jsonMatch = raw.match(/\{[\s\S]*\}/);
   if (jsonMatch) {
     try {
@@ -354,7 +387,8 @@ from __future__ import annotations
 `;
 
   for (const task of tasks) {
-    fileContent += `# [${task.code}] ${task.name}\n`;
+    const safeName = (task.name || '').replace(/\s+/g, ' ').trim();
+    fileContent += `# [${task.code}] ${safeName}\n`;
     if (task.generatedCode) {
       fileContent += `${task.generatedCode.trim()}\n\n`;
     } else {
@@ -369,9 +403,10 @@ from __future__ import annotations
   fileContent += `# ==============================================================================\n`;
   fileContent += `# Точка входа и ввод данных\n`;
   fileContent += `# ==============================================================================\n\n`;
+  const safeProjectName = (projectName || 'Программа').replace(/\s+/g, ' ').replace(/"/g, '\\"').trim();
   fileContent += `def main() -> None:\n`;
   fileContent += `    import random\n`;
-  fileContent += `    print("=== Запуск: ${projectName || 'Программа'} ===")\n\n`;
+  fileContent += `    print("=== Запуск: ${safeProjectName} ===")\n\n`;
 
   if (rootTask) {
     const fnParams = extractFunctionParams(rootTask.generatedCode, rootTask.functionName);
