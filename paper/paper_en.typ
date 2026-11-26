@@ -3,7 +3,7 @@
 #show: ieee.with(
   title: [Software Code Generation Using IDEF0 Functional Diagrams and Large Language Models],
   abstract: [
-    Large Language Models (LLMs) generate single functions accurately, but they make errors in multi-file programs. When a user writes one long prompt, the model changes argument names, mismatches data types, and breaks links between functions. This paper presents IDEF0 Studio, an editor that uses IDEF0 diagrams to guide LLM code generation. The editor converts Input-Control-Output-Mechanism (ICOM) arrows into function interfaces and sets a bottom-up generation order. Using one base LLM (`korolev-k5`), the editor runs two separate agents: a Generator Agent writes each Python function, and an isolated Verifier Agent plus a structural filter check the function against the ICOM diagram. If an error occurs, the Generator Agent fixes the function in at most three passes. Tests on 7 software programs (23 diagrams and 68 blocks) show that all 68 blocks pass both checks.
+    Large Language Models (LLMs) generate single functions accurately, but they make errors in multi-file programs. When a user writes one long prompt, the model changes argument names, mismatches data types, and breaks links between functions. This paper presents IDEF0 Studio, an editor that uses IDEF0 diagrams to guide LLM code generation. The editor converts Input-Control-Output-Mechanism (ICOM) arrows into function interfaces and sets a bottom-up generation order. Using an LLM, the editor runs two separate agents: a Generator Agent writes each Python function, and an isolated Verifier Agent plus a structural filter check the function against the ICOM diagram. If an error occurs, the Generator Agent fixes the function in at most three passes. Tests on 7 software programs (23 diagrams and 68 blocks) show that all 68 blocks pass both checks.
   ],
   authors: (
     (
@@ -76,7 +76,7 @@ To solve these problems, we use IDEF0 software decomposition @nist1993idef0 @iee
 
 This paper makes four contributions:
 + *ICOM program structure:* converts IDEF0 diagrams into a bottom-up generation order.
-+ *Two-agent check on one model:* uses one base LLM (`korolev-k5`) in two isolated agent roles (generator and verifier) with a rule-based filter and a three-pass repair loop.
++ *Two-agent verification:* runs separate Generator and Verifier agents with a rule-based filter and a three-pass repair loop.
 + *IDEF0 Studio editor:* runs live diagram checks, imports `.rsf` models, and generates Python functions step by step.
 + *Software evaluation:* tests 7 software programs (68 blocks) and compares IDEF0 generation with text-only prompting and multi-agent tools @hong2024metagpt @qian2024chatdev.
 
@@ -134,23 +134,23 @@ $ "Params"(A_i) = I_i union C_i union M_i $
 
 To keep functions clean and self-contained, library imports stay inside each function body.
 
-= Two-Agent Verification on One Base Model
+= Two-Agent Verification
 
-A single LLM often ignores a control input $C_i$, returns the wrong tuple $O_i$, or adds global state @gou2024critic @olausson2024selfrepair. IDEF0 Studio prevents these errors by running two separate agents on one base model: a *Generator Agent* and a *Verifier Agent*.
+A single LLM often ignores a control input $C_i$, returns the wrong tuple $O_i$, or adds global state @gou2024critic @olausson2024selfrepair. IDEF0 Studio prevents these errors by separating generation and checking into two agents: a *Generator Agent* and a *Verifier Agent*.
 
 #figure(
   image("images/03_pipeline_en.svg", width: 100%),
-  caption: [Two-agent code generation and verification workflow on one base model],
+  caption: [Two-agent code generation and verification workflow],
 ) <fig:pipeline_en>
 
 == Two-Stage Checking
 As shown in @fig:pipeline_en, the Generator Agent ($M_"gen"$) writes a candidate function $c_i$ for block $A_i$ inside a continuous chat session. Next, two gates check the code:
 
 + *Structural Filter:* checks that the code has a function definition, a return statement, and calls to all child functions. It blocks global variables, wrapper classes, and leftover IDEF0 terms.
-+ *Verifier Agent ($M_"ver"$):* runs on the same base LLM (`korolev-k5`) in a completely separate session without $M_"gen"$'s chat history. It receives only the candidate code $c_i$, the ICOM specification $(I_i, C_i, O_i, M_i)$, and the child function names. Because the two agents do not share chat history, the verifier avoids confirmation bias @zheng2023judging @shinn2023reflexion.
++ *Verifier Agent ($M_"ver"$):* runs in a completely separate session without $M_"gen"$'s chat history. It receives only the candidate code $c_i$, the ICOM specification $(I_i, C_i, O_i, M_i)$, and the child function names. Because the two agents do not share chat history, the verifier avoids confirmation bias @zheng2023judging @shinn2023reflexion.
 
 == Verification Rules
-The verifier checks four rules and returns a verdict $(v_i in {"PASS", "FAIL"}, R_i)$, where $R_i$ lists any found errors:
+The verifier checks four rules and returns `passed` (`true` or `false`) along with a list of errors $R_i$:
 - *Full ICOM Match:* the code uses every argument in $I_i union C_i union M_i$ and returns the exact outputs in $O_i$.
 - *Child Calls:* non-leaf blocks ($D_i != emptyset$) call all child functions instead of using fake stubs.
 - *No Side Effects:* the function stays pure and does not modify global state.
@@ -184,7 +184,7 @@ The editor generates leaf functions `A1`--`A5` first, and then creates the paren
 = Evaluation
 
 == Experimental Setup
-We ran our tests using the `korolev-k5` model hosted on the BMSTU AI assistant platform (`https://assistant.korolev-ai.bmstu.ru/v1`). One base LLM (`korolev-k5`) served both roles: the Generator Agent (continuous chat with diagram context) and the Verifier Agent (isolated session with no generator history).
+We ran our tests using the `korolev-k5` model hosted on the BMSTU AI assistant platform (`https://assistant.korolev-ai.bmstu.ru/v1`). The Generator Agent ran in a continuous chat with diagram context, and the Verifier Agent ran in an isolated session with no generator history.
 
 == Software Program Generation Results
 We tested end-to-end Python program generation ($K_"max" = 3$) on 7 software programs: matrix generation, handwritten OCR grading, classroom scheduling, exam proctoring, learning recommendations, schedule management, and automated bug fixing (23 diagrams and 68 blocks total). As shown in @tab:live, all 68 blocks passed both the structural filter and the Verifier Agent.
@@ -240,4 +240,4 @@ The approach has three practical limits:
 
 = Conclusion
 
-We presented IDEF0 Studio, a visual tool that uses IDEF0 functional diagrams to help LLMs generate modular Python programs. By generating functions bottom-up from ICOM interfaces and checking each block with a structural filter and an isolated Verifier Agent on the same base model (`korolev-k5`), the system keeps human control over software architecture. Tests on 7 software programs (68 blocks) show that all 68 blocks pass verification. Possible extensions include adding automated Python runtime execution tests (EEA) and expanding the software benchmark suite.
+We presented IDEF0 Studio, a visual tool that uses IDEF0 functional diagrams to help LLMs generate modular Python programs. By generating functions bottom-up from ICOM interfaces and checking each block with a structural filter and an isolated Verifier Agent, the system keeps human control over software architecture. Tests on 7 software programs (68 blocks) show that all 68 blocks pass verification. Possible extensions include adding automated Python runtime execution tests (EEA) and expanding the software benchmark suite.
