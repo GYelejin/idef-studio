@@ -83,22 +83,63 @@ function countNonStubFunctions(code: string, tasks: ReturnType<typeof buildBotto
   return ok;
 }
 
-async function runComparison(config: LlmConfig, models: { name: string; project: Project }[]) {
+async function runComparison(config: LlmConfig, models: { name: string; project: Project }[], resume: boolean) {
   const swModels = models.filter((m) => SOFTWARE_MODEL_NAMES.has(m.name));
   console.log(`=== Comparison Benchmark (M-ZS vs M-CoT vs IDEF0) on ${swModels.length} software models (${config.model}) ===\n`);
+
+  const comparePath = path.resolve('paper/compare_results.json');
+  const existingResultsPath = path.resolve('paper/benchmark_results.json');
+  let cachedIdef0: Record<string, { verified: number; astValid: boolean }> = {};
+  if (fs.existsSync(existingResultsPath)) {
+    try {
+      const prev = JSON.parse(fs.readFileSync(existingResultsPath, 'utf-8')) as {
+        models?: { model: string; verified: number; astValid: boolean }[];
+      };
+      for (const m of prev.models || []) {
+        cachedIdef0[m.model] = { verified: m.verified, astValid: m.astValid };
+      }
+    } catch {
+      // ignore
+    }
+  }
+
+  interface CompareRow {
+    model: string;
+    blocks: number;
+    mzs: { ast: boolean; fn: number };
+    mcot: { ast: boolean; fn: number };
+    idef0: { ast: boolean; fn: number };
+  }
+
+  let perModel: CompareRow[] = [];
+  if (resume && fs.existsSync(comparePath)) {
+    try {
+      const prevCmp = JSON.parse(fs.readFileSync(comparePath, 'utf-8')) as { perModel?: CompareRow[] };
+      if (Array.isArray(prevCmp.perModel)) perModel = prevCmp.perModel;
+    } catch {
+      // ignore
+    }
+  }
 
   const summary = {
     mzs: { astOk: 0, fnOk: 0, totalBlocks: 0 },
     mcot: { astOk: 0, fnOk: 0, totalBlocks: 0 },
     idef0: { astOk: 0, fnOk: 0, totalBlocks: 0 },
   };
-  const perModel: unknown[] = [];
 
   for (const item of swModels) {
+    const existingRow = perModel.find((r) => r.model === item.name);
+    if (resume && existingRow) {
+      console.log(
+        `[COMPARE-SKIP] ${item.name} (${existingRow.blocks} blocks) | M-ZS: fn=${existingRow.mzs.fn}/${existingRow.blocks} | M-CoT: fn=${existingRow.mcot.fn}/${existingRow.blocks} | IDEF0: fn=${existingRow.idef0.fn}/${existingRow.blocks}`
+      );
+      continue;
+    }
+
     const tasks = buildBottomUpBlockTasks(item.project);
     const specLines = tasks.map(
       (t) =>
-        `- ${t.functionName}(${[...t.icom.inputs, ...t.icom.controls, ...t.icom.mechanisms].join(', ')}) -> ${t.icom.outputs.join(', ') || 'None'}: ${t.name}`
+        `- ${t.functionName}(${[...t.icom.inputs, ...t.icom.controls, ...t.icom.mechanisms].join(', ')}) -> ${t.icom.outputs.join(', ') || 'None'}: ${t.name.replace(/\s+/g, ' ').trim()}`
     );
     const specText = `Program: ${item.project.name}\nRequired functions:\n${specLines.join('\n')}`;
 
@@ -115,9 +156,6 @@ async function runComparison(config: LlmConfig, models: { name: string; project:
     const zsCode = extractCodeBlock(zsRaw);
     const zsAst = checkPythonSyntax(zsCode);
     const zsFn = countNonStubFunctions(zsCode, tasks);
-    summary.mzs.totalBlocks += tasks.length;
-    if (zsAst) summary.mzs.astOk++;
-    summary.mzs.fnOk += zsFn;
 
     // 2. Monolithic CoT
     const cotRaw = await callChatCompletions(
@@ -139,23 +177,24 @@ async function runComparison(config: LlmConfig, models: { name: string; project:
     const cotCode = extractCodeBlock(cotRaw);
     const cotAst = checkPythonSyntax(cotCode);
     const cotFn = countNonStubFunctions(cotCode, tasks);
-    summary.mcot.totalBlocks += tasks.length;
-    if (cotAst) summary.mcot.astOk++;
-    summary.mcot.fnOk += cotFn;
 
-    // 3. IDEF0-Guided
-    const history = initConversationHistory(config, tasks, item.project.name);
+    // 3. IDEF0-Guided (reuse saved results/artifacts when available to avoid redundant API usage)
     let idefVerified = 0;
-    for (let i = 0; i < tasks.length; i++) {
-      const res = await generateAndVerifyFunctionInChat(config, tasks[i], i, tasks.length, history);
-      tasks[i].generatedCode = res.code;
-      if (res.verified) idefVerified++;
+    let idefAst = false;
+    const cached = cachedIdef0[item.name];
+    if (cached) {
+      idefVerified = cached.verified;
+      idefAst = cached.astValid;
+    } else {
+      const history = initConversationHistory(config, tasks, item.project.name);
+      for (let i = 0; i < tasks.length; i++) {
+        const res = await generateAndVerifyFunctionInChat(config, tasks[i], i, tasks.length, history);
+        tasks[i].generatedCode = res.code;
+        if (res.verified) idefVerified++;
+      }
+      const idefCode = assembleMainPy(tasks, item.project.name);
+      idefAst = checkPythonSyntax(idefCode);
     }
-    const idefCode = assembleMainPy(tasks, item.project.name);
-    const idefAst = checkPythonSyntax(idefCode);
-    summary.idef0.totalBlocks += tasks.length;
-    if (idefAst) summary.idef0.astOk++;
-    summary.idef0.fnOk += idefVerified;
 
     console.log(
       `[COMPARE] ${item.name} (${tasks.length} blocks) | M-ZS: ast=${zsAst} fn=${zsFn}/${tasks.length} | M-CoT: ast=${cotAst} fn=${cotFn}/${tasks.length} | IDEF0: ast=${idefAst} fn=${idefVerified}/${tasks.length}`
@@ -167,9 +206,25 @@ async function runComparison(config: LlmConfig, models: { name: string; project:
       mcot: { ast: cotAst, fn: cotFn },
       idef0: { ast: idefAst, fn: idefVerified },
     });
+
+    // Recompute summary and save incrementally after each model
+    summary.mzs = { astOk: 0, fnOk: 0, totalBlocks: 0 };
+    summary.mcot = { astOk: 0, fnOk: 0, totalBlocks: 0 };
+    summary.idef0 = { astOk: 0, fnOk: 0, totalBlocks: 0 };
+    for (const r of perModel) {
+      summary.mzs.totalBlocks += r.blocks;
+      summary.mcot.totalBlocks += r.blocks;
+      summary.idef0.totalBlocks += r.blocks;
+      if (r.mzs.ast) summary.mzs.astOk++;
+      if (r.mcot.ast) summary.mcot.astOk++;
+      if (r.idef0.ast) summary.idef0.astOk++;
+      summary.mzs.fnOk += r.mzs.fn;
+      summary.mcot.fnOk += r.mcot.fn;
+      summary.idef0.fnOk += r.idef0.fn;
+    }
+    fs.writeFileSync(comparePath, JSON.stringify({ model: config.model, summary, perModel }, null, 2), 'utf-8');
   }
 
-  fs.writeFileSync(path.resolve('paper/compare_results.json'), JSON.stringify({ model: config.model, summary, perModel }, null, 2), 'utf-8');
   console.log('\nSaved comparison results to paper/compare_results.json');
 }
 
@@ -221,7 +276,7 @@ async function runBenchmark() {
   };
 
   if (compare && !dryRun) {
-    await runComparison(config, models);
+    await runComparison(config, models, resume);
     return;
   }
 

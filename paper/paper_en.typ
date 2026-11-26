@@ -79,7 +79,7 @@ This paper makes four contributions:
 + *ICOM program structure:* converts IDEF0 diagrams into a bottom-up generation order.
 + *Two-agent verification:* runs separate Generator and Verifier agents with a rule-based filter and a three-pass repair loop.
 + *IDEF0 Studio editor:* runs live diagram checks, imports `.rsf` models, and generates Python functions step by step.
-+ *Empirical evaluation:* tests 16 IDEF0 models offline (158 blocks, 479 unit tests) and evaluates live Python generation on 14 models (144 blocks), measuring first-pass rate, repair gain, `ast.parse` validity, and qualitative differences from multi-agent tools @hong2024metagpt @qian2024chatdev.
++ *Empirical evaluation:* tests 16 IDEF0 models offline (158 blocks, 481 unit tests) and evaluates live Python generation on 14 models (144 blocks), measuring first-pass rate, repair gain, `ast.parse` validity, and qualitative differences from multi-agent tools @hong2024metagpt @qian2024chatdev.
 
 = Software Decomposition with IDEF0
 
@@ -220,7 +220,7 @@ The editor generates leaf functions `A1`--`A5` first, and then creates the paren
 We ran our tests using the `korolev-k5` model hosted on the BMSTU AI assistant platform @korolev2025bmstu. The Generator Agent ran in a continuous chat with diagram context, and the Verifier Agent ran in an isolated session with no generator history.
 
 == Corpus and Live Generation Results
-The full repository corpus contains 16 IDEF0 models (2 native studio models and 14 models imported from `.rsf` archives), totaling 55 diagrams, 158 functional blocks (119 leaf, 39 composite), and 474 bound ICOM ports (mean 3.00 per block). Offline structural harness checks (`--dry-run`) and the 479-test unit suite pass 100.0% across all 16 models.
+The full repository corpus contains 16 IDEF0 models (2 native studio models and 14 models imported from `.rsf` archives), totaling 55 diagrams, 158 functional blocks (119 leaf, 39 composite), and 474 bound ICOM ports (mean 3.00 per block). Offline structural harness checks (`--dry-run`) and the 481-test unit suite pass 100.0% across all 16 models.
 
 In the live benchmark (`K_max = 3`), 14 of 16 models (50 diagrams, 144 blocks) completed before reaching the API gateway's 5-hour token quota (`tokens_5h`) on the 15th model. As detailed in @tab:live, all 14 assembled `main.py` modules (100.0%) passed Python `ast.parse` syntax validation. Across 144 blocks, 94 (65.3%) passed both checks on the first attempt, while the bounded repair loop fixed another 41 blocks (28.5%) using 89 total repair iterations (mean 0.62 repairs/block), reaching 93.8% (135/144) verified blocks. The remaining 9 blocks (6.2%) across 4 models exceeded $K_"max" = 3$ and were flagged with a `warning` for manual inspection.
 
@@ -269,4 +269,4 @@ The approach has four practical limits:
 
 = Conclusion
 
-We presented IDEF0 Studio, a visual tool that uses IDEF0 functional diagrams to help LLMs generate modular Python programs. By generating functions bottom-up from ICOM interfaces and checking each block with a structural filter and an isolated Verifier Agent, the system keeps human control over software architecture. Offline checks confirm 100.0% assembly across 16 models (158 blocks, 479 unit tests), and live evaluation on 14 models (144 blocks) achieves 100.0% `ast.parse` validity and 93.8% contract verification (improving first-pass 65.3% by +28.5% through bounded repair). Future work includes completing the remaining 2 models, running runtime execution tests (EEA), and benchmarking against monolithic baselines.
+We presented IDEF0 Studio, a visual tool that uses IDEF0 functional diagrams to help LLMs generate modular Python programs. By generating functions bottom-up from ICOM interfaces and checking each block with a structural filter and an isolated Verifier Agent, the system keeps human control over software architecture. Offline checks confirm 100.0% assembly across 16 models (158 blocks, 481 unit tests), and live evaluation on 14 models (144 blocks) achieves 100.0% `ast.parse` validity and 93.8% contract verification (improving first-pass 65.3% by +28.5% through bounded repair). Future work includes completing the remaining 2 models, running runtime execution tests (EEA), and benchmarking against monolithic baselines.

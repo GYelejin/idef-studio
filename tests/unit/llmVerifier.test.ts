@@ -4,6 +4,7 @@ import {
   verifyFunctionStateless,
   generateAndVerifyFunctionInChat,
   initConversationHistory,
+  assembleMainPy,
 } from '../../src/core/llm/client';
 import { BlockGenerationTask, LlmConfig } from '../../src/core/llm/types';
 
@@ -124,5 +125,46 @@ describe('LLM Stateless Verifier & Repair Loop', () => {
     expect(out.verified).toBe(true);
     expect(out.repairAttempts).toBe(1);
     expect(out.code).toContain('порог');
+  });
+
+  it('verifyFunctionStateless routes requests to dedicated verifierModel/verifierApiUrl when configured', async () => {
+    let capturedUrl = '';
+    let capturedModel = '';
+    let capturedAuth = '';
+    globalThis.fetch = (async (url: unknown, init?: RequestInit) => {
+      capturedUrl = String(url);
+      const body = JSON.parse(String(init?.body || '{}'));
+      capturedModel = body.model;
+      capturedAuth = String((init?.headers as Record<string, string>)?.Authorization || '');
+      return new Response(
+        JSON.stringify({ choices: [{ message: { content: '{"verdict": "PASS", "issues": []}' } }] }),
+        { status: 200 }
+      );
+    }) as typeof fetch;
+
+    const splitConfig: LlmConfig = {
+      ...mockConfig,
+      verifierApiUrl: 'http://verifier.local:8000/v1',
+      verifierApiKey: 'verifier-secret',
+      verifierModel: 'critic-model-v2',
+    };
+
+    const res = await verifyFunctionStateless(splitConfig, leafTask, 'def фильтрация_a1(x):\n    return x');
+    expect(res.passed).toBe(true);
+    expect(capturedUrl).toContain('http://verifier.local:8000/v1');
+    expect(capturedModel).toBe('critic-model-v2');
+    expect(capturedAuth).toBe('Bearer verifier-secret');
+  });
+
+  it('assembleMainPy sanitizes multiline block names and project titles into valid Python', () => {
+    const multilineTask: BlockGenerationTask = {
+      ...leafTask,
+      name: 'Первая строка\nВторая строка блока',
+      generatedCode: 'def фильтрация_a1(данные):\n    return данные',
+    };
+    const py = assembleMainPy([multilineTask], 'Проект\nСо второй строкой');
+    expect(py).toContain('# [A1] Первая строка Вторая строка блока');
+    expect(py).not.toContain('# [A1] Первая строка\nВторая строка блока');
+    expect(py).toContain('print("=== Запуск: Проект Со второй строкой ==="');
   });
 });
