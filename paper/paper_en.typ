@@ -184,7 +184,7 @@ The editor generates leaf functions `A1`--`A5` first, and then creates the paren
 = Evaluation
 
 == Experimental Setup
-We ran our tests using the `korolev-k5` model hosted on the BMSTU AI assistant platform (`https://assistant.korolev-ai.bmstu.ru/v1`). The Generator Agent ran in a continuous chat with diagram context, and the Verifier Agent ran in an isolated session with no generator history.
+We ran our tests using the `korolev-k5` model hosted on the BMSTU AI assistant platform @korolev2025bmstu. The Generator Agent ran in a continuous chat with diagram context, and the Verifier Agent ran in an isolated session with no generator history.
 
 == Software Program Generation Results
 We tested end-to-end Python program generation ($K_"max" = 3$) on 7 software programs: matrix generation, handwritten OCR grading, classroom scheduling, exam proctoring, learning recommendations, schedule management, and automated bug fixing (23 diagrams and 68 blocks total). As shown in @tab:live, all 68 blocks passed both the structural filter and the Verifier Agent.

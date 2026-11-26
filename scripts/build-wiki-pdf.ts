@@ -75,11 +75,11 @@ function convertMarkdownToTypst(md: string): string {
       continue;
     }
 
-    // Video blockquote link
-    if (line.startsWith('> 🎥')) {
-      const vidMatch = line.match(/\*\*([^*]+):\*\*.*?(videos\/[^\s)]+\.mp4)/);
+    // Video player or blockquote link
+    if (line.startsWith('<video ') || line.startsWith('> 🎥')) {
+      const vidMatch = line.match(/videos\/([^\s"')]+\.mp4)/);
       if (vidMatch) {
-        out.push(`#block(inset: 6pt, fill: luma(248), stroke: (left: 2pt + rgb("#2563eb")), radius: 2pt)[_${escapeTypst(vidMatch[1])}_ (доступно в GitHub Wiki: #raw(${JSON.stringify(vidMatch[2])}))]`);
+        out.push(`#block(inset: 6pt, fill: luma(248), stroke: (left: 2pt + rgb("#2563eb")), radius: 2pt)[_Видеодемонстрация в GitHub Wiki:_ #raw(${JSON.stringify(`videos/${vidMatch[1]}`)})]`);
       }
       i++;
       continue;
