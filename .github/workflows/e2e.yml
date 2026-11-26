@@ -127,29 +127,37 @@ jobs:
           retention-days: 14
 
   build-papers:
-    name: Build Research Papers (Typst PDF)
+    name: Build Papers & User Guide PDF
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
 
       - name: Setup Typst
         uses: typst-community/setup-typst@v3
         with:
           typst-version: latest
 
-      - name: Compile EN and RU PDFs
+      - name: Clone Wiki Documentation
+        run: git clone https://github.com/GYelejin/idef-studio.wiki.git wiki || true
+
+      - name: Compile Research Papers and User Guide PDF
         run: |
           typst compile paper/paper_en.typ paper/paper_en.pdf
           typst compile paper/paper_ru.typ paper/paper_ru.pdf
+          if [ -d "wiki" ]; then bun scripts/build-wiki-pdf.ts paper/IDEF0_Studio_User_Guide_RU.pdf; fi
 
-      - name: Upload Paper PDFs
+      - name: Upload Documentation PDFs
         uses: actions/upload-artifact@v4
         with:
           name: research-papers
           path: |
-            paper/paper_en.pdf
-            paper/paper_ru.pdf
+            paper/*.pdf
           retention-days: 30
 
   release:

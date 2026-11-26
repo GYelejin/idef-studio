@@ -191,21 +191,21 @@ We tested end-to-end Python program generation ($K_"max" = 3$) on 7 software pro
 
 #figure(
   table(
-    columns: (1.75fr, 0.55fr, 0.5fr, 0.85fr),
+    columns: (1.65fr, 0.45fr, 0.7fr, 0.7fr, 0.55fr),
     inset: 4pt,
     stroke: (x, y) => if y == 0 { (top: 0.8pt, bottom: 0.8pt) } else if y == 8 { (bottom: 0.8pt) } else { none },
-    align: (left, center, center, center),
-    [*Software Program*], [*Diagr.*], [*Blocks*], [*Verified*],
-    [Fibonacci Matrix Generator], [3], [7], [7 / 7],
-    [Handwritten Solution OCR], [2], [6], [6 / 6],
-    [Classroom Schedule Optimization], [2], [6], [6 / 6],
-    [Exam Proctoring System], [2], [5], [5 / 5],
-    [Learning Recommender], [2], [5], [5 / 5],
-    [Schedule Management System], [10], [32], [32 / 32],
-    [Automated Bug-Fix Pipeline], [2], [7], [7 / 7],
-    [*Total (7 Software Programs)*], [*23*], [*68*], [*68 / 68*],
+    align: (left, center, center, center, center),
+    [*Software Program*], [*Diagr.*], [*Leaf / Comp.*], [*ICOM Ports*], [*Verified*],
+    [Fibonacci Matrix Generator], [3], [5 / 2], [25], [7 / 7],
+    [Handwritten Solution OCR], [2], [5 / 1], [17], [6 / 6],
+    [Classroom Schedule Optimization], [2], [5 / 1], [18], [6 / 6],
+    [Exam Proctoring System], [2], [4 / 1], [14], [5 / 5],
+    [Learning Recommender], [2], [4 / 1], [16], [5 / 5],
+    [Schedule Management System], [10], [23 / 9], [103], [32 / 32],
+    [Automated Bug-Fix Pipeline], [2], [6 / 1], [31], [7 / 7],
+    [*Total (7 Software Programs)*], [*23*], [*52 / 16*], [*224*], [*68 / 68*],
   ),
-  caption: [Software Program Generation and Verification Results],
+  caption: [Structural Complexity and Verification Results Across 7 Software Programs],
 ) <tab:live>
 
 == Comparison with Prompting Baselines
