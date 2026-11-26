@@ -1,0 +1,102 @@
+{
+  "model": "korolev-k5",
+  "summary": {
+    "mzs": {
+      "astOk": 5,
+      "fnOk": 56,
+      "totalBlocks": 73
+    },
+    "mcot": {
+      "astOk": 5,
+      "fnOk": 62,
+      "totalBlocks": 73
+    },
+    "idef0": {
+      "astOk": 5,
+      "fnOk": 68,
+      "totalBlocks": 73
+    }
+  },
+  "perModel": [
+    {
+      "model": "fibonacci-matrix-model.json",
+      "blocks": 7,
+      "mzs": {
+        "ast": true,
+        "fn": 7
+      },
+      "mcot": {
+        "ast": true,
+        "fn": 6
+      },
+      "idef0": {
+        "ast": true,
+        "fn": 7
+      }
+    },
+    {
+      "model": "fibonacci-matrix-variant-a.json",
+      "blocks": 17,
+      "mzs": {
+        "ast": true,
+        "fn": 17
+      },
+      "mcot": {
+        "ast": true,
+        "fn": 17
+      },
+      "idef0": {
+        "ast": true,
+        "fn": 16
+      }
+    },
+    {
+      "model": "plane-points-bisector.json",
+      "blocks": 8,
+      "mzs": {
+        "ast": true,
+        "fn": 8
+      },
+      "mcot": {
+        "ast": true,
+        "fn": 7
+      },
+      "idef0": {
+        "ast": true,
+        "fn": 5
+      }
+    },
+    {
+      "model": "schedule-management-system.json",
+      "blocks": 32,
+      "mzs": {
+        "ast": true,
+        "fn": 23
+      },
+      "mcot": {
+        "ast": true,
+        "fn": 24
+      },
+      "idef0": {
+        "ast": true,
+        "fn": 32
+      }
+    },
+    {
+      "model": "triangle-radii-optimizer.json",
+      "blocks": 9,
+      "mzs": {
+        "ast": true,
+        "fn": 1
+      },
+      "mcot": {
+        "ast": true,
+        "fn": 8
+      },
+      "idef0": {
+        "ast": true,
+        "fn": 8
+      }
+    }
+  ]
+}

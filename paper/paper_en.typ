@@ -253,6 +253,23 @@ In the live benchmark (`K_max = 3`), 14 of 16 models (50 diagrams, 144 blocks) c
 == Effect of Independent Verification and Repair
 The live results directly show the value of separating generation and checking: without the Verifier Agent and repair loop, only 65.3% (94/144) of functions satisfied all ICOM and structural rules on the first pass. Bounded iterative repair recovered +28.5% (41/144) of blocks, while cleanly isolating the 9 hardest blocks (6.2%) for human review rather than silently shipping broken interfaces.
 
+== Comparison with Monolithic Prompting Baselines
+We further compared our IDEF0-guided workflow against Monolithic Zero-Shot @brown2020language and Monolithic Few-Shot Chain-of-Thought (CoT) @wei2022chain prompting on 5 deterministic mathematical and scheduling programs (73 blocks total) using `korolev-k5`. As summarized in @tab:compare, while all methods produced syntactically valid Python (`ast.parse` 5/5), monolithic Zero-Shot and CoT implemented only 76.7% (56/73) and 84.9% (62/73) of required non-stub functions, compared to *93.2% (68/73)* for IDEF0-guided synthesis. On the largest 32-block system (`schedule-management-system`), IDEF0 achieved 100.0% (32/32) completeness versus 71.9% (23/32) for Zero-Shot and 75.0% (24/32) for CoT.
+
+#figure(
+  table(
+    columns: (1.7fr, 0.7fr, 0.85fr, 0.85fr),
+    inset: 4pt,
+    stroke: (x, y) => if y == 0 { (top: 0.8pt, bottom: 0.8pt) } else if y == 3 { (bottom: 0.8pt) } else { none },
+    align: (left, center, center, center),
+    [*Method*], [*AST Valid*], [*All 73 Blocks*], [*32-Block System*],
+    [Monolithic Zero-Shot], [5 / 5], [56 / 73 (76.7%)], [23 / 32 (71.9%)],
+    [Monolithic Few-Shot CoT], [5 / 5], [62 / 73 (84.9%)], [24 / 32 (75.0%)],
+    [*IDEF0-Guided Two-Agent*], [*5 / 5*], [*68 / 73 (93.2%)*], [*32 / 32 (100.0%)*],
+  ),
+  caption: [Comparison Against Monolithic Prompting Baselines on 5 Programs (`korolev-k5`)],
+) <tab:compare>
+
 == Comparison with Related Tools
 Multi-agent tools like MetaGPT @hong2024metagpt and ChatDev @qian2024chatdev rely on free-form chat between AI roles. In contrast, IDEF0 Studio binds every prompt to clear ICOM diagram interfaces, which prevents interface drift across deep trees. Also, unlike single-chat self-repair @olausson2024selfrepair @madaan2023selfrefine, an isolated verifier avoids blind spots and gives engineers clear diagnostic notes @vaithilingam2022expectation @barke2023grounded.
 
@@ -262,11 +279,11 @@ In standard AI coding tools, developers must read long code diffs to spot design
 
 == Limitations
 The approach has four practical limits:
-- *Partial Live Coverage and Baselines:* due to the 5-hour token quota, 14 of 16 models completed live evaluation; quantitative comparisons against monolithic Zero-Shot @brown2020language and Chain-of-Thought @wei2022chain baselines remain future work.
+- *Partial Live Coverage:* due to the 5-hour token quota, 14 of 16 corpus models completed the full live verification run (while 5 pure math/scheduling models were evaluated in the baseline comparison).
 - *Diagram Label Quality:* unclear arrow names reduce generation and verification accuracy.
 - *Extra Time and Tokens:* running a separate verifier (and up to three repair passes) takes more time and tokens than single-pass generation.
 - *Basic Static Rules:* the structural filter checks text patterns and `ast.parse` syntax rather than full static type proofs or runtime unit tests.
 
 = Conclusion
 
-We presented IDEF0 Studio, a visual tool that uses IDEF0 functional diagrams to help LLMs generate modular Python programs. By generating functions bottom-up from ICOM interfaces and checking each block with a structural filter and an isolated Verifier Agent, the system keeps human control over software architecture. Offline checks confirm 100.0% assembly across 16 models (158 blocks, 481 unit tests), and live evaluation on 14 models (144 blocks) achieves 100.0% `ast.parse` validity and 93.8% contract verification (improving first-pass 65.3% by +28.5% through bounded repair). Future work includes completing the remaining 2 models, running runtime execution tests (EEA), and benchmarking against monolithic baselines.
+We presented IDEF0 Studio, a visual tool that uses IDEF0 functional diagrams to help LLMs generate modular Python programs. By generating functions bottom-up from ICOM interfaces and checking each block with a structural filter and an isolated Verifier Agent, the system keeps human control over software architecture. Offline checks confirm 100.0% assembly across 16 models (158 blocks, 481 unit tests), live evaluation on 14 models (144 blocks) achieves 100.0% `ast.parse` validity and 93.8% contract verification (+28.5% over 65.3% first-pass), and baseline comparison on 5 programs (73 blocks) shows 93.2% completeness versus 76.7% (Zero-Shot) and 84.9% (CoT). Future work includes completing the remaining 2 models and adding automated runtime execution tests (EEA).

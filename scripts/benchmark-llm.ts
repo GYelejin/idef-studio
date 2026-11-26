@@ -57,12 +57,10 @@ function checkPythonSyntax(pythonCode: string): boolean {
 
 const SOFTWARE_MODEL_NAMES = new Set([
   'fibonacci-matrix-model.json',
-  'handwritten-solution-ocr.json',
-  'classroom-schedule-optimizer.json',
-  'exam-proctoring-monitor.json',
-  'learning-recommender.json',
+  'fibonacci-matrix-variant-a.json',
+  'plane-points-bisector.json',
+  'triangle-radii-optimizer.json',
   'schedule-management-system.json',
-  'automated-bug-fix-pipeline.json',
 ]);
 
 function extractCodeBlock(raw: string): string {
